@@ -1,5 +1,9 @@
 import { DeployResult } from '../domain/deploy-result';
 
+type DeployResponseJson = {
+    result: DeployResultJson;
+}
+
 type DeployResultJson = {
     id: string;
     status: string;
@@ -7,25 +11,73 @@ type DeployResultJson = {
 };
 
 type DeployDetailsJson = {
-    componentSuccesses: DeployMessageJson[];
-    componentFailures: DeployMessageJson[];
-    testSuccesses: RunTestSuccessJson[];
-    testFailures: RunTestFailureJson[];
+    componentSuccesses: DeployMessageSuccessJson[];
+    componentFailures: DeployMessageFailureJson[];
+    runTestResult: RunTestResultJson;
 }
 
-type DeployMessageJson = {
-    fileName: string;
-    lineNumber: number;
-    columnNumber: number;
-    message: string;
-    type: string;
+type RunTestResultJson = {
+    successes: RunTestSuccessJson[];
+    failures: RunTestFailureJson[];
+}
+
+type DeployMessageSuccessJson = {
+    //   "changed": true,
+    //   "componentType": "ApexClass",
+    //   "created": false,
+    //   "createdDate": "2026-04-05T23:59:41.000Z",
+    //   "deleted": false,
+    //   "fileName": "classes/MyClassName.cls",
+    //   "fullName": "MyClassName",
+    //   "id": "01pak00000NfciPAAR",
+    //   "success": true
     changed: boolean;
+    componentType: string;
+    created: boolean;
+    createdDate: string;
+    deleted: boolean;
+    fileName: string;
+    fullName: string;
+    id: string;
+}
+
+type DeployMessageFailureJson = {
+    // "changed": false,
+    // "columnNumber": 5,
+    // "componentType": "ApexClass",
+    // "created": false,
+    // "createdDate": "2026-04-05T23:55:28.000Z",
+    // "deleted": false,
+    // "fileName": "classes/MyClassName.cls",
+    // "fullName": "MyClassName",
+    // "lineNumber": 4,
+    // "problem": "Missing ';' at '}'",
+    // "problemType": "Error",
+    // "success": false
+    changed: boolean;
+    columnNumber: number;
+    componentType: string;
+    created: boolean;
+    createdDate: string;
+    deleted: boolean;
+    fileName: string;
+    fullName: string;
+    lineNumber: number;
+    problem: string;
+    problemType: string;
 }
 
 type RunTestSuccessJson = {
+    // "id": "01pak00000FUcVSAA1",
+    // "methodName": "testGetAccount",
+    // "name": "GetAccountServiceTest",
+    // "namespace": null,
+    // "time": 265
+    id: string;
     name: string;
     methodName: string;
     namespace: string;
+    time: number;
 }
 
 type RunTestFailureJson = {
@@ -37,11 +89,11 @@ type RunTestFailureJson = {
 
 type CreateDeployResultParams = {
     organizationId: string;
-    deployResultJson: DeployResultJson;
+    deployResponseJson: DeployResponseJson;
 };
 
 interface DeployResultRepository {
-    saveDeployResult (deployResult: DeployResult): void;
+    saveDeployResult (deployResult: DeployResult): Promise<void>;
 }
 
 export default class CreateDeployResult {
@@ -54,40 +106,44 @@ export default class CreateDeployResult {
     }) {
         this.deployResultRepository = deployResultRepository;
     }
-    public execute ({
+    public async execute ({
         organizationId,
-        deployResultJson,
-    }: CreateDeployResultParams): void {
-        const deployResult = {
+        deployResponseJson,
+    }: CreateDeployResultParams): Promise<void> {
+        const deployResult: DeployResult = {
             organizationId,
-            id: deployResultJson.id,
-            status: deployResultJson.status,
+            id: deployResponseJson.result.id,
+            status: deployResponseJson.result.status,
 
-            componentSuccesses: deployResultJson.details.componentSuccesses.map((success) => ({
-                fileName: success.fileName,
-                lineNumber: success.lineNumber,
-                columnNumber: success.columnNumber,
-                message: success.message,
-                type: success.type,
-                changed: success.changed,
-            })),
+            componentSuccesses: deployResponseJson.result.details.componentSuccesses
+                .filter(success => success.componentType === 'ApexClass')
+                .map((success) => ({
+                    fullName: success.fullName,
+                    componentType: success.componentType,
+                    changed: success.changed,
+                    created: success.created,
+                    deleted: success.deleted,
+                })),
 
-            componentFailures: deployResultJson.details.componentFailures.map((failure) => ({
-                fileName: failure.fileName,
+            componentFailures: deployResponseJson.result.details.componentFailures.map((failure) => ({
+                fullName: failure.fullName,
                 lineNumber: failure.lineNumber,
                 columnNumber: failure.columnNumber,
-                message: failure.message,
-                type: failure.type,
+                componentType: failure.componentType,
                 changed: failure.changed,
+                created: failure.created,
+                deleted: failure.deleted,
             })),
 
-            testSuccesses: deployResultJson.details.testSuccesses.map((success) => ({
+            testSuccesses: deployResponseJson.result.details.runTestResult.successes.map((success) => ({
                 name: success.name,
                 methodName: success.methodName,
                 namespace: success.namespace,
+                id: success.id,
+                time: success.time,
             })),
 
-            testFailures: deployResultJson.details.testFailures.map((failure) => ({
+            testFailures: deployResponseJson.result.details.runTestResult.failures.map((failure) => ({
                 name: failure.name,
                 methodName: failure.methodName,
                 message: failure.message,
@@ -95,6 +151,6 @@ export default class CreateDeployResult {
             })),
         };
 
-        this.deployResultRepository.saveDeployResult(deployResult);
+        await this.deployResultRepository.saveDeployResult(deployResult);
     }
 }

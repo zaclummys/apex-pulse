@@ -9,21 +9,21 @@ export type DeployResult = {
 }
 
 export type DeployMessageSuccess = {
-    fileName: string;
-    lineNumber: number;
-    columnNumber: number;
-    message: string;
-    type: string;
+    fullName: string;
+    componentType: string;
     changed: boolean;
+    created: boolean;
+    deleted: boolean;
 }
 
 export type DeployMessageFailure = {
-    fileName: string;
+    fullName: string;
     lineNumber: number;
     columnNumber: number;
-    message: string;
-    type: string;
+    componentType: string;
     changed: boolean;
+    created: boolean;
+    deleted: boolean;
 }
 
 export type RunTestFailure = {
@@ -34,7 +34,9 @@ export type RunTestFailure = {
 }
 
 export type RunTestSuccess = {
+    id: string;
     name: string;
     methodName: string;
     namespace: string;
+    time: number;
 }
