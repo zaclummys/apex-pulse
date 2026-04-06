@@ -54,28 +54,28 @@ model DeployResult {
 }
 
 model DeployMessageSuccess {
-    id String @unique
-    changed Boolean
-    componentType String
-    created Boolean
-    createdDate DateTime
-    deleted Boolean
+    id String @default(uuid()) @unique
+
     fullName String
-    success Boolean
+    componentType String
+
+    changed Boolean
+    created Boolean
+    deleted Boolean
 
     deployResultId String
     DeployResult DeployResult @relation(fields: [deployResultId], references: [id])
 }
 
 model DeployMessageFailure {
-    id String @unique
-    changed Boolean
-    componentType String
-    created Boolean
-    createdDate DateTime
-    deleted Boolean
+    id String @default(uuid()) @unique
+
     fullName String
-    success Boolean
+    componentType String
+
+    changed Boolean
+    created Boolean
+    deleted Boolean
 
     columnNumber Int
     lineNumber Int
@@ -88,6 +88,7 @@ model DeployMessageFailure {
 
 model RunTestSuccess {
     id String @unique
+
     methodName String
     name String
     namespace String
@@ -99,11 +100,13 @@ model RunTestSuccess {
 
 model RunTestFailure {
     id String @unique
+
     message String
     methodName String
     name String
     namespace String
     stackTrace String
+
     time Int
     type String
 

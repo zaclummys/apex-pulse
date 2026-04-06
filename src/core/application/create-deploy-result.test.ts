@@ -86,6 +86,8 @@ describe('Create Deploy Result', async () => {
                     created: false,
                     deleted: false,
                     lineNumber: 4,
+                    problem: "Missing ';' at '}'",
+                    problemType: "Error",
                 },
                 {
                     componentType: 'ApexClass',
@@ -95,6 +97,8 @@ describe('Create Deploy Result', async () => {
                     created: false,
                     deleted: false,
                     lineNumber: 3,
+                    problem: "Expression cannot be a statement.",
+                    problemType: "Error",
                 }
             ],
             testSuccesses: [],

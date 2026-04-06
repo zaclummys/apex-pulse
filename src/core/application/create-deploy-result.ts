@@ -59,6 +59,8 @@ type RunTestFailureJson = {
     methodName: string;
     message: string;
     stackTrace: string;
+    time: number;
+    type: string;
 }
 
 type CreateDeployResultParams = {
@@ -109,7 +111,9 @@ export default class CreateDeployResult {
                     changed: failure.changed,
                     created: failure.created,
                     deleted: failure.deleted,
-            })),
+                    problem: failure.problem,
+                    problemType: failure.problemType,
+                })),
 
             testSuccesses: deployResponseJson.result.details.runTestResult.successes.map((success) => ({
                 name: success.name,
@@ -124,6 +128,8 @@ export default class CreateDeployResult {
                 methodName: failure.methodName,
                 message: failure.message,
                 stackTrace: failure.stackTrace,
+                time: failure.time,
+                type: failure.type,
             })),
         };
 
