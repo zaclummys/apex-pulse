@@ -6,26 +6,36 @@ import { Card, CardAction, CardContent, CardFooter, CardHeader, CardTitle } from
 import { Field, FieldLabel } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { useRouter } from 'next/navigation';
+
 import Header from '@/app/header';
 
-export default function SignUp() {
+export default function SignIn() {
+    const router = useRouter();
+
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        
+        router.push('/dashboard');
+    }
+
     return (
         <>
             <Header />
-
+            
             <div className="min-h-screen flex items-center justify-center">
                 <Card className="w-full max-w-md">
                     <CardHeader>
-                        <CardTitle>Sign Up</CardTitle>
+                        <CardTitle>Sign In</CardTitle>
                         <CardAction>
-                            <Link href="/sign-in">
-                                Already have an account?
+                            <Link href="/sign-up">
+                                Don't have an account?
                             </Link>
                         </CardAction>
                     </CardHeader>
 
                     <CardContent>
-                        <form id="form" className="flex flex-col gap-6">
+                        <form id="form" className="flex flex-col gap-6" onSubmit={handleSubmit}>
                             <Field>
                                 <FieldLabel htmlFor="email">Email</FieldLabel>
                                 <Input id="email" type="email" placeholder="Enter your email" required/>
@@ -40,7 +50,7 @@ export default function SignUp() {
 
                     <CardFooter>
                         <Button type="submit" className="w-full" form="form">
-                            Sign Up
+                            Sign In
                         </Button>
                     </CardFooter>
                 </Card>

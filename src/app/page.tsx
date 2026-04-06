@@ -1,31 +1,11 @@
-import { Button } from '@/components/ui/button';
+import Header from '@/app/header';
 import { Rocket, Zap } from 'lucide-react'
-import Link from 'next/link';
+import ButtonLink from '@/components/button-link';
 
 export default function Home () {
     return (
         <div className="container mx-auto">
-            <header className="flex flex-row justify-between p-4">
-                <Link href="/" className="flex flex-row items-center gap-2">
-                    <Zap className='inline-block mr-2' />
-
-                    <span>Apex Pulse</span>
-                </Link>
-
-                <div className="self-end flex flex-row gap-4">
-                    <Button variant="outline" size="sm">
-                        <Link href="/sign-in">
-                            Entrar
-                        </Link>
-                    </Button>
-
-                    <Button size="sm">
-                        <Link href="/sign-up">
-                            Criar conta
-                        </Link>
-                    </Button>
-                </div>
-            </header>
+            <Header />
 
             <section className="p-4 flex flex-col items-center text-center gap-6">
                 <span>
@@ -37,17 +17,13 @@ export default function Home () {
                 </span>
 
                 <div className="flex gap-4">
-                    <Button>
-                        <Link href="/sign-up">
-                            Criar conta agora mesmo
-                        </Link>
-                    </Button>
+                    <ButtonLink href="/sign-up">
+                        Criar conta agora mesmo
+                    </ButtonLink>
 
-                    <Button variant="outline">
-                        <Link href="/#features">
-                            Ver recursos
-                        </Link>
-                    </Button>
+                    <ButtonLink href="/#features" variant="outline">
+                        Ver recursos
+                    </ButtonLink>
                 </div>
             </section>
 
@@ -89,11 +65,9 @@ export default function Home () {
                     Crie sua conta e comece a monitorar os seus deploys Salesforce hoje mesmo.
                 </span>
 
-                <Button>
-                    <Link href="/sign-up">
-                        Começar agora
-                    </Link>
-                </Button>
+                <ButtonLink href="/sign-up">
+                    Começar agora
+                </ButtonLink>
             </section>
 
             <footer className="flex flex-row p-4">
