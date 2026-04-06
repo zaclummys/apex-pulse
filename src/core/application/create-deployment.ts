@@ -1,4 +1,5 @@
-import { DeployResult } from '../domain/deploy-result';
+import { Deployment } from '@/core/domain/deployment';
+import DeploymentRepository from '@/core/application/interfaces/deployment-repository';
 
 type DeployResponseJson = {
     result: DeployResultJson;
@@ -83,52 +84,44 @@ type RunTestFailureJson = {
     type: string;
 }
 
-type CreateDeployResultParams = {
+type CreateDeploymentParams = {
     organizationId: string;
-    deployResponseJson: DeployResponseJson;
+    deployResponse: DeployResponseJson;
 };
 
-interface DeployResultRepository {
-    saveDeployResult (deployResult: DeployResult): Promise<void>;
-}
-
-export default class CreateDeployResult {
-    private deployResultRepository: DeployResultRepository;
+export default class CreateDeployment {
+    private deploymentRepository: DeploymentRepository;
     
-    constructor ({
-        deployResultRepository
-    }: {
-        deployResultRepository: DeployResultRepository;
-    }) {
-        this.deployResultRepository = deployResultRepository;
+    constructor (deploymentRepository: DeploymentRepository) {
+        this.deploymentRepository = deploymentRepository;
     }
     public async execute ({
         organizationId,
-        deployResponseJson,
-    }: CreateDeployResultParams): Promise<void> {
-        const deployResult: DeployResult = {
+        deployResponse,
+    }: CreateDeploymentParams): Promise<void> {
+        const deployResult: Deployment = {
             organizationId,
-            id: deployResponseJson.result.id,
-            status: deployResponseJson.result.status,
+            id: deployResponse.result.id,
+            status: deployResponse.result.status,
 
-            createdBy: deployResponseJson.result.createdBy,
-            createdByName: deployResponseJson.result.createdByName,
+            createdBy: deployResponse.result.createdBy,
+            createdByName: deployResponse.result.createdByName,
 
-            startDate: new Date(deployResponseJson.result.startDate),
-            endDate: new Date(deployResponseJson.result.completedDate),
+            startDate: new Date(deployResponse.result.startDate),
+            endDate: new Date(deployResponse.result.completedDate),
 
-            checkOnly: deployResponseJson.result.checkOnly,
-            deployUrl: deployResponseJson.result.deployUrl,
+            checkOnly: deployResponse.result.checkOnly,
+            deployUrl: deployResponse.result.deployUrl,
 
-            numberComponentsDeployed: deployResponseJson.result.numberComponentsDeployed,
-            numberComponentErrors: deployResponseJson.result.numberComponentErrors,
-            numberComponentsTotal: deployResponseJson.result.numberComponentsTotal,
+            numberComponentsDeployed: deployResponse.result.numberComponentsDeployed,
+            numberComponentErrors: deployResponse.result.numberComponentErrors,
+            numberComponentsTotal: deployResponse.result.numberComponentsTotal,
 
-            numberTestErrors: deployResponseJson.result.numberTestErrors,
-            numberTestsCompleted: deployResponseJson.result.numberTestsCompleted,
-            numberTestsTotal: deployResponseJson.result.numberTestsTotal,
+            numberTestErrors: deployResponse.result.numberTestErrors,
+            numberTestsCompleted: deployResponse.result.numberTestsCompleted,
+            numberTestsTotal: deployResponse.result.numberTestsTotal,
 
-            componentSuccesses: deployResponseJson.result.details.componentSuccesses
+            componentSuccesses: deployResponse.result.details.componentSuccesses
                 .filter(success => success.componentType === 'ApexClass')
                 .map((success) => ({
                     fullName: success.fullName,
@@ -138,7 +131,7 @@ export default class CreateDeployResult {
                     deleted: success.deleted,
                 })),
 
-            componentFailures: deployResponseJson.result.details.componentFailures
+            componentFailures: deployResponse.result.details.componentFailures
                 .filter(failure => failure.componentType === 'ApexClass')
                 .map((failure) => ({
                     fullName: failure.fullName,
@@ -152,7 +145,7 @@ export default class CreateDeployResult {
                     problemType: failure.problemType,
                 })),
 
-            runTestSuccesses: deployResponseJson.result.details.runTestResult.successes.map((success) => ({
+            testSuccesses: deployResponse.result.details.runTestResult.successes.map((success) => ({
                 className: success.name,
                 methodName: success.methodName,
                 namespace: success.namespace,
@@ -160,7 +153,7 @@ export default class CreateDeployResult {
                 time: success.time,
             })),
 
-            runTestFailures: deployResponseJson.result.details.runTestResult.failures.map((failure) => ({
+            testFailures: deployResponse.result.details.runTestResult.failures.map((failure) => ({
                 id: failure.id,
                 className: failure.name,
                 methodName: failure.methodName,
@@ -172,6 +165,6 @@ export default class CreateDeployResult {
             })),
         };
 
-        await this.deployResultRepository.saveDeployResult(deployResult);
+        await this.deploymentRepository.saveDeployment(deployResult);
     }
 }

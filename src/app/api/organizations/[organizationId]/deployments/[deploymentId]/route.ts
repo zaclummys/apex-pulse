@@ -1,10 +1,7 @@
 import { NextRequest } from 'next/server';
-
-export async function POST (request: NextRequest, context: any) {
+import Prisma
+export async function GET (request: NextRequest, context: any) {
     const { organizationId, deploymentId } = await context.params;
-    
-    return Response.json({
-        organizationId,
-        deploymentId,
-    });
+
+    return new Response(null, { status: 204 });
 }

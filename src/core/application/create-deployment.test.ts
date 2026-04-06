@@ -1,30 +1,30 @@
 import { readFile } from 'fs/promises';
 import { describe, it, expect, vi } from 'vitest';
 
-import CreateDeployResult from './create-deploy-result';
+import CreateDeployment from '@/core/application/create-deployment';
 
-describe('Create Deploy Result', async () => {
+describe('Create Deployment', async () => {
     const rawSuccessDeployResponseJson = await readFile('fixtures/success-deploy-response.json', 'utf-8');
-    const rawFailureDeployResponseJson = await readFile('fixtures/failure-deploy-response.json', 'utf-8');
+    const rawComponentFailureDeployResponseJson = await readFile('fixtures/component-failure-deploy-response.json', 'utf-8');
+    const rawTestFailureDeployResponseJson = await readFile('fixtures/test-failure-deploy-response.json', 'utf-8');
 
     const successDeployResponseJson = JSON.parse(rawSuccessDeployResponseJson);
-    const failureDeployResponseJson = JSON.parse(rawFailureDeployResponseJson);
+    const componentFailureDeployResponseJson = JSON.parse(rawComponentFailureDeployResponseJson);
+    const testFailureDeployResponseJson = JSON.parse(rawTestFailureDeployResponseJson);
 
     it('Should create a deploy result successfully', async () => {
-        const deployResultRepository = {
-            saveDeployResult: vi.fn(),
+        const deploymentRepository = {
+            saveDeployment: vi.fn(),
         };
 
-        const createDeployResult = new CreateDeployResult({
-            deployResultRepository,
-        });
+        const createDeployment = new CreateDeployment(deploymentRepository);
 
-        await createDeployResult.execute({
+        await createDeployment.execute({
             organizationId: 'org123',
-            deployResponseJson: successDeployResponseJson
+            deployResponse: successDeployResponseJson
         });
 
-        expect(deployResultRepository.saveDeployResult).toHaveBeenCalledWith(
+        expect(deploymentRepository.saveDeployment).toHaveBeenCalledWith(
             expect.objectContaining({
                 organizationId: 'org123',
                 id: '0Afak00000X387hCAB',
@@ -39,7 +39,7 @@ describe('Create Deploy Result', async () => {
                     }
                 ],
                 componentFailures: [],
-                runTestSuccesses: [
+                testSuccesses: [
                     {
                         id: '01pak00000FUcVSAA1',
                         methodName: 'testGetAccount',
@@ -55,31 +55,26 @@ describe('Create Deploy Result', async () => {
                         time: 74,
                     }
                 ],
-                runTestFailures: []
+                testFailures: [],
             })
         );
     });
 
-    it('Should create a deploy result with failures', async () => {
-        const deployResultRepository = {
-            saveDeployResult: vi.fn(),
+    it('Should create a deploy result with component failures', async () => {
+        const deploymentRepository = {
+            saveDeployment: vi.fn(),
         };
 
-        const createDeployResult = new CreateDeployResult({
-            deployResultRepository,
-        });
+        const createDeployment = new CreateDeployment(deploymentRepository);
 
-        await createDeployResult.execute({
+        await createDeployment.execute({
             organizationId: 'org123',
-            deployResponseJson: failureDeployResponseJson
+            deployResponse: componentFailureDeployResponseJson
         });
 
-        expect(deployResultRepository.saveDeployResult).toHaveBeenCalledWith(
+        expect(deploymentRepository.saveDeployment).toHaveBeenCalledWith(
             expect.objectContaining({
                 organizationId: 'org123',
-                id: '0Afak00000X37rZCAR',
-                status: 'Failed',
-                componentSuccesses: [],
                 componentFailures: [
                     {
                         componentType: 'ApexClass',
@@ -103,9 +98,38 @@ describe('Create Deploy Result', async () => {
                         problem: "Expression cannot be a statement.",
                         problemType: "Error",
                     }
-                ],
-                runTestSuccesses: [],
-                runTestFailures: []
+                ]
+            })
+        );
+    });
+
+    it('Should create a deploy result with test failures', async () => {
+        const deploymentRepository = {
+            saveDeployment: vi.fn(),
+        };
+
+        const createDeployment = new CreateDeployment(deploymentRepository);
+
+        await createDeployment.execute({
+            organizationId: 'org123',
+            deployResponse: testFailureDeployResponseJson
+        });
+
+        expect(deploymentRepository.saveDeployment).toHaveBeenCalledWith(
+            expect.objectContaining({
+                organizationId: 'org123',
+                testFailures: [
+                    {
+                        "id": "01pak00000NfmrRAAR",
+                        "message": "System.AssertException: Assertion Failed: Expected: true, Actual: false",
+                        "methodName": "failure",
+                        "className": "MyClassNameTest",
+                        "namespace": null,
+                        "stackTrace": "Class.MyClassNameTest.failure: line 10, column 1",
+                        "time": 129,
+                        "type": "Class"
+                    }
+                ]
             })
         );
     });

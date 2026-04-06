@@ -11,8 +11,6 @@ generator client {
 
 datasource db {
     provider = "postgresql"
-    url      = env("DATABASE_URL")
-    shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
 model Organization {
@@ -44,16 +42,16 @@ model DeployResult {
 
     deployUrl String
 
-    componentSuccesses DeployMessageSuccess[]
-    componentFailures DeployMessageFailure[]
-    runTestSuccesses RunTestSuccess[]
-    runTestFailures RunTestFailure[]
+    componentSuccesses DeployComponentSuccess[]
+    componentFailures DeployComponentFailure[]
+    testSuccesses DeployTestSuccess[]
+    testFailures DeployTestFailure[]
 
     organizationId String
     Organization Organization @relation(fields: [organizationId], references: [id])
 }
 
-model DeployMessageSuccess {
+model DeployComponentSuccess {
     id String @default(uuid()) @unique
 
     fullName String
@@ -67,7 +65,7 @@ model DeployMessageSuccess {
     DeployResult DeployResult @relation(fields: [deployResultId], references: [id])
 }
 
-model DeployMessageFailure {
+model DeployComponentFailure {
     id String @default(uuid()) @unique
 
     fullName String
@@ -87,12 +85,12 @@ model DeployMessageFailure {
     DeployResult DeployResult @relation(fields: [deployResultId], references: [id])
 }
 
-model RunTestSuccess {
+model DeployTestSuccess {
     id String @unique
 
     className String
     methodName String
-    namespace String
+    namespace String?
 
     time Int
 
@@ -100,12 +98,12 @@ model RunTestSuccess {
     DeployResult DeployResult @relation(fields: [deployResultId], references: [id])
 }
 
-model RunTestFailure {
+model DeployTestFailure {
     id String @unique
 
     className String
     methodName String
-    namespace String
+    namespace String?
 
     message String
     stackTrace String

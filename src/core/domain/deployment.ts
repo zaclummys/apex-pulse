@@ -1,4 +1,4 @@
-export type DeployResult = {
+export type Deployment = {
     id: string;
     status: string;
 
@@ -21,14 +21,14 @@ export type DeployResult = {
     checkOnly: boolean;
     deployUrl: string;
 
-    componentSuccesses: DeployMessageSuccess[];
-    componentFailures: DeployMessageFailure[];
+    componentSuccesses: DeployComponentSuccess[];
+    componentFailures: DeployComponentFailure[];
 
-    runTestSuccesses: RunTestSuccess[];
-    runTestFailures: RunTestFailure[];
+    testSuccesses: DeployTestSuccess[];
+    testFailures: DeployTestFailure[];
 }
 
-export type DeployMessageSuccess = {
+export type DeployComponentSuccess = {
     fullName: string;
     componentType: string;
     changed: boolean;
@@ -36,7 +36,7 @@ export type DeployMessageSuccess = {
     deleted: boolean;
 }
 
-export type DeployMessageFailure = {
+export type DeployComponentFailure = {
     fullName: string;
     componentType: string;
     lineNumber: number;
@@ -48,7 +48,7 @@ export type DeployMessageFailure = {
     problemType: string;
 }
 
-export type RunTestSuccess = {
+export type DeployTestSuccess = {
     id: string;
     
     className: string;
@@ -58,7 +58,7 @@ export type RunTestSuccess = {
     time: number;
 }
 
-export type RunTestFailure = {
+export type DeployTestFailure = {
     id: string;
 
     className: string;

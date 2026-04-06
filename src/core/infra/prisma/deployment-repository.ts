@@ -1,18 +1,11 @@
-import { PrismaClient } from "@/generated/prisma/client";
-import { DeployResult } from '@/core/domain/deploy-result';
+import prisma from '@/core/infra/prisma/client';
 
-import DeployResultRepository from '@/core/application/interfaces/deploy-result-repository';
+import { Deployment } from '@/core/domain/deployment';
+import DeploymentRepository from '@/core/application/interfaces/deployment-repository';
 
-export default class PrismaDeployResultRepository implements DeployResultRepository {
-    private prisma: PrismaClient;
-
-    constructor (prisma: PrismaClient) {
-        this.prisma = prisma;
-    }
-
-    public async saveDeployResult (deployResult: DeployResult): Promise<void> {
-        // TODO: Save component successes, component failures, test successes, and test failures
-        await this.prisma.deployResult.create({
+export default class PrismaDeployResultRepository implements DeploymentRepository {
+    public async saveDeployment (deployResult: Deployment): Promise<void> {
+        await prisma.deployResult.create({
             data: {
                 id: deployResult.id,
                 status: deployResult.status,
@@ -21,7 +14,7 @@ export default class PrismaDeployResultRepository implements DeployResultReposit
                 createdByName: deployResult.createdByName,
 
                 startDate: deployResult.startDate,
-                completedDate: deployResult.completedDate,
+                endDate: deployResult.endDate,
 
                 numberComponentsDeployed: deployResult.numberComponentsDeployed,
                 numberComponentErrors: deployResult.numberComponentErrors,
@@ -64,9 +57,9 @@ export default class PrismaDeployResultRepository implements DeployResultReposit
 
                 runTestSuccesses: {
                     createMany: {
-                        data: deployResult.testSuccesses.map(success => ({
+                        data: deployResult.runTestSuccesses.map(success => ({
                             id: success.id,
-                            name: success.name,
+                            className: success.className,
                             methodName: success.methodName,
                             namespace: success.namespace,
                             time: success.time,
@@ -76,13 +69,13 @@ export default class PrismaDeployResultRepository implements DeployResultReposit
 
                 runTestFailures: {
                     createMany: {
-                        data: deployResult.testFailures.map(failure => ({
+                        data: deployResult.runTestFailures.map(failure => ({
                             id: failure.id,
-                            name: failure.name,
+                            className: failure.className,
                             methodName: failure.methodName,
+                            namespace: failure.namespace,
                             message: failure.message,
                             stackTrace: failure.stackTrace,
-                            namespace: failure.namespace,
                             time: failure.time,
                             type: failure.type,
                         })),
