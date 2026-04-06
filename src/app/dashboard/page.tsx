@@ -24,7 +24,7 @@ export default function Dashboard() {
     const items = [
         {
             title: 'Dashboard',
-            url: '/dashboard',
+            url: '/',
             icon: <LayoutDashboard />,
         },
         {
