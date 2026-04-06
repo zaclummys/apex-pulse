@@ -1,3 +1,4 @@
+
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
@@ -10,4 +11,102 @@ generator client {
 
 datasource db {
     provider = "postgresql"
+    url      = env("DATABASE_URL")
+    shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+model Organization {
+    id String @unique
+    name String
+
+    deployResults DeployResult[]
+}
+
+model DeployResult {
+    id String @unique
+    status       String
+
+    createdBy   String
+    createdByName String
+
+    startDate    DateTime
+    completedDate DateTime
+    
+    numberTestsCompleted Int
+    numberTestsTotal Int
+    numberTestErrors Int
+
+    numberComponentsDeployed Int
+    numberComponentsTotal Int
+    numberComponentErrors Int
+
+    checkOnly Boolean
+
+    deployUrl String
+
+    componentSuccesses DeployMessageSuccess[]
+    componentFailures DeployMessageFailure[]
+    runTestSuccesses RunTestSuccess[]
+    runTestFailures RunTestFailure[]
+
+    organizationId String
+    Organization Organization @relation(fields: [organizationId], references: [id])
+}
+
+model DeployMessageSuccess {
+    id String @unique
+    changed Boolean
+    componentType String
+    created Boolean
+    createdDate DateTime
+    deleted Boolean
+    fullName String
+    success Boolean
+
+    deployResultId String
+    DeployResult DeployResult @relation(fields: [deployResultId], references: [id])
+}
+
+model DeployMessageFailure {
+    id String @unique
+    changed Boolean
+    componentType String
+    created Boolean
+    createdDate DateTime
+    deleted Boolean
+    fullName String
+    success Boolean
+
+    columnNumber Int
+    lineNumber Int
+    problem String
+    problemType String
+
+    deployResultId String
+    DeployResult DeployResult @relation(fields: [deployResultId], references: [id])
+}
+
+model RunTestSuccess {
+    id String @unique
+    methodName String
+    name String
+    namespace String
+    time Int
+
+    deployResultId String
+    DeployResult DeployResult @relation(fields: [deployResultId], references: [id])
+}
+
+model RunTestFailure {
+    id String @unique
+    message String
+    methodName String
+    name String
+    namespace String
+    stackTrace String
+    time Int
+    type String
+
+    deployResultId String
+    DeployResult DeployResult @relation(fields: [deployResultId], references: [id])
 }
