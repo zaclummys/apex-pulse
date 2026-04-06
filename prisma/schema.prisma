@@ -30,7 +30,7 @@ model DeployResult {
     createdByName String
 
     startDate    DateTime
-    completedDate DateTime
+    endDate DateTime
     
     numberTestsCompleted Int
     numberTestsTotal Int
@@ -79,6 +79,7 @@ model DeployMessageFailure {
 
     columnNumber Int
     lineNumber Int
+
     problem String
     problemType String
 
@@ -89,9 +90,10 @@ model DeployMessageFailure {
 model RunTestSuccess {
     id String @unique
 
+    className String
     methodName String
-    name String
     namespace String
+
     time Int
 
     deployResultId String
@@ -101,10 +103,11 @@ model RunTestSuccess {
 model RunTestFailure {
     id String @unique
 
-    message String
+    className String
     methodName String
-    name String
     namespace String
+
+    message String
     stackTrace String
 
     time Int

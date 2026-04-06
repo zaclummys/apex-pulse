@@ -16,15 +16,16 @@ export type DeployResult = {
     createdByName: string;
 
     startDate: Date;
-    completedDate: Date;
+    endDate: Date;
 
     checkOnly: boolean;
     deployUrl: string;
 
     componentSuccesses: DeployMessageSuccess[];
     componentFailures: DeployMessageFailure[];
-    testSuccesses: RunTestSuccess[];
-    testFailures: RunTestFailure[];
+
+    runTestSuccesses: RunTestSuccess[];
+    runTestFailures: RunTestFailure[];
 }
 
 export type DeployMessageSuccess = {
@@ -49,19 +50,24 @@ export type DeployMessageFailure = {
 
 export type RunTestSuccess = {
     id: string;
-    name: string;
+    
+    className: string;
     methodName: string;
     namespace: string;
+
     time: number;
 }
 
 export type RunTestFailure = {
     id: string;
-    name: string;
+
+    className: string;
     methodName: string;
     namespace: string;
+
     message: string;
     stackTrace: string;
+
     time: number;
     type: string;
 }

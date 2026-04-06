@@ -7,6 +7,24 @@ type DeployResponseJson = {
 type DeployResultJson = {
     id: string;
     status: string;
+
+    createdBy: string;
+    createdByName: string;
+
+    startDate: string;
+    completedDate: string;
+    
+    numberComponentsDeployed: number;
+    numberComponentErrors: number;
+    numberComponentsTotal: number;
+    
+    numberTestErrors: number;
+    numberTestsCompleted: number;
+    numberTestsTotal: number;
+
+    checkOnly: boolean;
+    deployUrl: string;
+    
     details: DeployDetailsJson;
 };
 
@@ -55,8 +73,10 @@ type RunTestSuccessJson = {
 }
 
 type RunTestFailureJson = {
+    id: string;
     name: string;
     methodName: string;
+    namespace: string;
     message: string;
     stackTrace: string;
     time: number;
@@ -91,6 +111,23 @@ export default class CreateDeployResult {
             id: deployResponseJson.result.id,
             status: deployResponseJson.result.status,
 
+            createdBy: deployResponseJson.result.createdBy,
+            createdByName: deployResponseJson.result.createdByName,
+
+            startDate: new Date(deployResponseJson.result.startDate),
+            endDate: new Date(deployResponseJson.result.completedDate),
+
+            checkOnly: deployResponseJson.result.checkOnly,
+            deployUrl: deployResponseJson.result.deployUrl,
+
+            numberComponentsDeployed: deployResponseJson.result.numberComponentsDeployed,
+            numberComponentErrors: deployResponseJson.result.numberComponentErrors,
+            numberComponentsTotal: deployResponseJson.result.numberComponentsTotal,
+
+            numberTestErrors: deployResponseJson.result.numberTestErrors,
+            numberTestsCompleted: deployResponseJson.result.numberTestsCompleted,
+            numberTestsTotal: deployResponseJson.result.numberTestsTotal,
+
             componentSuccesses: deployResponseJson.result.details.componentSuccesses
                 .filter(success => success.componentType === 'ApexClass')
                 .map((success) => ({
@@ -115,17 +152,19 @@ export default class CreateDeployResult {
                     problemType: failure.problemType,
                 })),
 
-            testSuccesses: deployResponseJson.result.details.runTestResult.successes.map((success) => ({
-                name: success.name,
+            runTestSuccesses: deployResponseJson.result.details.runTestResult.successes.map((success) => ({
+                className: success.name,
                 methodName: success.methodName,
                 namespace: success.namespace,
                 id: success.id,
                 time: success.time,
             })),
 
-            testFailures: deployResponseJson.result.details.runTestResult.failures.map((failure) => ({
-                name: failure.name,
+            runTestFailures: deployResponseJson.result.details.runTestResult.failures.map((failure) => ({
+                id: failure.id,
+                className: failure.name,
                 methodName: failure.methodName,
+                namespace: failure.namespace,
                 message: failure.message,
                 stackTrace: failure.stackTrace,
                 time: failure.time,
