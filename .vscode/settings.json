@@ -1,7 +1,6 @@
 {
     "editor.tabSize": 4,
     "editor.detectIndentation": false,
-    "rest-client.previewResponseInUntitledDocument": false,
-    "rest-client.reuseResponsePanel": true,
-    "rest-client.previewColumn": "current"
+    "rest-client.previewColumn": "current",
+    "rest-client.followredirect": true
 }

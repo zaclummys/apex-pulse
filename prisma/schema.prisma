@@ -17,10 +17,10 @@ model Organization {
     id String @unique
     name String
 
-    deployResults DeployResult[]
+    deployments Deployment[]
 }
 
-model DeployResult {
+model Deployment {
     id String @unique
     status       String
 
@@ -61,8 +61,8 @@ model DeployComponentSuccess {
     created Boolean
     deleted Boolean
 
-    deployResultId String
-    DeployResult DeployResult @relation(fields: [deployResultId], references: [id])
+    deploymentId String
+    Deployment Deployment @relation(fields: [deploymentId], references: [id])
 }
 
 model DeployComponentFailure {
@@ -81,8 +81,8 @@ model DeployComponentFailure {
     problem String
     problemType String
 
-    deployResultId String
-    DeployResult DeployResult @relation(fields: [deployResultId], references: [id])
+    deploymentId String
+    Deployment Deployment @relation(fields: [deploymentId], references: [id])
 }
 
 model DeployTestSuccess {
@@ -94,8 +94,8 @@ model DeployTestSuccess {
 
     time Int
 
-    deployResultId String
-    DeployResult DeployResult @relation(fields: [deployResultId], references: [id])
+    deploymentId String
+    Deployment Deployment @relation(fields: [deploymentId], references: [id])
 }
 
 model DeployTestFailure {
@@ -111,6 +111,6 @@ model DeployTestFailure {
     time Int
     type String
 
-    deployResultId String
-    DeployResult DeployResult @relation(fields: [deployResultId], references: [id])
+    deploymentId String
+    Deployment Deployment @relation(fields: [deploymentId], references: [id])
 }

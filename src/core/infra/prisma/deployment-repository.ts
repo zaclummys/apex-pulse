@@ -5,7 +5,7 @@ import DeploymentRepository from '@/core/application/interfaces/deployment-repos
 
 export default class PrismaDeploymentRepository implements DeploymentRepository {
     public async findDeployment ({ deploymentId, organizationId }: { deploymentId: string, organizationId: string }): Promise<Deployment | null> {
-        return await prisma.deployResult.findUnique({
+        return await prisma.deployment.findUnique({
             where: {
                 id: deploymentId,
                 organizationId: organizationId,
@@ -20,7 +20,7 @@ export default class PrismaDeploymentRepository implements DeploymentRepository 
     }
 
     public async saveDeployment (deployResult: Deployment): Promise<void> {
-        await prisma.deployResult.create({
+        await prisma.deployment.create({
             data: {
                 id: deployResult.id,
                 status: deployResult.status,

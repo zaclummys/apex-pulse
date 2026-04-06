@@ -18,3 +18,16 @@ POST http://localhost:3000/api/organizations/123/deployments
 Content-Type: application/json
 
 < fixtures/success-deploy-response.json
+
+
+###
+POST http://localhost:3000/api/organizations/123/deployments
+Content-Type: application/json
+
+< fixtures/test-failure-deploy-response.json
+
+###
+POST http://localhost:3000/api/organizations/123/deployments
+Content-Type: application/json
+
+< fixtures/component-failure-deploy-response.json

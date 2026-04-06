@@ -20,5 +20,10 @@ export async function POST (request: NextRequest) {
 
     await createOrganization.execute(body);
 
-    return new Response(null, { status: 204 });
+    return new Response(null, {
+        status: 302,
+        headers: {
+            Location: `/api/organizations/${body.id}`,
+        },
+    });
 }

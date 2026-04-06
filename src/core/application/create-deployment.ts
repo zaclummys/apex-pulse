@@ -98,7 +98,7 @@ export default class CreateDeployment {
     public async execute ({
         organizationId,
         deployResponse,
-    }: CreateDeploymentParams): Promise<void> {
+    }: CreateDeploymentParams): Promise<{ organizationId: string; deploymentId: string }> {
         const deployResult: Deployment = {
             organizationId,
             id: deployResponse.result.id,
@@ -166,5 +166,10 @@ export default class CreateDeployment {
         };
 
         await this.deploymentRepository.saveDeployment(deployResult);
+
+        return {
+            organizationId,
+            deploymentId: deployResult.id,
+        };
     }
 }

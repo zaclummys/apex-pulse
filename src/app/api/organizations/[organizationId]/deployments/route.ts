@@ -12,10 +12,16 @@ export async function POST (request: NextRequest, context: any) {
         new PrismaDeploymentRepository()
     );
 
-    await createDeployment.execute({
+    const { deploymentId } = await createDeployment.execute({
         organizationId,
         deployResponse: deployResponseJson
     });
 
-    return new Response(null, { status: 204 });
+    // redirect
+    return new Response(null, {
+        status: 302,
+        headers: {
+            Location: `/api/organizations/${organizationId}/deployments/${deploymentId}`,
+        },
+    });
 }
