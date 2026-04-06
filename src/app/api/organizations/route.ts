@@ -1,6 +1,6 @@
 import { NextRequest } from 'next/server';
 
-import FindOrganizationById from '@/core/application/find-organization-by-id';
+import FindOrganization from '@/core/application/find-organization';
 import CreateOrganization from '@/core/application/create-organization';
 import PrismaOrganizationRepository from '@/core/infra/prisma/organization-repository';
 
@@ -9,10 +9,10 @@ export async function POST (request: NextRequest) {
 
     const prismaOrganizationRepository = new PrismaOrganizationRepository();
 
-    const findOrganizationById = new FindOrganizationById(prismaOrganizationRepository);
+    const findOrganization = new FindOrganization(prismaOrganizationRepository);
     const createOrganization = new CreateOrganization(prismaOrganizationRepository);
 
-    const existingOrganization = await findOrganizationById.execute(body.id);
+    const existingOrganization = await findOrganization.execute(body.id);
 
     if (existingOrganization) {
         return new Response(null, { status: 400 });

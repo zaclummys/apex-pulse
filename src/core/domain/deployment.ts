@@ -53,7 +53,7 @@ export type DeployTestSuccess = {
     
     className: string;
     methodName: string;
-    namespace: string;
+    namespace: string | null;
 
     time: number;
 }
@@ -63,7 +63,7 @@ export type DeployTestFailure = {
 
     className: string;
     methodName: string;
-    namespace: string;
+    namespace: string | null;
 
     message: string;
     stackTrace: string;

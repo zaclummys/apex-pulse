@@ -3,7 +3,22 @@ import prisma from '@/core/infra/prisma/client';
 import { Deployment } from '@/core/domain/deployment';
 import DeploymentRepository from '@/core/application/interfaces/deployment-repository';
 
-export default class PrismaDeployResultRepository implements DeploymentRepository {
+export default class PrismaDeploymentRepository implements DeploymentRepository {
+    public async findDeployment ({ deploymentId, organizationId }: { deploymentId: string, organizationId: string }): Promise<Deployment | null> {
+        return await prisma.deployResult.findUnique({
+            where: {
+                id: deploymentId,
+                organizationId: organizationId,
+            },
+            include: {
+                componentSuccesses: true,
+                componentFailures: true,
+                testSuccesses: true,
+                testFailures: true,
+            },
+        });
+    }
+
     public async saveDeployment (deployResult: Deployment): Promise<void> {
         await prisma.deployResult.create({
             data: {
@@ -55,9 +70,9 @@ export default class PrismaDeployResultRepository implements DeploymentRepositor
                     },
                 },
 
-                runTestSuccesses: {
+                testSuccesses: {
                     createMany: {
-                        data: deployResult.runTestSuccesses.map(success => ({
+                        data: deployResult.testSuccesses.map(success => ({
                             id: success.id,
                             className: success.className,
                             methodName: success.methodName,
@@ -67,9 +82,9 @@ export default class PrismaDeployResultRepository implements DeploymentRepositor
                     },
                 },
 
-                runTestFailures: {
+                testFailures: {
                     createMany: {
-                        data: deployResult.runTestFailures.map(failure => ({
+                        data: deployResult.testFailures.map(failure => ({
                             id: failure.id,
                             className: failure.className,
                             methodName: failure.methodName,

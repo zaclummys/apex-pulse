@@ -11,7 +11,7 @@ export default class CreateOrganization {
         id,
         name,
     }: { id: string; name: string }): Promise<void> {
-        const alreadyExistingOrganization = await this.organizationRepository.findOrganizationById(id);
+        const alreadyExistingOrganization = await this.organizationRepository.findOrganization(id);
 
         if (alreadyExistingOrganization) {
             throw new Error(`Organization with id ${id} already exists.`);
