@@ -19,7 +19,6 @@ import {
     Settings,
     Zap,
 } from 'lucide-react';
-import { title } from 'process';
 
 export default function Dashboard() {
     const items = [
