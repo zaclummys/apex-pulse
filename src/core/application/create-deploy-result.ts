@@ -22,15 +22,6 @@ type RunTestResultJson = {
 }
 
 type DeployMessageSuccessJson = {
-    //   "changed": true,
-    //   "componentType": "ApexClass",
-    //   "created": false,
-    //   "createdDate": "2026-04-05T23:59:41.000Z",
-    //   "deleted": false,
-    //   "fileName": "classes/MyClassName.cls",
-    //   "fullName": "MyClassName",
-    //   "id": "01pak00000NfciPAAR",
-    //   "success": true
     changed: boolean;
     componentType: string;
     created: boolean;
@@ -42,18 +33,6 @@ type DeployMessageSuccessJson = {
 }
 
 type DeployMessageFailureJson = {
-    // "changed": false,
-    // "columnNumber": 5,
-    // "componentType": "ApexClass",
-    // "created": false,
-    // "createdDate": "2026-04-05T23:55:28.000Z",
-    // "deleted": false,
-    // "fileName": "classes/MyClassName.cls",
-    // "fullName": "MyClassName",
-    // "lineNumber": 4,
-    // "problem": "Missing ';' at '}'",
-    // "problemType": "Error",
-    // "success": false
     changed: boolean;
     columnNumber: number;
     componentType: string;
@@ -68,11 +47,6 @@ type DeployMessageFailureJson = {
 }
 
 type RunTestSuccessJson = {
-    // "id": "01pak00000FUcVSAA1",
-    // "methodName": "testGetAccount",
-    // "name": "GetAccountServiceTest",
-    // "namespace": null,
-    // "time": 265
     id: string;
     name: string;
     methodName: string;
@@ -125,14 +99,16 @@ export default class CreateDeployResult {
                     deleted: success.deleted,
                 })),
 
-            componentFailures: deployResponseJson.result.details.componentFailures.map((failure) => ({
-                fullName: failure.fullName,
-                lineNumber: failure.lineNumber,
-                columnNumber: failure.columnNumber,
-                componentType: failure.componentType,
-                changed: failure.changed,
-                created: failure.created,
-                deleted: failure.deleted,
+            componentFailures: deployResponseJson.result.details.componentFailures
+                .filter(failure => failure.componentType === 'ApexClass')
+                .map((failure) => ({
+                    fullName: failure.fullName,
+                    lineNumber: failure.lineNumber,
+                    columnNumber: failure.columnNumber,
+                    componentType: failure.componentType,
+                    changed: failure.changed,
+                    created: failure.created,
+                    deleted: failure.deleted,
             })),
 
             testSuccesses: deployResponseJson.result.details.runTestResult.successes.map((success) => ({
