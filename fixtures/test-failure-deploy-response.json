@@ -1,0 +1,214 @@
+{
+  "status": 1,
+  "result": {
+    "checkOnly": false,
+    "completedDate": "2026-04-06T02:02:24.000Z",
+    "createdBy": "005ak00000Dfz3F",
+    "createdByName": "Isaac Ferreira",
+    "createdDate": "2026-04-06T02:02:22.000Z",
+    "details": {
+      "componentSuccesses": [
+        {
+          "changed": false,
+          "componentType": "ApexClass",
+          "created": false,
+          "createdDate": "2026-04-06T02:02:23.000Z",
+          "deleted": false,
+          "fileName": "classes/MyClassName.cls",
+          "fullName": "MyClassName",
+          "id": "01pak00000NfciPAAR",
+          "success": true
+        },
+        {
+          "changed": true,
+          "componentType": "ApexClass",
+          "created": true,
+          "createdDate": "2026-04-06T02:02:23.000Z",
+          "deleted": false,
+          "fileName": "classes/MyClassNameTest.cls",
+          "fullName": "MyClassNameTest",
+          "id": "01pak00000NfmrRAAR",
+          "success": true
+        },
+        {
+          "changed": true,
+          "componentType": "",
+          "created": false,
+          "createdDate": "2026-04-06T02:02:23.000Z",
+          "deleted": false,
+          "fileName": "package.xml",
+          "fullName": "package.xml",
+          "success": true
+        }
+      ],
+      "runTestResult": {
+        "codeCoverage": [
+          {
+            "id": "01pak00000NfciPAAR",
+            "locationsNotCovered": [
+              {
+                "column": 0,
+                "line": 2,
+                "numExecutions": 0,
+                "time": -1
+              }
+            ],
+            "name": "MyClassName",
+            "namespace": null,
+            "numLocations": 1,
+            "numLocationsNotCovered": 1,
+            "type": "Class",
+            "dmlInfo": [],
+            "methodInfo": [],
+            "soqlInfo": [],
+            "soslInfo": []
+          },
+          {
+            "id": "01pak00000CDt9RAAT",
+            "locationsNotCovered": [
+              {
+                "column": 0,
+                "line": 2,
+                "numExecutions": 0,
+                "time": -1
+              }
+            ],
+            "name": "MyApexClass",
+            "namespace": null,
+            "numLocations": 1,
+            "numLocationsNotCovered": 1,
+            "type": "Class",
+            "dmlInfo": [],
+            "methodInfo": [],
+            "soqlInfo": [],
+            "soslInfo": []
+          },
+          {
+            "id": "01pak00000FUcVTAA1",
+            "locationsNotCovered": [
+              {
+                "column": 0,
+                "line": 17,
+                "numExecutions": 0,
+                "time": -1
+              }
+            ],
+            "name": "ViolationExample",
+            "namespace": null,
+            "numLocations": 9,
+            "numLocationsNotCovered": 1,
+            "type": "Class",
+            "dmlInfo": [],
+            "methodInfo": [],
+            "soqlInfo": [],
+            "soslInfo": []
+          },
+          {
+            "id": "01pak00000FUcVRAA1",
+            "name": "GetAccountService",
+            "namespace": null,
+            "numLocations": 2,
+            "numLocationsNotCovered": 0,
+            "type": "Class",
+            "dmlInfo": [],
+            "locationsNotCovered": [],
+            "methodInfo": [],
+            "soqlInfo": [],
+            "soslInfo": []
+          }
+        ],
+        "failures": [
+          {
+            "id": "01pak00000NfmrRAAR",
+            "message": "System.AssertException: Assertion Failed: Expected: true, Actual: false",
+            "methodName": "failure",
+            "name": "MyClassNameTest",
+            "namespace": null,
+            "packageName": "MyClassNameTest",
+            "stackTrace": "Class.MyClassNameTest.failure: line 10, column 1",
+            "time": 129,
+            "type": "Class"
+          }
+        ],
+        "numFailures": 1,
+        "numTestsRun": 4,
+        "successes": [
+          {
+            "id": "01pak00000FUcVSAA1",
+            "methodName": "testGetAccount",
+            "name": "GetAccountServiceTest",
+            "namespace": null,
+            "time": 299
+          },
+          {
+            "id": "01pak00000NfmrRAAR",
+            "methodName": "success",
+            "name": "MyClassNameTest",
+            "namespace": null,
+            "time": 102
+          },
+          {
+            "id": "01pak00000FUcVUAA1",
+            "methodName": "testDoSomething",
+            "name": "ViolationExampleTest",
+            "namespace": null,
+            "time": 104
+          }
+        ],
+        "totalTime": 712,
+        "codeCoverageWarnings": [],
+        "flowCoverage": [],
+        "flowCoverageWarnings": []
+      },
+      "componentFailures": []
+    },
+    "done": true,
+    "id": "0Afak00000X3G6rCAF",
+    "ignoreWarnings": false,
+    "lastModifiedDate": "2026-04-06T02:02:24.000Z",
+    "numberComponentErrors": 0,
+    "numberComponentsDeployed": 2,
+    "numberComponentsTotal": 2,
+    "numberFiles": "6",
+    "numberTestErrors": 1,
+    "numberTestsCompleted": 3,
+    "numberTestsTotal": 4,
+    "rollbackOnError": true,
+    "runTestsEnabled": true,
+    "startDate": "2026-04-06T02:02:22.000Z",
+    "status": "Failed",
+    "success": false,
+    "zipSize": 1371,
+    "files": [
+      {
+        "fullName": "MyClassName",
+        "type": "ApexClass",
+        "state": "Unchanged",
+        "filePath": "/Users/isaacluizvieiraferreira/apex-pulse/apex-pulse/sfdx-project/force-app/main/default/classes/MyClassName.cls"
+      },
+      {
+        "fullName": "MyClassName",
+        "type": "ApexClass",
+        "state": "Unchanged",
+        "filePath": "/Users/isaacluizvieiraferreira/apex-pulse/apex-pulse/sfdx-project/force-app/main/default/classes/MyClassName.cls-meta.xml"
+      },
+      {
+        "fullName": "MyClassNameTest",
+        "type": "ApexClass",
+        "state": "Created",
+        "filePath": "/Users/isaacluizvieiraferreira/apex-pulse/apex-pulse/sfdx-project/force-app/main/default/classes/MyClassNameTest.cls"
+      },
+      {
+        "fullName": "MyClassNameTest",
+        "type": "ApexClass",
+        "state": "Created",
+        "filePath": "/Users/isaacluizvieiraferreira/apex-pulse/apex-pulse/sfdx-project/force-app/main/default/classes/MyClassNameTest.cls-meta.xml"
+      }
+    ],
+    "zipFileCount": 5,
+    "deployUrl": "https://nttdata207-dev-ed.develop.my.salesforce.com/lightning/setup/DeployStatus/page?address=%2Fchangemgmt%2FmonitorDeploymentsDetails.apexp%3FasyncId%3D0Afak00000X3G6rCAF%26retURL%3D%252Fchangemgmt%252FmonitorDeployment.apexp"
+  },
+  "warnings": [
+    "Starting in December 2025, this command will require that the target org use source tracking.\nSpecifically, to use this command with a production org, scratch org created with the `--no-track-source` flag, or other non-source-tracking org, you must specify the metadata you want to deploy with either the `--metadata`, `--source-dir`, or `--manifest` flag."
+  ]
+}
