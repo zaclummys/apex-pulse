@@ -13,7 +13,7 @@ import Header from '@/app/header';
 import signInAction from '@/app/actions/sign-in';
 
 export default function SignIn() {
-    const [state, action, pending] = useActionState(signInAction, {});
+    const [state, action, pending] = useActionState<any, FormData>(signInAction, {});
     const router = useRouter();
 
     console.log('State:', state);

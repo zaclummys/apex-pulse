@@ -1,3 +1,7 @@
+'use client';
+
+import Link from 'next/link';
+
 import {
     Sidebar,
     SidebarContent,
@@ -24,22 +28,22 @@ export default function Layout ({ children }: { children: React.ReactNode }) {
     const items = [
         {
             title: 'Dashboard',
-            url: '/',
+            url: '/dashboard',
             icon: <LayoutDashboard />,
         },
         {
             title: 'Deployments',
-            url: '/deployments',
+            url: '/dashboard/deployments',
             icon: <Rocket />,
         },
         {
             title: 'Organizations',
-            url: '/organizations',
+            url: '/dashboard/organizations',
             icon: <Building />,
         },
         {
             title: 'Settings',
-            url: '/settings',
+            url: '/dashboard/settings',
             icon: <Settings />,
         },
     ];
@@ -67,12 +71,13 @@ export default function Layout ({ children }: { children: React.ReactNode }) {
                             <SidebarMenu>
                                 {items.map((item) => (
                                     <SidebarMenuItem key={item.title}>
-                                        <SidebarMenuButton>
-                                            {item.icon}
+                                        <SidebarMenuButton render={props => (
+                                            <Link href={item.url} {...props}>
+                                                {item.icon}
 
-                                            <span>
-                                                {item.title}
-                                            </span>
+                                                <span>{item.title}</span>
+                                            </Link>
+                                        )}>
                                         </SidebarMenuButton>
                                     </SidebarMenuItem>
                                 ))}

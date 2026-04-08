@@ -13,9 +13,9 @@ export default function Header () {
             </Link>
 
             <div className="self-end flex flex-row gap-4">
-                {/* {/* <ButtonLink href="/sign-in" variant="outline" size="sm">
+                <ButtonLink href="/sign-in" variant="outline" size="sm">
                     Sign In
-                </ButtonLink> */}
+                </ButtonLink>
 
                 <ButtonLink href="/sign-up" size="sm">
                     Sign Up
