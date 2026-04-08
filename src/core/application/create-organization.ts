@@ -1,16 +1,21 @@
 import OrganizationRepository from "@/core/application/interfaces/organization-repository";
 
-export default class CreateOrganization {
+export type CreateOrganizationParams = {
+    id: string;
+    name: string;
+};
+
+export class CreateOrganizationService {
     private organizationRepository: OrganizationRepository;
 
     constructor (organizationRepository: OrganizationRepository) {
-        this.organizationRepository = organizationRepository
+        this.organizationRepository = organizationRepository;
     }
 
     public async execute ({
         id,
         name,
-    }: { id: string; name: string }): Promise<void> {
+    }: CreateOrganizationParams): Promise<void> {
         const alreadyExistingOrganization = await this.organizationRepository.findOrganization(id);
 
         if (alreadyExistingOrganization) {

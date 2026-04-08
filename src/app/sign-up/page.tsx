@@ -13,7 +13,7 @@ export default function SignUp() {
         <>
             <Header />
 
-            <div className="min-h-screen flex items-center justify-center">
+            <div className="absolute inset-0 flex items-center justify-center">
                 <Card className="w-full max-w-md">
                     <CardHeader>
                         <CardTitle>Sign Up</CardTitle>

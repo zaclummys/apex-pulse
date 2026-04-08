@@ -1,15 +1,11 @@
 import { NextRequest } from 'next/server';
 
-import PrismaOrganizationRepository from '@/core/infra/prisma/organization-repository';
-import FindOrganization from '@/core/application/find-organization';
+import { getOrganization } from '@/core';
 
 export async function GET (request: NextRequest, context: any) {
     const { organizationId } = await context.params;
 
-    const prismaOrganizationRepository = new PrismaOrganizationRepository();
-    const findOrganization = new FindOrganization(prismaOrganizationRepository);
-
-    const organization = await findOrganization.execute(organizationId);
+    const organization = await getOrganization({ organizationId });
 
     if (!organization) {
         return new Response(null, { status: 404 });

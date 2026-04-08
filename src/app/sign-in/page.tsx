@@ -1,29 +1,30 @@
 'use client';
 
+import { useActionState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 import { Card, CardAction, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Field, FieldLabel } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { useRouter } from 'next/navigation';
 
 import Header from '@/app/header';
+import signInAction from '@/app/actions/sign-in';
 
 export default function SignIn() {
+    const [state, action, pending] = useActionState(signInAction, {});
     const router = useRouter();
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        
-        router.push('/dashboard');
-    }
+    console.log('State:', state);
+    console.log('Action:', action);
+    console.log('Pending:', pending);
 
     return (
         <>
             <Header />
             
-            <div className="min-h-screen flex items-center justify-center">
+            <div className="absolute inset-0 flex items-center justify-center">
                 <Card className="w-full max-w-md">
                     <CardHeader>
                         <CardTitle>Sign In</CardTitle>
@@ -35,15 +36,27 @@ export default function SignIn() {
                     </CardHeader>
 
                     <CardContent>
-                        <form id="form" className="flex flex-col gap-6" onSubmit={handleSubmit}>
+                        <form id="form" className="flex flex-col gap-6" action={action}>
                             <Field>
                                 <FieldLabel htmlFor="email">Email</FieldLabel>
-                                <Input id="email" type="email" placeholder="Enter your email" required/>
+                                <Input
+                                    id="email"
+                                    name="email"
+                                    type="email"
+                                    placeholder="Enter your email"
+                                    required
+                                />
                             </Field>
 
                             <Field>
                                 <FieldLabel htmlFor="password">Password</FieldLabel>
-                                <Input id="password" type="password" placeholder="Enter your password" required />
+                                <Input
+                                    id="password"
+                                    name="password"
+                                    type="password"
+                                    placeholder="Enter your password"
+                                    required
+                                />
                             </Field>
                         </form>
                     </CardContent>

@@ -4,6 +4,20 @@ import { Deployment } from '@/core/domain/deployment';
 import DeploymentRepository from '@/core/application/interfaces/deployment-repository';
 
 export default class PrismaDeploymentRepository implements DeploymentRepository {
+    public async findDeploymentsByOrganizationId (organizationId: string): Promise<Deployment[]> {
+        return await prisma.deployment.findMany({
+            where: {
+                organizationId,
+            },
+            include: {
+                componentSuccesses: true,
+                componentFailures: true,
+                testSuccesses: true,
+                testFailures: true,
+            },
+        });
+    }
+    
     public async findDeployment ({ deploymentId, organizationId }: { deploymentId: string, organizationId: string }): Promise<Deployment | null> {
         return await prisma.deployment.findUnique({
             where: {

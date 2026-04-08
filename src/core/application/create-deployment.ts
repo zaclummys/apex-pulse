@@ -84,12 +84,12 @@ type RunTestFailureJson = {
     type: string;
 }
 
-type CreateDeploymentParams = {
+export type CreateDeploymentParams = {
     organizationId: string;
     deployResponse: DeployResponseJson;
 };
 
-export default class CreateDeployment {
+export class CreateDeploymentService {
     private deploymentRepository: DeploymentRepository;
     
     constructor (deploymentRepository: DeploymentRepository) {
