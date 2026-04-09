@@ -85,9 +85,13 @@ type RunTestFailureJson = {
     type: string;
 }
 
-export type CreateDeploymentParams = {
+export type CreateDeploymentInput = {
+    organizationId: string;
     deployResponse: DeployResponseJson;
-    organizationSalesforceId: string;
+};
+
+export type CreateDeploymentOutput = {
+    deploymentId: string;
 };
 
 export class CreateDeploymentService {
@@ -105,17 +109,16 @@ export class CreateDeploymentService {
         this.organizationRepository = organizationRepository;
     }
     public async execute ({
-        organizationSalesforceId,
+        organizationId,
         deployResponse,
-    }: CreateDeploymentParams): Promise<{ organizationId: string; deploymentId: string }> {
-        const organization = await this.organizationRepository.findOrganizationBySalesforceId(organizationSalesforceId);
+    }: CreateDeploymentInput): Promise<CreateDeploymentOutput> {
+        const organization = await this.organizationRepository.findOrganizationById(organizationId);
 
         if (!organization) {
-            throw new Error(`Organization with Salesforce ID ${organizationSalesforceId} not found.`);
+            throw new Error(`Organization with ID ${organizationId} not found.`);
         }
 
         const deployment: Deployment = {
-            salesforceId: deployResponse.result.id,
             status: deployResponse.result.status,
 
             createdBy: deployResponse.result.createdBy,
@@ -184,8 +187,7 @@ export class CreateDeploymentService {
         await this.deploymentRepository.saveDeployment(deployment);
 
         return {
-            deploymentId: deployment.salesforceId,
-            organizationId: organization.salesforceId,
+            deploymentId: deployment.id!,
         };
     }
 }

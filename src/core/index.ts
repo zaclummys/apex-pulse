@@ -2,29 +2,20 @@ import PrismaDeploymentRepository from '@/core/infra/prisma/deployment-repositor
 import PrismaOrganizationRepository from '@/core/infra/prisma/organization-repository';
 import PrismaApiKeyRepository from '@/core/infra/prisma/api-key-repository';
 
-import {
-    GetOrganizationService,
-    GetOrganizationParams,
-} from '@/core/application/queries/get-organization';
+import { GetOrganizationByIdService } from '@/core/application/queries/get-organization-by-id';
 
-import {
-    GetDeploymentService,
-    GetDeploymentParams,
-} from '@/core/application/queries/get-deployment';
+import { GetDeploymentByIdService } from '@/core/application/queries/get-deployment-by-id';
 
-import {
-    GetDeploymentsByOrganizationIdService,
-    GetDeploymentsByOrganizationIdParams,
-} from '@/core/application/queries/get-deployments-by-organization-id';
+import { GetDeploymentsByOrganizationIdService } from '@/core/application/queries/get-deployments-by-organization-id';
 
 import {
     CreateOrganizationService,
-    CreateOrganizationParams,
+    CreateOrganizationInput,
 } from '@/core/application/commands/create-organization';
 
 import {
     CreateDeploymentService,
-    CreateDeploymentParams,
+    CreateDeploymentInput,
 } from '@/core/application/commands/create-deployment';
 
 import {
@@ -36,37 +27,37 @@ const deploymentRepository = new PrismaDeploymentRepository();
 const organizationRepository = new PrismaOrganizationRepository();
 const apiKeyRepository = new PrismaApiKeyRepository();
 
-export function getOrganization (getOrganizationParams: GetOrganizationParams) {
-    const getOrganizationService = new GetOrganizationService(organizationRepository);
+export function getOrganizationById (id: string) {
+    const getOrganizationByIdService = new GetOrganizationByIdService(organizationRepository);
 
-    return getOrganizationService.execute(getOrganizationParams);
+    return getOrganizationByIdService.execute(id);
 }
 
-export function getDeployment (getDeploymentParams: GetDeploymentParams) {
-    const getDeploymentService = new GetDeploymentService(deploymentRepository);
+export function getDeploymentById (id: string) {
+    const getDeploymentByIdService = new GetDeploymentByIdService(deploymentRepository);
 
-    return getDeploymentService.execute(getDeploymentParams);
+    return getDeploymentByIdService.execute(id);
 }
 
-export function getDeploymentsByOrganizationId (getDeploymentsByOrganizationIdParams: GetDeploymentsByOrganizationIdParams) {
-    const getDeploymentsService = new GetDeploymentsByOrganizationIdService(deploymentRepository);
+export function getDeploymentsByOrganizationId (organizationId: string) {
+    const getDeploymentsByOrganizationIdService = new GetDeploymentsByOrganizationIdService(deploymentRepository);
 
-    return getDeploymentsService.execute(getDeploymentsByOrganizationIdParams);
+    return getDeploymentsByOrganizationIdService.execute(organizationId);
 }
 
-export function createOrganization (createOrganizationParams: CreateOrganizationParams) {
+export function createOrganization (createOrganizationInput: CreateOrganizationInput) {
     const createOrganizationService = new CreateOrganizationService(organizationRepository);
 
-    return createOrganizationService.execute(createOrganizationParams);
+    return createOrganizationService.execute(createOrganizationInput);
 }
 
-export function createDeployment (createDeploymentParams: CreateDeploymentParams) {
+export function createDeployment (createDeploymentInput: CreateDeploymentInput) {
     const createDeploymentService = new CreateDeploymentService({
         deploymentRepository,
         organizationRepository,
     });
 
-    return createDeploymentService.execute(createDeploymentParams);
+    return createDeploymentService.execute(createDeploymentInput);
 }
 
 export function createApiKey (createApiKeyInput: CreateApiKeyInput) {

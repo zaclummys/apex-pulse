@@ -8,6 +8,7 @@ export default class PrismaApiKeyRepository implements ApiKeyRepository {
             data: {
                 id: apiKey.id,
                 key: apiKey.key,
+                name: apiKey.name,
                 createdAt: apiKey.createdAt,
                 organizationId: apiKey.organizationId,
             },

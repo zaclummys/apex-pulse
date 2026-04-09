@@ -1,9 +1,6 @@
 import { NextRequest } from 'next/server';
 
-import {
-    getDeployment,
-    createDeployment,
-} from '@/core';
+import { createDeployment } from '@/core';
 
 export async function POST (request: NextRequest, context: any) {
     const { organizationId } = await context.params;
@@ -12,7 +9,7 @@ export async function POST (request: NextRequest, context: any) {
 
     const { deploymentId } = await createDeployment({
         organizationId,
-        deployResponse: deployResponseJson
+        deployResponse: deployResponseJson,
     });
     
     return new Response(null, {

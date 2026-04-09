@@ -27,8 +27,6 @@ model Organization {
     id String @id @default(uuid())
     name String
 
-    salesforceId String @unique
-
     deployments Deployment[]
     
     userId String
@@ -51,8 +49,6 @@ model ApiKey {
 
 model Deployment {
     id String @id @default(uuid())
-
-    salesforceId String
 
     status       String
 

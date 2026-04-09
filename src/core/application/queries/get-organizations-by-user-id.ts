@@ -1,9 +1,5 @@
 import OrganizationRepository from '@/core/application/interfaces/organization-repository';
 
-type GetOrganizationsByUserIdParams = {
-    userId: string;
-};
-
 export class GetOrganizationsByUserIdService {
     private organizationRepository: OrganizationRepository;
 
@@ -11,7 +7,7 @@ export class GetOrganizationsByUserIdService {
         this.organizationRepository = organizationRepository;
     }
 
-    async execute ({ userId }: GetOrganizationsByUserIdParams) {
+    async execute (userId: string) {
         return await this.organizationRepository.findOrganizationsByUserId(userId);
     }
 }

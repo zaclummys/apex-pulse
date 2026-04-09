@@ -1,9 +1,6 @@
 import { NextRequest } from 'next/server';
 
-import {
-    getOrganization,
-    createOrganization,
-} from '@/core';
+import { createOrganization } from '@/core';
 
 export async function POST (request: NextRequest) {
     const body = await request.json();

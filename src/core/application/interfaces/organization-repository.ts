@@ -5,8 +5,7 @@ type SavedOrganization = Organization & {
 };
 
 export default interface OrganizationRepository {
-    findOrganizationsByUserId (userId: string): Promise<SavedOrganization[]>;
     findOrganizationById (id: string): Promise<SavedOrganization | null>;
-    findOrganizationBySalesforceId (salesforceId: string): Promise<SavedOrganization | null>;
+    findOrganizationsByUserId (userId: string): Promise<SavedOrganization[]>;
     saveOrganization (organization: Organization): Promise<void>;
 }

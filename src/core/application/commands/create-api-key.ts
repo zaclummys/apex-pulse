@@ -2,9 +2,11 @@ import crypto from 'crypto';
 
 import OrganizationRepository from '@/core/application/interfaces/organization-repository';
 import ApiKeyRepository from '@/core/application/interfaces/api-key-repository';
+import ApiKey from '@/core/domain/api-key';
 
 export type CreateApiKeyInput = {
-    organizationSalesforceId: string;
+    name: string;
+    organizationId: string;
 };
 
 export type CreateApiKeyOutput = {
@@ -27,16 +29,18 @@ export class CreateApiKeyService {
     }
 
     public async execute ({
-        organizationSalesforceId,
+        name,
+        organizationId,
     }: CreateApiKeyInput): Promise<CreateApiKeyOutput> {
-        const organization = await this.organizationRepository.findOrganizationBySalesforceId(organizationSalesforceId);
+        const organization = await this.organizationRepository.findOrganizationById(organizationId);
 
         if (!organization) {
-            throw new Error(`Organization with Salesforce ID ${organizationSalesforceId} not found.`);
+            throw new Error(`Organization with ID ${organizationId} not found.`);
         }
 
-        const apiKey = {
+        const apiKey: ApiKey = {
             key: this.generateInsecureKey(),
+            name: name,
             organizationId: organization.id,
         }
 

@@ -1,9 +1,5 @@
 import DeploymentRepository from '@/core/application/interfaces/deployment-repository';
 
-export type GetDeploymentsByOrganizationIdParams = {
-    organizationId: string;
-};
-
 export class GetDeploymentsByOrganizationIdService {
     private deploymentRepository: DeploymentRepository;
 
@@ -11,7 +7,7 @@ export class GetDeploymentsByOrganizationIdService {
         this.deploymentRepository = deploymentRepository;
     }
 
-    public async execute ({ organizationId }: GetDeploymentsByOrganizationIdParams): Promise<any[]> {
+    public async execute (organizationId: string) {
         return await this.deploymentRepository.findDeploymentsByOrganizationId(organizationId);
     }
 }

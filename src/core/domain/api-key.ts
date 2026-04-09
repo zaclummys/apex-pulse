@@ -1,7 +1,8 @@
 type ApiKey = {
     id?: string;
     key: string;
-    createdAt: Date;
+    name: string;
+    createdAt?: Date;
     organizationId: string;
 }
 

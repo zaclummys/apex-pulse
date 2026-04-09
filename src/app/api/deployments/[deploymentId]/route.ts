@@ -1,14 +1,11 @@
 import { NextRequest } from 'next/server';
 
-import { getDeployment } from '@/core';
+import { getDeploymentById } from '@/core';
 
 export async function GET (request: NextRequest, context: any) {
-    const { organizationId, deploymentId } = await context.params;
+    const { deploymentId } = await context.params;
 
-    const deployment = await getDeployment({
-        deploymentId,
-        organizationId,
-    });
+    const deployment = await getDeploymentById(deploymentId);
 
     if (!deployment) {
         return new Response(null, { status: 404 });

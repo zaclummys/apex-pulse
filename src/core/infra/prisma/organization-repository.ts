@@ -12,21 +12,12 @@ export default class PrismaOrganizationRepository implements OrganizationReposit
         });
     }
 
-    public async findOrganizationBySalesforceId (salesforceId: string) {
-        return await prisma.organization.findUnique({
-            where: {
-                salesforceId,
-            },
-        });
-    }
-
     public async saveOrganization (organization: Organization) {
         await prisma.organization.create({
             data: {
                 id: organization.id,
                 name: organization.name,
                 userId: organization.userId,
-                salesforceId: organization.salesforceId,
             },
         });
     }
