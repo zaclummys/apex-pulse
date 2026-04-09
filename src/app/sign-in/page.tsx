@@ -10,7 +10,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 
 import Header from '@/app/header';
-import signInAction from '@/app/actions/sign-in';
+import signInAction from '@/app/actions/commands/sign-in';
 
 export default function SignIn() {
     const [state, action, pending] = useActionState<any, FormData>(signInAction, {});

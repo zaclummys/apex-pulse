@@ -4,7 +4,6 @@ import { Organization } from '@/core/domain/organization';
 export type CreateOrganizationInput = {
     name: string;
     userId: string;
-    salesforceId: string;
 };
 
 export type CreateOrganizationOutput = {

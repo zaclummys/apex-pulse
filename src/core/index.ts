@@ -3,9 +3,8 @@ import PrismaOrganizationRepository from '@/core/infra/prisma/organization-repos
 import PrismaApiKeyRepository from '@/core/infra/prisma/api-key-repository';
 
 import { GetOrganizationByIdService } from '@/core/application/queries/get-organization-by-id';
-
+import { GetOrganizationsByUserIdService } from '@/core/application/queries/get-organizations-by-user-id';
 import { GetDeploymentByIdService } from '@/core/application/queries/get-deployment-by-id';
-
 import { GetDeploymentsByOrganizationIdService } from '@/core/application/queries/get-deployments-by-organization-id';
 
 import {
@@ -31,6 +30,12 @@ export function getOrganizationById (id: string) {
     const getOrganizationByIdService = new GetOrganizationByIdService(organizationRepository);
 
     return getOrganizationByIdService.execute(id);
+}
+
+export function getOrganizationsByUserId (userId: string) {
+    const getOrganizationsByUserIdService = new GetOrganizationsByUserIdService(organizationRepository);
+
+    return getOrganizationsByUserIdService.execute(userId);
 }
 
 export function getDeploymentById (id: string) {

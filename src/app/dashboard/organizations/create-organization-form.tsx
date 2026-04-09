@@ -1,7 +1,7 @@
 'use client';
 
 import { useActionState } from 'react'
-import createOrganizationAction from '@/app/actions/create-organization';
+import createOrganizationAction from '@/app/actions/commands/create-organization';
 
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
@@ -9,28 +9,19 @@ import { Button } from "@/components/ui/button"
 export default function CreateOrganizationForm () {
     const [state, action, pending] = useActionState(createOrganizationAction, {
         fields: {
-            organizationName: "",
-            organizationSalesforceId: "",
+            organizationName: ""
         },
     });
 
     return (
         <form
             action={action}
-            className="flex flex-col items-start gap-4">
+            className="flex flex-row items-start gap-4">
             <Input
                 type="text"
                 name="organizationName"
                 placeholder="Organization Name"
                 defaultValue={state.fields.organizationName}
-                required
-            />
-
-            <Input
-                type="text"
-                name="organizationSalesforceId"
-                placeholder="Organization Salesforce ID"
-                defaultValue={state.fields.organizationSalesforceId}
                 required
             />
 
