@@ -4,10 +4,18 @@ import { Organization } from '@/core/domain/organization';
 import OrganizationRepository from '@/core/application/interfaces/organization-repository';
 
 export default class PrismaOrganizationRepository implements OrganizationRepository {
-    public async findOrganization (id: string): Promise<Organization | null> {
+    public async findOrganizationById (id: string): Promise<Organization | null> {
         return await prisma.organization.findUnique({
             where: {
                 id,
+            },
+        });
+    }
+
+    public async findOrganizationBySalesforceId (salesforceId: string): Promise<Organization | null> {
+        return await prisma.organization.findUnique({
+            where: {
+                salesforceId,
             },
         });
     }
@@ -17,6 +25,8 @@ export default class PrismaOrganizationRepository implements OrganizationReposit
             data: {
                 id: organization.id,
                 name: organization.name,
+                userId: organization.userId,
+                salesforceId: organization.salesforceId,
             },
         });
     }

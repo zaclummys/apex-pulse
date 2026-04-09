@@ -1,5 +1,6 @@
 import { Deployment } from '@/core/domain/deployment';
 import DeploymentRepository from '@/core/application/interfaces/deployment-repository';
+import OrganizationRepository from '@/core/application/interfaces/organization-repository';
 
 type DeployResponseJson = {
     result: DeployResultJson;
@@ -85,23 +86,36 @@ type RunTestFailureJson = {
 }
 
 export type CreateDeploymentParams = {
-    organizationId: string;
     deployResponse: DeployResponseJson;
+    organizationSalesforceId: string;
 };
 
 export class CreateDeploymentService {
     private deploymentRepository: DeploymentRepository;
+    private organizationRepository: OrganizationRepository;
     
-    constructor (deploymentRepository: DeploymentRepository) {
+    constructor ({
+        deploymentRepository,
+        organizationRepository,
+    }: {
+        deploymentRepository: DeploymentRepository;
+        organizationRepository: OrganizationRepository;
+    }) {
         this.deploymentRepository = deploymentRepository;
+        this.organizationRepository = organizationRepository;
     }
     public async execute ({
-        organizationId,
+        organizationSalesforceId,
         deployResponse,
     }: CreateDeploymentParams): Promise<{ organizationId: string; deploymentId: string }> {
-        const deployResult: Deployment = {
-            organizationId,
-            id: deployResponse.result.id,
+        const organization = await this.organizationRepository.findOrganizationBySalesforceId(organizationSalesforceId);
+
+        if (!organization) {
+            throw new Error(`Organization with Salesforce ID ${organizationSalesforceId} not found.`);
+        }
+
+        const deployment: Deployment = {
+            salesforceId: deployResponse.result.id,
             status: deployResponse.result.status,
 
             createdBy: deployResponse.result.createdBy,
@@ -163,13 +177,15 @@ export class CreateDeploymentService {
                 time: failure.time,
                 type: failure.type,
             })),
+
+            organizationId: organization.id,
         };
 
-        await this.deploymentRepository.saveDeployment(deployResult);
+        await this.deploymentRepository.saveDeployment(deployment);
 
         return {
-            organizationId,
-            deploymentId: deployResult.id,
+            deploymentId: deployment.salesforceId,
+            organizationId: organization.salesforceId,
         };
     }
 }

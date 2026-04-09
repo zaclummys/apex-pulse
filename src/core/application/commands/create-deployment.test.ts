@@ -1,6 +1,7 @@
 import { readFile } from 'fs/promises';
 import { describe, it, expect, vi } from 'vitest';
 
+import DeploymentRepository from '@/core/application/interfaces/deployment-repository';
 import { CreateDeploymentService } from '@/core/application/commands/create-deployment';
 
 describe('Create Deployment', async () => {
@@ -12,24 +13,42 @@ describe('Create Deployment', async () => {
     const componentFailureDeployResponseJson = JSON.parse(rawComponentFailureDeployResponseJson);
     const testFailureDeployResponseJson = JSON.parse(rawTestFailureDeployResponseJson);
 
-    const deploymentRepository = {
+    const organizationRepository = {
+        findOrganizationBySalesforceId: vi.fn(),
+        findOrganizationById: vi.fn(),
+        findOrganizationsByUserId: vi.fn(),
+        saveOrganization: vi.fn(),
+    };
+
+    const deploymentRepository: DeploymentRepository = {
         saveDeployment: vi.fn(),
         findDeploymentsByOrganizationId: vi.fn(),
         findDeployment: vi.fn(),
+        findDeploymentBySalesforceId: vi.fn(),
     };
 
+    const createDeployment = new CreateDeploymentService({
+        deploymentRepository,
+        organizationRepository,
+    });
+
+
     it('Should create a deploy result successfully', async () => {
-        const createDeployment = new CreateDeploymentService(deploymentRepository);
+        organizationRepository.findOrganizationBySalesforceId.mockResolvedValue({
+            id: 'organization-id',
+            name: 'Organization Name',
+            salesforceId: 'salesforce-organization-id',
+        });
 
         await createDeployment.execute({
-            organizationId: 'org123',
-            deployResponse: successDeployResponseJson
+            deployResponse: successDeployResponseJson,
+            organizationSalesforceId: 'salesforce-organization-id',
         });
 
         expect(deploymentRepository.saveDeployment).toHaveBeenCalledWith(
             expect.objectContaining({
-                organizationId: 'org123',
-                id: '0Afak00000X387hCAB',
+                organizationId: 'organization-id',
+                salesforceId: '0Afak00000X387hCAB',
                 status: 'Succeeded',
                 componentSuccesses: [
                     {
@@ -63,16 +82,14 @@ describe('Create Deployment', async () => {
     });
 
     it('Should create a deploy result with component failures', async () => {
-        const createDeployment = new CreateDeploymentService(deploymentRepository);
-
         await createDeployment.execute({
-            organizationId: 'org123',
+            organizationSalesforceId: 'salesforce-organization-id',
             deployResponse: componentFailureDeployResponseJson
         });
 
         expect(deploymentRepository.saveDeployment).toHaveBeenCalledWith(
             expect.objectContaining({
-                organizationId: 'org123',
+                organizationId: 'organization-id',
                 componentFailures: [
                     {
                         componentType: 'ApexClass',
@@ -102,16 +119,14 @@ describe('Create Deployment', async () => {
     });
 
     it('Should create a deploy result with test failures', async () => {
-        const createDeployment = new CreateDeploymentService(deploymentRepository);
-
         await createDeployment.execute({
-            organizationId: 'org123',
-            deployResponse: testFailureDeployResponseJson
+            deployResponse: testFailureDeployResponseJson,
+            organizationSalesforceId: 'salesforce-organization-id',
         });
 
         expect(deploymentRepository.saveDeployment).toHaveBeenCalledWith(
             expect.objectContaining({
-                organizationId: 'org123',
+                organizationId: 'organization-id',
                 testFailures: [
                     {
                         "id": "01pak00000NfmrRAAR",

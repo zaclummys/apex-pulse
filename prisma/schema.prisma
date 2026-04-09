@@ -14,16 +14,20 @@ datasource db {
 }
 
 model User {
-    id String @unique
+    id String @id @default(uuid())
     name String
+
     email String @unique
+    password String
 
     organizations Organization[]
 }
 
 model Organization {
-    id String @unique
+    id String @id @default(uuid())
     name String
+
+    salesforceId String @unique
 
     deployments Deployment[]
     
@@ -32,7 +36,10 @@ model Organization {
 }
 
 model Deployment {
-    id String @unique
+    id String @id @default(uuid())
+
+    salesforceId String @unique
+
     status       String
 
     createdBy   String

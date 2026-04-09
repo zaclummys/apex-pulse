@@ -1,7 +1,8 @@
 export type Deployment = {
-    id: string;
+    id?: string;
     status: string;
 
+    salesforceId: string;
     organizationId: string;
 
     numberComponentsDeployed: number;

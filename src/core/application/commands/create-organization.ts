@@ -1,8 +1,9 @@
 import OrganizationRepository from "@/core/application/interfaces/organization-repository";
 
 export type CreateOrganizationParams = {
-    id: string;
     name: string;
+    userId: string;
+    salesforceId: string;
 };
 
 export class CreateOrganizationService {
@@ -13,18 +14,22 @@ export class CreateOrganizationService {
     }
 
     public async execute ({
-        id,
         name,
+        userId,
+        salesforceId,
     }: CreateOrganizationParams): Promise<void> {
-        const alreadyExistingOrganization = await this.organizationRepository.findOrganization(id);
+        const alreadyExistingOrganization = await this.organizationRepository.findOrganizationBySalesforceId(salesforceId);
 
         if (alreadyExistingOrganization) {
-            throw new Error(`Organization with id ${id} already exists.`);
+            throw new Error(`Organization with Salesforce ID ${salesforceId} already exists.`);
         }
-        
-        await this.organizationRepository.saveOrganization({
-            id,
+
+        const organization = {
             name,
-        });
+            userId,
+            salesforceId,
+        };
+        
+        await this.organizationRepository.saveOrganization(organization);
     }
 }
