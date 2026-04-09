@@ -33,12 +33,26 @@ model Organization {
     
     userId String
     User User @relation(fields: [userId], references: [id])
+
+    apiKeys ApiKey[]
+}
+
+model ApiKey {
+    id String @id @default(uuid())
+    key String @unique
+    
+    name String
+
+    createdAt DateTime @default(now())
+
+    organizationId String
+    Organization Organization @relation(fields: [organizationId], references: [id])
 }
 
 model Deployment {
     id String @id @default(uuid())
 
-    salesforceId String @unique
+    salesforceId String
 
     status       String
 

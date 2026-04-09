@@ -1,12 +1,38 @@
 -- CreateTable
+CREATE TABLE "User" (
+    "id" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
+
+    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
 CREATE TABLE "Organization" (
     "id" TEXT NOT NULL,
-    "name" TEXT NOT NULL
+    "name" TEXT NOT NULL,
+    "salesforceId" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
+
+    CONSTRAINT "Organization_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "ApiKey" (
+    "id" TEXT NOT NULL,
+    "key" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "organizationId" TEXT NOT NULL,
+
+    CONSTRAINT "ApiKey_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Deployment" (
     "id" TEXT NOT NULL,
+    "salesforceId" TEXT NOT NULL,
     "status" TEXT NOT NULL,
     "createdBy" TEXT NOT NULL,
     "createdByName" TEXT NOT NULL,
@@ -20,7 +46,9 @@ CREATE TABLE "Deployment" (
     "numberComponentErrors" INTEGER NOT NULL,
     "checkOnly" BOOLEAN NOT NULL,
     "deployUrl" TEXT NOT NULL,
-    "organizationId" TEXT NOT NULL
+    "organizationId" TEXT NOT NULL,
+
+    CONSTRAINT "Deployment_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -73,10 +101,13 @@ CREATE TABLE "DeployTestFailure" (
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Organization_id_key" ON "Organization"("id");
+CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Deployment_id_key" ON "Deployment"("id");
+CREATE UNIQUE INDEX "Organization_salesforceId_key" ON "Organization"("salesforceId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "ApiKey_key_key" ON "ApiKey"("key");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "DeployComponentSuccess_id_key" ON "DeployComponentSuccess"("id");
@@ -89,6 +120,12 @@ CREATE UNIQUE INDEX "DeployTestSuccess_id_key" ON "DeployTestSuccess"("id");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "DeployTestFailure_id_key" ON "DeployTestFailure"("id");
+
+-- AddForeignKey
+ALTER TABLE "Organization" ADD CONSTRAINT "Organization_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "ApiKey" ADD CONSTRAINT "ApiKey_organizationId_fkey" FOREIGN KEY ("organizationId") REFERENCES "Organization"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Deployment" ADD CONSTRAINT "Deployment_organizationId_fkey" FOREIGN KEY ("organizationId") REFERENCES "Organization"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

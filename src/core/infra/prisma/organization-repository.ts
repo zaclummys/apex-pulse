@@ -4,7 +4,7 @@ import { Organization } from '@/core/domain/organization';
 import OrganizationRepository from '@/core/application/interfaces/organization-repository';
 
 export default class PrismaOrganizationRepository implements OrganizationRepository {
-    public async findOrganizationById (id: string): Promise<Organization | null> {
+    public async findOrganizationById (id: string) {
         return await prisma.organization.findUnique({
             where: {
                 id,
@@ -12,7 +12,7 @@ export default class PrismaOrganizationRepository implements OrganizationReposit
         });
     }
 
-    public async findOrganizationBySalesforceId (salesforceId: string): Promise<Organization | null> {
+    public async findOrganizationBySalesforceId (salesforceId: string) {
         return await prisma.organization.findUnique({
             where: {
                 salesforceId,
@@ -20,7 +20,7 @@ export default class PrismaOrganizationRepository implements OrganizationReposit
         });
     }
 
-    public async saveOrganization (organization: Organization): Promise<void> {
+    public async saveOrganization (organization: Organization) {
         await prisma.organization.create({
             data: {
                 id: organization.id,
@@ -31,7 +31,7 @@ export default class PrismaOrganizationRepository implements OrganizationReposit
         });
     }
 
-    public async findOrganizationsByUserId(userId: string): Promise<Organization[]> {
+    public async findOrganizationsByUserId (userId: string) {
         return await prisma.organization.findMany({
             where: {
                 userId: userId,

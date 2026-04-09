@@ -21,7 +21,7 @@ export default class PrismaDeploymentRepository implements DeploymentRepository 
     public async findDeployment ({ deploymentId, organizationId }: { deploymentId: string, organizationId: string }): Promise<Deployment | null> {
         return await prisma.deployment.findUnique({
             where: {
-                deploymentId,
+                salesforceId: deploymentId,
                 organizationId,
             },
             include: {
@@ -36,9 +36,12 @@ export default class PrismaDeploymentRepository implements DeploymentRepository 
     public async saveDeployment (deployResult: Deployment): Promise<void> {
         await prisma.deployment.create({
             data: {
-                deploymentId: deployResult.id,
-                status: deployResult.status,
+                id: deployResult.id,
+
+                salesforceId: deployResult.salesforceId,
                 organizationId: deployResult.organizationId,
+
+                status: deployResult.status,
                 createdBy: deployResult.createdBy,
                 createdByName: deployResult.createdByName,
 

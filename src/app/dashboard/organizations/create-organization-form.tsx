@@ -7,10 +7,10 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 
 export default function CreateOrganizationForm () {
-    const [state, action, pending] = useActionState<any, FormData>(createOrganizationAction, {
+    const [state, action, pending] = useActionState(createOrganizationAction, {
         fields: {
-            organizationId: "",
             organizationName: "",
+            organizationSalesforceId: "",
         },
     });
 
@@ -28,9 +28,9 @@ export default function CreateOrganizationForm () {
 
             <Input
                 type="text"
-                name="organizationId"
-                placeholder="Organization ID"
-                defaultValue={state.fields.organizationId}
+                name="organizationSalesforceId"
+                placeholder="Organization Salesforce ID"
+                defaultValue={state.fields.organizationSalesforceId}
                 required
             />
 
