@@ -4,64 +4,57 @@ import PrismaOrganizationRepository from '@/core/infra/prisma/organization-repos
 import {
     GetOrganizationService,
     GetOrganizationParams,
-} from '@/core/application/get-organization';
+} from '@/core/application/queries/get-organization';
 
 import {
     GetDeploymentService,
     GetDeploymentParams,
-} from '@/core/application/get-deployment';
+} from '@/core/application/queries/get-deployment';
 
 import {
     CreateOrganizationService,
     CreateOrganizationParams,
-} from '@/core/application/create-organization';
+} from '@/core/application/commands/create-organization';
 
 import {
     CreateDeploymentService,
     CreateDeploymentParams,
- } from '@/core/application/create-deployment';
+ } from '@/core/application/commands/create-deployment';
 
 import {
     GetDeploymentsByOrganizationIdService,
     GetDeploymentsByOrganizationIdParams,
-} from '@/core/application/get-deployments-by-organization-id';
+} from '@/core/application/queries/get-deployments-by-organization-id';
+
+const prismaDeploymentRepository = new PrismaDeploymentRepository();
+const prismaOrganizationRepository = new PrismaOrganizationRepository();
 
 export function getOrganization (getOrganizationParams: GetOrganizationParams) {
-    const getOrganizationService = new GetOrganizationService(
-        new PrismaOrganizationRepository()
-    );
+    const getOrganizationService = new GetOrganizationService(prismaOrganizationRepository);
 
     return getOrganizationService.execute(getOrganizationParams);
 }
 
 export function getDeployment (getDeploymentParams: GetDeploymentParams) {
-    const getDeploymentService = new GetDeploymentService(
-        new PrismaDeploymentRepository()
-    );
+    const getDeploymentService = new GetDeploymentService(prismaDeploymentRepository);
 
     return getDeploymentService.execute(getDeploymentParams);
 }
 
 export function getDeploymentsByOrganizationId (getDeploymentsByOrganizationIdParams: GetDeploymentsByOrganizationIdParams) {
-    const getDeploymentsService = new GetDeploymentsByOrganizationIdService(
-        new PrismaDeploymentRepository()
-    );
+    const getDeploymentsService = new GetDeploymentsByOrganizationIdService(prismaDeploymentRepository);
 
     return getDeploymentsService.execute(getDeploymentsByOrganizationIdParams);
 }
 
 export function createOrganization (createOrganizationParams: CreateOrganizationParams) {
-    const createOrganizationService = new CreateOrganizationService(
-        new PrismaOrganizationRepository()
-    );
+    const createOrganizationService = new CreateOrganizationService(prismaOrganizationRepository);
 
     return createOrganizationService.execute(createOrganizationParams);
 }
 
 export function createDeployment (createDeploymentParams: CreateDeploymentParams) {
-    const createDeploymentService = new CreateDeploymentService(
-        new PrismaDeploymentRepository()
-    );
+    const createDeploymentService = new CreateDeploymentService(prismaDeploymentRepository);
 
     return createDeploymentService.execute(createDeploymentParams);
 }

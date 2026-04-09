@@ -1,7 +1,7 @@
 import { readFile } from 'fs/promises';
 import { describe, it, expect, vi } from 'vitest';
 
-import CreateDeployment from '@/core/application/create-deployment';
+import { CreateDeploymentService } from '@/core/application/commands/create-deployment';
 
 describe('Create Deployment', async () => {
     const rawSuccessDeployResponseJson = await readFile('fixtures/success-deploy-response.json', 'utf-8');
@@ -12,12 +12,14 @@ describe('Create Deployment', async () => {
     const componentFailureDeployResponseJson = JSON.parse(rawComponentFailureDeployResponseJson);
     const testFailureDeployResponseJson = JSON.parse(rawTestFailureDeployResponseJson);
 
-    it('Should create a deploy result successfully', async () => {
-        const deploymentRepository = {
-            saveDeployment: vi.fn(),
-        };
+    const deploymentRepository = {
+        saveDeployment: vi.fn(),
+        findDeploymentsByOrganizationId: vi.fn(),
+        findDeployment: vi.fn(),
+    };
 
-        const createDeployment = new CreateDeployment(deploymentRepository);
+    it('Should create a deploy result successfully', async () => {
+        const createDeployment = new CreateDeploymentService(deploymentRepository);
 
         await createDeployment.execute({
             organizationId: 'org123',
@@ -61,11 +63,7 @@ describe('Create Deployment', async () => {
     });
 
     it('Should create a deploy result with component failures', async () => {
-        const deploymentRepository = {
-            saveDeployment: vi.fn(),
-        };
-
-        const createDeployment = new CreateDeployment(deploymentRepository);
+        const createDeployment = new CreateDeploymentService(deploymentRepository);
 
         await createDeployment.execute({
             organizationId: 'org123',
@@ -104,11 +102,7 @@ describe('Create Deployment', async () => {
     });
 
     it('Should create a deploy result with test failures', async () => {
-        const deploymentRepository = {
-            saveDeployment: vi.fn(),
-        };
-
-        const createDeployment = new CreateDeployment(deploymentRepository);
+        const createDeployment = new CreateDeploymentService(deploymentRepository);
 
         await createDeployment.execute({
             organizationId: 'org123',

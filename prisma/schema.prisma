@@ -13,11 +13,22 @@ datasource db {
     provider = "postgresql"
 }
 
+model User {
+    id String @unique
+    name String
+    email String @unique
+
+    organizations Organization[]
+}
+
 model Organization {
     id String @unique
     name String
 
     deployments Deployment[]
+    
+    userId String
+    User User @relation(fields: [userId], references: [id])
 }
 
 model Deployment {

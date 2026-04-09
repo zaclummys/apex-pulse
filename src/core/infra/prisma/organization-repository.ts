@@ -20,4 +20,12 @@ export default class PrismaOrganizationRepository implements OrganizationReposit
             },
         });
     }
+
+    public async findOrganizationsByUserId(userId: string): Promise<Organization[]> {
+        return await prisma.organization.findMany({
+            where: {
+                userId: userId,
+            },
+        });
+    }
 }

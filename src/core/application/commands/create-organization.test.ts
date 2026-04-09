@@ -1,15 +1,16 @@
 import { describe, it, expect, vi } from 'vitest';
 
-import CreateOrganization from '@/core/application/create-organization';
+import { CreateOrganizationService } from '@/core/application/commands/create-organization';
 
 describe('Create Organization', async () => {
-    it('Should create an organization successfully', async () => {
-        const organizationRepository = {
-            findOrganization: vi.fn().mockResolvedValue(null),
-            saveOrganization: vi.fn(),
-        };
+    const organizationRepository = {
+        findOrganization: vi.fn(),
+        saveOrganization: vi.fn(),
+        findOrganizationsByUserId: vi.fn(),
+    };
 
-        const createOrganization = new CreateOrganization(organizationRepository);
+    it('Should create an organization successfully', async () => {
+        const createOrganization = new CreateOrganizationService(organizationRepository);
 
         await createOrganization.execute({
             id: 'org123',
