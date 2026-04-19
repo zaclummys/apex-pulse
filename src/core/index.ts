@@ -8,6 +8,7 @@ import { GetOrganizationByIdService } from '@/core/application/queries/get-organ
 import { GetOrganizationsByUserIdService } from '@/core/application/queries/get-organizations-by-user-id';
 import { GetDeploymentByIdService } from '@/core/application/queries/get-deployment-by-id';
 import { GetDeploymentsByOrganizationIdService } from '@/core/application/queries/get-deployments-by-organization-id';
+import { GetUserIdByTokenService } from '@/core/application/queries/get-user-id-by-token';
 
 import {
     CreateOrganizationService,
@@ -101,4 +102,10 @@ export function signUp (signUpInput: SignUpInput) {
     const signUpService = new SignUpService(userRepository);
 
     return signUpService.execute(signUpInput);
+}
+
+export function getUserIdByToken (token: string) {
+    const getUserIdByTokenService = new GetUserIdByTokenService(sessionRepository);
+
+    return getUserIdByTokenService.execute(token);
 }
