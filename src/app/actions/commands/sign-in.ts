@@ -24,10 +24,7 @@ export default async function signInAction (state: any, formData: FormData) {
             };
         }
 
-        await setSessionToken({
-            token: success.sessionToken,
-            maxAgeInSeconds: success.sessionDurationInMilliseconds / 1000,
-        });
+        await setSessionToken(success.sessionToken);
     } catch (error) {
         console.error('An error occurred during sign-in:', error);
 

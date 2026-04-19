@@ -2,6 +2,7 @@ import crypto from 'crypto';
 
 import UserRepository from '@/core/application/interfaces/user-repository';
 import SessionRepository from '@/core/application/interfaces/session-repository';
+import { sessionDurationInSeconds } from '@/config';
 
 export type SignInInput = {
     email: string;
@@ -50,7 +51,7 @@ export class SignInService {
             }
         }
 
-        const sessionDurationInMilliseconds = 1000 * 60 * 60 * 24 * 7;
+        const sessionDurationInMilliseconds = sessionDurationInSeconds * 1000;
 
         const session = this.generateSessionFor({
             userId: user.id,

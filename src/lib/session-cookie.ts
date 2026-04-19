@@ -1,6 +1,5 @@
 import { cookies } from 'next/headers';
-
-const sessionCookieName = 'session_token';
+import { sessionCookieName, sessionDurationInSeconds } from '@/config';
 
 export async function getSessionToken () {
     const cookieStore = await cookies();
@@ -8,13 +7,7 @@ export async function getSessionToken () {
     return cookieStore.get(sessionCookieName)?.value;
 }
 
-export async function setSessionToken ({
-    token,
-    maxAgeInSeconds,
-}: {
-    token: string;
-    maxAgeInSeconds: number;
-}) {
+export async function setSessionToken (token: string) {
     const cookieStore = await cookies();
 
     cookieStore.set(sessionCookieName, token, {
@@ -22,7 +15,7 @@ export async function setSessionToken ({
         secure: true,
         sameSite: 'lax',
         path: '/',
-        maxAge: maxAgeInSeconds,
+        maxAge: sessionDurationInSeconds,
     });
 }
 
