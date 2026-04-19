@@ -31,6 +31,17 @@ export default function SignUp() {
                     <CardContent>
                         <form id="form" className="flex flex-col gap-6" action={action}>
                             <Field>
+                                <FieldLabel htmlFor="name">Name</FieldLabel>
+                                <Input
+                                    id="name"
+                                    name="name"
+                                    type="text"
+                                    placeholder="Enter your name"
+                                    required
+                                />
+                            </Field>
+
+                            <Field>
                                 <FieldLabel htmlFor="email">Email</FieldLabel>
                                 <Input
                                     id="email"

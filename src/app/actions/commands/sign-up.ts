@@ -1,11 +1,27 @@
+'use server';
+
 import { redirect } from 'next/navigation';
 
-export default function signUpAction (formState: any, formData: FormData) {
+import { signUp } from '@/core';
+
+export default async function signUpAction (formState: any, formData: FormData) {
+    const name = formData.get('name') as string;
     const email = formData.get('email') as string;
     const password = formData.get('password') as string;
 
-    console.log('Email:', email);
-    console.log('Password:', password);
+    try {
+        await signUp({
+            name,
+            email,
+            password,
+        });
+    } catch {
+        return {
+            errors: {
+                message: 'Email already in use',
+            },
+        };
+    }
 
     redirect('/sign-in');
 }
