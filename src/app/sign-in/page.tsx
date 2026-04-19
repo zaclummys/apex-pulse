@@ -67,8 +67,8 @@ export default function SignIn() {
                     </CardContent>
 
                     <CardFooter>
-                        <Button type="submit" className="w-full" form="form">
-                            Sign In
+                        <Button type="submit" className="w-full" form="form" disabled={pending}>
+                            {pending ? 'Signing In...' : 'Sign In'}
                         </Button>
                     </CardFooter>
                 </Card>
