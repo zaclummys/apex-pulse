@@ -41,6 +41,7 @@ export default function SignUp() {
                                     name="name"
                                     type="text"
                                     placeholder="Enter your name"
+                                    defaultValue={state?.fields?.name}
                                     required
                                 />
                             </Field>
@@ -52,6 +53,7 @@ export default function SignUp() {
                                     name="email"
                                     type="email"
                                     placeholder="Enter your email"
+                                    defaultValue={state?.fields?.email}
                                     required
                                 />
                             </Field>

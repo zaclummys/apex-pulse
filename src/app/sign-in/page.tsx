@@ -48,6 +48,7 @@ export default function SignIn() {
                                     name="email"
                                     type="email"
                                     placeholder="Enter your email"
+                                    defaultValue={state?.fields?.email}
                                     required
                                 />
                             </Field>

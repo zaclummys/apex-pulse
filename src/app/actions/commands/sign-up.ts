@@ -19,6 +19,10 @@ export default async function signUpAction (state: any, formData: FormData) {
         console.error('An error occurred during sign-up');
 
         return {
+            fields: {
+                name,
+                email,
+            },
             errors: {
                 message: 'Email already in use',
             },

@@ -11,20 +11,30 @@ export default async function signInAction (state: any, formData: FormData) {
 
     try {
         const {
-            sessionToken,
-            sessionDurationInMilliseconds,
-         } = await signIn({ email, password });
+            error,
+            success,
+        } = await signIn({ email, password });
+
+        if (error) {
+            return {
+                fields: { email },
+                errors: {
+                    message: error.message,
+                }
+            };
+        }
 
         await setSessionToken({
-            token: sessionToken,
-            maxAgeInSeconds: sessionDurationInMilliseconds / 1000,
+            token: success.sessionToken,
+            maxAgeInSeconds: success.sessionDurationInMilliseconds / 1000,
         });
     } catch (error) {
         console.error('An error occurred during sign-in:', error);
 
         return {
+            fields: { email },
             errors: {
-                message: 'Invalid email or password',
+                message: 'An unexpected error occurred. Please try again later.',
             },
         };
     }

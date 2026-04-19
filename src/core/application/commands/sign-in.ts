@@ -35,11 +35,19 @@ export class SignInService {
         const user = await this.userRepository.findUserByEmail(email);
 
         if (!user) {
-            throw new Error('Invalid email or password');
+            return {
+                error: {
+                    message: 'Invalid email or password',
+                }
+            }
         }
 
         if (user.password !== password) {
-            throw new Error('Invalid email or password');
+            return {
+                error: {
+                    message: 'Invalid email or password',
+                }
+            }
         }
 
         const sessionDurationInMilliseconds = 1000 * 60 * 60 * 24 * 7;
@@ -52,8 +60,10 @@ export class SignInService {
         await this.sessionRepository.saveSession(session);
 
         return {
-            sessionToken: session.token,
-            sessionDurationInMilliseconds: sessionDurationInMilliseconds,
+            success: {
+                sessionToken: session.token,
+                sessionDurationInMilliseconds: sessionDurationInMilliseconds,
+            },
         };
     }
 
