@@ -1,13 +1,12 @@
 'use server';
 
-import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
 import { getUserIdByToken } from '@/core';
+import { getSessionToken } from '@/lib/session-cookie';
 
 export default async function getCurrentUserIdAction () {
-    const cookieStore = await cookies();
-    const token = cookieStore.get('session_token')?.value;
+    const token = await getSessionToken();
 
     if (!token) {
         redirect('/sign-in');

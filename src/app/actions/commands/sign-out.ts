@@ -1,18 +1,17 @@
 'use server';
 
-import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
 import { signOut } from '@/core';
+import { getSessionToken, deleteSessionToken } from '@/lib/session-cookie';
 
 export default async function signOutAction () {
-    const cookieStore = await cookies();
-    const token = cookieStore.get('session_token')?.value;
+    const token = await getSessionToken();
 
     if (token) {
         await signOut({ token });
 
-        cookieStore.delete('session_token');
+        await deleteSessionToken();
     }
 
     redirect('/sign-in');

@@ -1,9 +1,9 @@
 'use server';
 
-import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
 import { signIn } from '@/core';
+import { setSessionToken } from '@/lib/session-cookie';
 
 export default async function signInAction (state: any, formData: FormData) {
     const email = formData.get('email') as string;
@@ -12,15 +12,7 @@ export default async function signInAction (state: any, formData: FormData) {
     try {
         const { token } = await signIn({ email, password });
 
-        const cookieStore = await cookies();
-
-        cookieStore.set('session_token', token, {
-            httpOnly: true,
-            secure: true,
-            sameSite: 'lax',
-            path: '/',
-            maxAge: 60 * 60 * 24 * 7,
-        });
+        await setSessionToken(token);
     } catch (error) {
         console.error('An error occurred during sign-in:', error);
 
