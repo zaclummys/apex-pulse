@@ -5,6 +5,8 @@ import {
     getDeploymentsByOrganizationId,
 } from '@/core';
 
+import CreateDeploymentModal from './create-deployment-modal';
+
 export default async function OrganizationPage ({ params }: { params: Promise<{ organizationId: string }> }) {
     const { organizationId } = await params;
 
@@ -19,6 +21,8 @@ export default async function OrganizationPage ({ params }: { params: Promise<{ 
     return (
         <div>
             <h1>{organization.name}</h1>
+
+            <CreateDeploymentModal organizationId={organizationId} />
 
             <h2>Deployments</h2>
 
