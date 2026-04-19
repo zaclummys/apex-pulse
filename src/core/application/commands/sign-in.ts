@@ -2,7 +2,6 @@ import crypto from 'crypto';
 
 import UserRepository from '@/core/application/interfaces/user-repository';
 import SessionRepository from '@/core/application/interfaces/session-repository';
-import { Session } from '@/core/domain/session';
 
 export type SignInInput = {
     email: string;
@@ -42,16 +41,22 @@ export class SignInService {
             throw new Error('Invalid email or password');
         }
 
-        const session: Session = {
-            token: crypto.randomBytes(32).toString('hex'),
-            userId: user.id,
-            expiresAt: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
-        };
+        const session = this.generateSessionFor(user.id);
 
         await this.sessionRepository.saveSession(session);
 
         return {
             token: session.token,
+        };
+    }
+
+    private generateSessionFor (userId: string) {
+        const sevenDaysInMilliseconds = 1000 * 60 * 60 * 24 * 7;
+
+        return {
+            userId: userId,
+            token: crypto.randomBytes(32).toString('hex'),
+            expiresAt: new Date(Date.now() + sevenDaysInMilliseconds),
         };
     }
 }
