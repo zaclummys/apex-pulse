@@ -22,4 +22,12 @@ export default class PrismaSessionRepository implements SessionRepository {
             },
         });
     }
+
+    public async deleteSessionByToken (token: string) {
+        await prisma.session.delete({
+            where: {
+                token,
+            },
+        });
+    }
 }

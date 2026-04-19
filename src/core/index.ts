@@ -35,6 +35,11 @@ import {
     SignUpInput,
 } from '@/core/application/commands/sign-up';
 
+import {
+    SignOutService,
+    SignOutInput,
+} from '@/core/application/commands/sign-out';
+
 const deploymentRepository = new PrismaDeploymentRepository();
 const organizationRepository = new PrismaOrganizationRepository();
 const apiKeyRepository = new PrismaApiKeyRepository();
@@ -108,4 +113,10 @@ export function getUserIdByToken (token: string) {
     const getUserIdByTokenService = new GetUserIdByTokenService(sessionRepository);
 
     return getUserIdByTokenService.execute(token);
+}
+
+export function signOut (signOutInput: SignOutInput) {
+    const signOutService = new SignOutService(sessionRepository);
+
+    return signOutService.execute(signOutInput);
 }
