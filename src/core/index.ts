@@ -2,6 +2,7 @@ import PrismaDeploymentRepository from '@/core/infra/prisma/deployment-repositor
 import PrismaOrganizationRepository from '@/core/infra/prisma/organization-repository';
 import PrismaApiKeyRepository from '@/core/infra/prisma/api-key-repository';
 import PrismaUserRepository from '@/core/infra/prisma/user-repository';
+import PrismaSessionRepository from '@/core/infra/prisma/session-repository';
 
 import { GetOrganizationByIdService } from '@/core/application/queries/get-organization-by-id';
 import { GetOrganizationsByUserIdService } from '@/core/application/queries/get-organizations-by-user-id';
@@ -37,6 +38,7 @@ const deploymentRepository = new PrismaDeploymentRepository();
 const organizationRepository = new PrismaOrganizationRepository();
 const apiKeyRepository = new PrismaApiKeyRepository();
 const userRepository = new PrismaUserRepository();
+const sessionRepository = new PrismaSessionRepository();
 
 export function getOrganizationById (id: string) {
     const getOrganizationByIdService = new GetOrganizationByIdService(organizationRepository);
@@ -87,7 +89,10 @@ export function createApiKey (createApiKeyInput: CreateApiKeyInput) {
 }
 
 export function signIn (signInInput: SignInInput) {
-    const signInService = new SignInService(userRepository);
+    const signInService = new SignInService({
+        userRepository,
+        sessionRepository,
+    });
 
     return signInService.execute(signInInput);
 }
