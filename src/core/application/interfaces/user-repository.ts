@@ -6,4 +6,5 @@ type SavedUser = User & {
 
 export default interface UserRepository {
     findUserByEmail (email: string): Promise<SavedUser | null>;
+    saveUser (user: User): Promise<void>;
 }

@@ -28,6 +28,11 @@ import {
     SignInInput,
 } from '@/core/application/commands/sign-in';
 
+import {
+    SignUpService,
+    SignUpInput,
+} from '@/core/application/commands/sign-up';
+
 const deploymentRepository = new PrismaDeploymentRepository();
 const organizationRepository = new PrismaOrganizationRepository();
 const apiKeyRepository = new PrismaApiKeyRepository();
@@ -85,4 +90,10 @@ export function signIn (signInInput: SignInInput) {
     const signInService = new SignInService(userRepository);
 
     return signInService.execute(signInInput);
+}
+
+export function signUp (signUpInput: SignUpInput) {
+    const signUpService = new SignUpService(userRepository);
+
+    return signUpService.execute(signUpInput);
 }
