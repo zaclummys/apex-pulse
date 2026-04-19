@@ -10,9 +10,15 @@ export default async function signInAction (state: any, formData: FormData) {
     const password = formData.get('password') as string;
 
     try {
-        const { token } = await signIn({ email, password });
+        const {
+            sessionToken,
+            sessionDurationInMilliseconds,
+         } = await signIn({ email, password });
 
-        await setSessionToken(token);
+        await setSessionToken({
+            token: sessionToken,
+            maxAgeInSeconds: sessionDurationInMilliseconds / 1000,
+        });
     } catch (error) {
         console.error('An error occurred during sign-in:', error);
 

@@ -1,11 +1,6 @@
 import { cookies } from 'next/headers';
 
 const sessionCookieName = 'session_token';
-const sessionDurationInSeconds = 60 * 60 * 24 * 7;
-
-export function createSessionExpirationDate () {
-    return new Date(Date.now() + sessionDurationInSeconds * 1000);
-}
 
 export async function getSessionToken () {
     const cookieStore = await cookies();
@@ -13,7 +8,13 @@ export async function getSessionToken () {
     return cookieStore.get(sessionCookieName)?.value;
 }
 
-export async function setSessionToken (token: string) {
+export async function setSessionToken ({
+    token,
+    maxAgeInSeconds,
+}: {
+    token: string;
+    maxAgeInSeconds: number;
+}) {
     const cookieStore = await cookies();
 
     cookieStore.set(sessionCookieName, token, {
@@ -21,7 +22,7 @@ export async function setSessionToken (token: string) {
         secure: true,
         sameSite: 'lax',
         path: '/',
-        maxAge: sessionDurationInSeconds,
+        maxAge: maxAgeInSeconds,
     });
 }
 
