@@ -16,6 +16,8 @@ export default async function signUpAction (formState: any, formData: FormData) 
             password,
         });
     } catch {
+        console.error('An error occurred during sign-up');
+        
         return {
             errors: {
                 message: 'Email already in use',
