@@ -19,16 +19,23 @@ export default async function createOrganizationAction (state: CreateOrganizatio
 
     const organizationName = formData.get("organizationName") as string;
 
-    await createOrganization({
-        name: organizationName,
-        userId: currentUserId,
-    });
+    try {
+        await createOrganization({
+            name: organizationName,
+            userId: currentUserId,
+        });
+    } catch (error) {
+        console.error('An error occurred while creating the organization:', error);
+
+        return {
+            fields: {
+                organizationName,
+            },
+            errors: {
+                message: 'An unexpected error occurred. Please try again later.',
+            },
+        };
+    }
 
     redirect("/dashboard/organizations");
-
-    return {
-        fields: {
-            organizationName,
-        },
-    }
 }
