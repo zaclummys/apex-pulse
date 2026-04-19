@@ -19,6 +19,7 @@ import {
 import {
     Building,
     LayoutDashboard,
+    LogOut,
     Rocket,
     Settings,
     Zap,
@@ -84,6 +85,21 @@ export default function Layout ({ children }: { children: React.ReactNode }) {
                             </SidebarMenu>
                         </SidebarGroup>
                     </SidebarContent>
+
+                    <SidebarFooter>
+                        <SidebarMenu>
+                            <SidebarMenuItem>
+                                <SidebarMenuButton render={props => (
+                                    <Link href="/sign-out" {...props}>
+                                        <LogOut />
+
+                                        <span>Sign Out</span>
+                                    </Link>
+                                )}>
+                                </SidebarMenuButton>
+                            </SidebarMenuItem>
+                        </SidebarMenu>
+                    </SidebarFooter>
                 </Sidebar>
 
                 <SidebarInset>
