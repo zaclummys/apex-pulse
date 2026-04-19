@@ -12,6 +12,11 @@ export class SignOutService {
     }
 
     public async execute ({ token }: SignOutInput) {
-        await this.sessionRepository.deleteSessionByToken(token);
+        const session = await this.sessionRepository.findSessionByToken(token);
+
+        if (session) {
+            await this.sessionRepository.deleteSessionByToken(token);
+        }
+
     }
 }

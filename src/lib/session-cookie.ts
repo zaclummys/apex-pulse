@@ -1,28 +1,32 @@
 import { cookies } from 'next/headers';
 
-const SESSION_COOKIE_NAME = 'session_token';
-const SESSION_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
+const sessionCookieName = 'session_token';
+const sessionDurationInSeconds = 60 * 60 * 24 * 7;
+
+export function createSessionExpirationDate () {
+    return new Date(Date.now() + sessionDurationInSeconds * 1000);
+}
 
 export async function getSessionToken () {
     const cookieStore = await cookies();
 
-    return cookieStore.get(SESSION_COOKIE_NAME)?.value;
+    return cookieStore.get(sessionCookieName)?.value;
 }
 
 export async function setSessionToken (token: string) {
     const cookieStore = await cookies();
 
-    cookieStore.set(SESSION_COOKIE_NAME, token, {
+    cookieStore.set(sessionCookieName, token, {
         httpOnly: true,
         secure: true,
         sameSite: 'lax',
         path: '/',
-        maxAge: SESSION_COOKIE_MAX_AGE,
+        maxAge: sessionDurationInSeconds,
     });
 }
 
 export async function deleteSessionToken () {
     const cookieStore = await cookies();
 
-    cookieStore.delete(SESSION_COOKIE_NAME);
+    cookieStore.delete(sessionCookieName);
 }

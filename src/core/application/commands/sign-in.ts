@@ -2,6 +2,7 @@ import crypto from 'crypto';
 
 import UserRepository from '@/core/application/interfaces/user-repository';
 import SessionRepository from '@/core/application/interfaces/session-repository';
+import { createSessionExpirationDate } from '@/lib/session-cookie';
 
 export type SignInInput = {
     email: string;
@@ -51,12 +52,10 @@ export class SignInService {
     }
 
     private generateSessionFor (userId: string) {
-        const sevenDaysInMilliseconds = 1000 * 60 * 60 * 24 * 7;
-
         return {
             userId: userId,
             token: crypto.randomBytes(32).toString('hex'),
-            expiresAt: new Date(Date.now() + sevenDaysInMilliseconds),
+            expiresAt: getSessionExpirationDate(),
         };
     }
 }
