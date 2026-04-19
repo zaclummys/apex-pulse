@@ -33,10 +33,9 @@ export default class PrismaDeploymentRepository implements DeploymentRepository 
     }
 
     public async saveDeployment (deployResult: Deployment) {
-        await prisma.deployment.create({
+        
+        const x = await prisma.deployment.create({
             data: {
-                id: deployResult.id,
-
                 organizationId: deployResult.organizationId,
 
                 status: deployResult.status,
@@ -113,5 +112,7 @@ export default class PrismaDeploymentRepository implements DeploymentRepository 
                 },
             },
         });
+
+        console.log('Saved deployment:', x);
     }
 }
