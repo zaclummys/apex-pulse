@@ -8,7 +8,7 @@ import { Field, FieldLabel } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import Header from '@/app/header';
-import signUpAction from '@/app/actions/commands/sign-up';
+import signUpAction from '@/actions/commands/sign-up';
 
 export default function SignUp() {
     const [state, action, pending] = useActionState<any, FormData>(signUpAction, {});

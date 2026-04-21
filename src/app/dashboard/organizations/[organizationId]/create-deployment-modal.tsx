@@ -17,7 +17,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Field, FieldLabel } from '@/components/ui/field';
 
-import createDeploymentAction from '@/app/actions/commands/create-deployment';
+import createDeploymentAction from '@/actions/commands/create-deployment';
 
 export default function CreateDeploymentModal ({ organizationId }: { organizationId: string }) {
     const [state, action, pending] = useActionState<any, FormData>(createDeploymentAction, {});

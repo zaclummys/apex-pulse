@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 import { getOrganizationsByUserId, getDeploymentsByOrganizationId } from '@/core';
-import getCurrentUserId from '@/app/actions/queries/get-current-user-id';
+import getCurrentUserId from '@/actions/queries/get-current-user-id';
 
 export default async function DeploymentsPage () {
     const currentUserId = await getCurrentUserId();

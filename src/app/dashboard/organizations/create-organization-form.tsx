@@ -1,7 +1,7 @@
 'use client';
 
 import { useActionState } from 'react'
-import createOrganizationAction from '@/app/actions/commands/create-organization';
+import createOrganizationAction from '@/actions/commands/create-organization';
 
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"

@@ -3,7 +3,7 @@
 import { createOrganization } from '@/core';
 import { redirect } from 'next/navigation';
 
-import getCurrentUserId from '@/app/actions/queries/get-current-user-id';
+import getCurrentUserId from '@/actions/queries/get-current-user-id';
 
 type CreateOrganizationState = {
     fields: {

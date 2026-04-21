@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import getOrganizations from '@/app/actions/queries/get-organizations';
+import getOrganizations from '@/actions/queries/get-organizations';
 
 import CreateOrganizationForm from "./create-organization-form";
 
