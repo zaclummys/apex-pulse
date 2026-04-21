@@ -33,8 +33,7 @@ export default class PrismaDeploymentRepository implements DeploymentRepository 
     }
 
     public async saveDeployment (deployResult: Deployment) {
-        
-        const x = await prisma.deployment.create({
+        const savedDeployment= await prisma.deployment.create({
             data: {
                 organizationId: deployResult.organizationId,
 
@@ -87,7 +86,6 @@ export default class PrismaDeploymentRepository implements DeploymentRepository 
                 testSuccesses: {
                     createMany: {
                         data: deployResult.testSuccesses.map(success => ({
-                            id: success.id,
                             className: success.className,
                             methodName: success.methodName,
                             namespace: success.namespace,
@@ -99,7 +97,6 @@ export default class PrismaDeploymentRepository implements DeploymentRepository 
                 testFailures: {
                     createMany: {
                         data: deployResult.testFailures.map(failure => ({
-                            id: failure.id,
                             className: failure.className,
                             methodName: failure.methodName,
                             namespace: failure.namespace,
@@ -113,6 +110,6 @@ export default class PrismaDeploymentRepository implements DeploymentRepository 
             },
         });
 
-        console.log('Saved deployment:', x);
+        return savedDeployment.id;
     }
 }

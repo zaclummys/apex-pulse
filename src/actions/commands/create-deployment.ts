@@ -39,7 +39,9 @@ export default async function createDeploymentAction (state: any, formData: Form
         });
 
         deploymentId = result.deploymentId;
-    } catch {
+    } catch (error) {
+        console.error('Error creating deployment:', error);
+        
         return {
             errors: {
                 message: 'Failed to create deployment.',

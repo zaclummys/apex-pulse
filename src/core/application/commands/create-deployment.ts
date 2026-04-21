@@ -184,10 +184,10 @@ export class CreateDeploymentService {
             organizationId: organization.id,
         };
 
-        await this.deploymentRepository.saveDeployment(deployment);
+        const deploymentId = await this.deploymentRepository.saveDeployment(deployment);
 
         return {
-            deploymentId: deployment.id!,
+            deploymentId,
         };
     }
 }

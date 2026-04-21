@@ -92,7 +92,7 @@ model Deployment {
 }
 
 model DeployComponentSuccess {
-    id String @default(uuid()) @unique
+    id String @id @default(uuid())
 
     fullName String
     componentType String
@@ -106,7 +106,7 @@ model DeployComponentSuccess {
 }
 
 model DeployComponentFailure {
-    id String @default(uuid()) @unique
+    id String @id @default(uuid())
 
     fullName String
     componentType String
@@ -126,7 +126,7 @@ model DeployComponentFailure {
 }
 
 model DeployTestSuccess {
-    id String @unique
+    id String @id @default(uuid())
 
     className String
     methodName String
@@ -139,7 +139,7 @@ model DeployTestSuccess {
 }
 
 model DeployTestFailure {
-    id String @unique
+    id String @id @default(uuid())
 
     className String
     methodName String
