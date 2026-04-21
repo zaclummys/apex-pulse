@@ -8,6 +8,7 @@ import { GetOrganizationByIdService } from '@/core/application/queries/get-organ
 import { GetOrganizationsByUserIdService } from '@/core/application/queries/get-organizations-by-user-id';
 import { GetDeploymentByIdService } from '@/core/application/queries/get-deployment-by-id';
 import { GetDeploymentsByOrganizationIdService } from '@/core/application/queries/get-deployments-by-organization-id';
+import { GetLatestDeploymentsService } from '@/core/application/queries/get-latest-deployments';
 import { GetUserIdByTokenService } from '@/core/application/queries/get-user-id-by-token';
 
 import {
@@ -68,6 +69,12 @@ export function getDeploymentsByOrganizationId (organizationId: string) {
     const getDeploymentsByOrganizationIdService = new GetDeploymentsByOrganizationIdService(deploymentRepository);
 
     return getDeploymentsByOrganizationIdService.execute(organizationId);
+}
+
+export function getLatestDeployments (userId: string) {
+    const getLatestDeploymentsService = new GetLatestDeploymentsService(deploymentRepository);
+
+    return getLatestDeploymentsService.execute(userId);
 }
 
 export function createOrganization (createOrganizationInput: CreateOrganizationInput) {

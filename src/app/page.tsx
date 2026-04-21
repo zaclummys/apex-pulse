@@ -9,11 +9,11 @@ export default function Home () {
 
             <section className="p-4 flex flex-col items-center text-center gap-6">
                 <span>
-                    Utilidade principal do Apex Pulse
+                    Monitor Salesforce deployments
                 </span>
 
                 <span>
-                    Breve descrição do que é o Apex Pulse e seus benefícios para os usuários.
+                    Track deployments, analyze test results, and manage multiple orgs in one place.
                 </span>
 
                 <div className="flex gap-4">

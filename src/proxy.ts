@@ -3,7 +3,7 @@ import { sessionCookieName } from '@/config';
 
 const protectedRoutes = ['/dashboard'];
 
-export function middleware (request: NextRequest) {
+export function proxy (request: NextRequest) {
     const { pathname } = request.nextUrl;
 
     const isProtected = protectedRoutes.some(route => pathname.startsWith(route));

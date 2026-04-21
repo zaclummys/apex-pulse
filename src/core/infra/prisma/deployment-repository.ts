@@ -18,6 +18,26 @@ export default class PrismaDeploymentRepository implements DeploymentRepository 
         });
     }
     
+    public async findLatestDeploymentsByUserId (userId: string) {
+        return await prisma.deployment.findMany({
+            where: {
+                Organization: {
+                    userId,
+                },
+            },
+            orderBy: {
+                startDate: 'desc',
+            },
+            take: 10,
+            include: {
+                componentSuccesses: true,
+                componentFailures: true,
+                testSuccesses: true,
+                testFailures: true,
+            },
+        });
+    }
+
     public async findDeploymentById (id: string) {
         return await prisma.deployment.findUnique({
             where: {
