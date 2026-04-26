@@ -2,12 +2,13 @@
 
 ## Organization
 
-- Create Organization
+- Create Organization 
 - Destroy Organization
 
 ## Deployment
 
-- Create Deployment
+- Start Deployment
+- Finish Deployment
 - Destroy Deployment
 - Get Latest Deployments
 

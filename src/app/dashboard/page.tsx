@@ -1,12 +1,11 @@
-import { Card, CardTitle } from '@/components/ui/card';
-import LatestDeploymentsTable from './latest-deployments-table';
+import AllOrganizationsSection from './all-organizations-section';
+import LatestDeploymentsSection from './latest-deployments-section';
 
 export default function Dashboard() {
     return (
-        <>
-            Dashboard
-
-            <LatestDeploymentsTable />
-        </>
+        <div className="flex flex-col gap-4">
+            <AllOrganizationsSection />
+            <LatestDeploymentsSection />
+        </div>
     );
 }

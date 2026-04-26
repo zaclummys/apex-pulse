@@ -14,6 +14,12 @@
 - How often do we have failed deployments due to other reasons (e.g. validation errors, timeouts, etc.)?
 - How do these metrics change over time?
 - How do these metrics vary by team, component, or other dimensions?
+- How fast do we fix failures?
+- Are our tests meaningful?
+- What kinds of changes fail most?
+- What components are most frequently changed?
+- What components most frequently cause failures?
+
 
 ## List
 - Deployment Success Rate
@@ -32,3 +38,5 @@
 - Changed components per deploy
 - New components vs modified
 - Deployment size trend
+- Mean Time To Recovery (MTTR) between failed deploy → next successful deploy
+- Correlation between code coverage and deployment success

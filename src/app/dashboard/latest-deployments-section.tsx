@@ -1,3 +1,8 @@
+import Link from "next/link"
+import { getOrganizationById } from "@/core"
+
+import { Button } from '@/components/ui/button';
+
 import {
     Table,
     TableBody,
@@ -5,13 +10,27 @@ import {
     TableHead,
     TableHeader,
     TableRow,
-} from "@/components/ui/table"
-import getLatestDeploymentsAction from "@/actions/queries/get-latest-deployments"
-import { getOrganizationById } from "@/core"
-import { Deployment } from "@/core/domain/deployment"
-import Link from "next/link"
+} from "@/components/ui/table";
 
-export default async function LatestDeploymentsTable() {
+import getLatestDeploymentsAction from "@/actions/queries/get-latest-deployments";
+
+export default function LatestDeploymentsSection() {
+    return (
+        <div className="flex flex-col gap-2">
+            <div className="flex items-center justify-between">
+                <span>Latest Deployments</span>
+
+                <Button variant="outline" size="sm">
+                    Create deployment
+                </Button>
+            </div>
+
+            <LatestDeploymentsTable />
+        </div>
+    );
+}
+
+async function LatestDeploymentsTable() {
     const deployments = await getLatestDeploymentsAction();
 
     return (
@@ -38,7 +57,23 @@ export default async function LatestDeploymentsTable() {
     )
 }
 
-async function DeploymentRow({ deployment }: { deployment: Deployment }) {
+type DeploymentRowDeployment = {
+    id: string;
+    status: string;
+    organizationId: string;
+    numberComponentsDeployed: number;
+    numberComponentsTotal: number;
+    numberTestsCompleted: number;
+    numberTestsTotal: number;
+    startDate: Date;
+    createdByName: string;
+}
+
+type DeploymentRowProps = {
+    deployment: DeploymentRowDeployment;
+}
+
+async function DeploymentRow({ deployment }: DeploymentRowProps) {
     const organization = await getOrganizationById(deployment.organizationId);
 
     return (

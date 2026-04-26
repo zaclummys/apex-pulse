@@ -103,7 +103,7 @@ export default function Layout ({ children }: { children: React.ReactNode }) {
                 </Sidebar>
 
                 <SidebarInset>
-                    <div className="p-2">
+                    <div className="p-4">
                         <SidebarTrigger />
                         
                         <div>
