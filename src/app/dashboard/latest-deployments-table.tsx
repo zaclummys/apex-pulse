@@ -11,31 +11,7 @@ import { getOrganizationById } from "@/core"
 import { Deployment } from "@/core/domain/deployment"
 import Link from "next/link"
 
-async function DeploymentRow({ deployment }: { deployment: Deployment }) {
-    const organization = await getOrganizationById(deployment.organizationId);
-
-    return (
-        <TableRow>
-            <TableCell>
-                <Link href={`/dashboard/deployments/${deployment.id}`}>
-                    {deployment.id}
-                </Link>
-            </TableCell>
-            <TableCell>{deployment.status}</TableCell>
-            <TableCell>
-                <Link href={`/dashboard/organizations/${organization?.id}`}>
-                    {organization?.name}
-                </Link>
-            </TableCell>
-            <TableCell>{deployment.numberComponentsDeployed}/{deployment.numberComponentsTotal}</TableCell>
-            <TableCell>{deployment.numberTestsCompleted}/{deployment.numberTestsTotal}</TableCell>
-            <TableCell>{deployment.startDate.toLocaleString('en-US', { dateStyle: 'short', timeStyle: 'short' })}</TableCell>
-            <TableCell>{deployment.createdByName}</TableCell>
-        </TableRow>
-    )
-}
-
-export default async function LatestDeployments() {
+export default async function LatestDeploymentsTable() {
     const deployments = await getLatestDeploymentsAction();
 
     return (
@@ -59,5 +35,29 @@ export default async function LatestDeployments() {
                 </TableBody>
             </Table>
         </div>
+    )
+}
+
+async function DeploymentRow({ deployment }: { deployment: Deployment }) {
+    const organization = await getOrganizationById(deployment.organizationId);
+
+    return (
+        <TableRow>
+            <TableCell>
+                <Link href={`/dashboard/deployments/${deployment.id}`}>
+                    {deployment.id}
+                </Link>
+            </TableCell>
+            <TableCell>{deployment.status}</TableCell>
+            <TableCell>
+                <Link href={`/dashboard/organizations/${organization?.id}`}>
+                    {organization?.name}
+                </Link>
+            </TableCell>
+            <TableCell>{deployment.numberComponentsDeployed}/{deployment.numberComponentsTotal}</TableCell>
+            <TableCell>{deployment.numberTestsCompleted}/{deployment.numberTestsTotal}</TableCell>
+            <TableCell>{deployment.startDate.toLocaleString('en-US', { dateStyle: 'short', timeStyle: 'short' })}</TableCell>
+            <TableCell>{deployment.createdByName}</TableCell>
+        </TableRow>
     )
 }

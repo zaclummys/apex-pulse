@@ -1,11 +1,12 @@
-import LatestDeployments from './latest-deployments';
+import { Card, CardTitle } from '@/components/ui/card';
+import LatestDeploymentsTable from './latest-deployments-table';
 
 export default function Dashboard() {
     return (
         <>
             Dashboard
 
-            <LatestDeployments />
+            <LatestDeploymentsTable />
         </>
     );
 }
