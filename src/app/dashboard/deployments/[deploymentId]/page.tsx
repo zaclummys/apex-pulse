@@ -149,20 +149,18 @@ function SummaryCards({ deployment, organization }: { deployment: Deployment; or
             </Card>
 
             <Card>
-                <CardHeader><CardTitle className="flex items-center gap-2"><Boxes className="size-4 text-muted-foreground" />Components</CardTitle></CardHeader>
+                <CardHeader><CardTitle className="flex items-center gap-2"><Boxes className="size-4 text-muted-foreground" />Components <span className="text-muted-foreground font-normal text-sm">({deployment.numberComponentsTotal})</span></CardTitle></CardHeader>
                 <CardContent className="flex flex-col gap-2 text-sm">
-                    <InfoRow label="Deployed" value={<span className="font-medium text-green-600 dark:text-green-400">{deployment.numberComponentsDeployed}</span>} />
-                    <InfoRow label="Total" value={String(deployment.numberComponentsTotal)} />
-                    <InfoRow label="Errors" value={deployment.numberComponentErrors > 0 ? <span className="font-medium text-red-600 dark:text-red-400">{deployment.numberComponentErrors}</span> : '0'} />
+                    <InfoRow label="Deployed" value={<span className="font-medium text-green-600 dark:text-green-400">{deployment.numberComponentsDeployed} <span className="font-normal text-muted-foreground">({deployment.numberComponentsTotal > 0 ? Math.round(deployment.numberComponentsDeployed / deployment.numberComponentsTotal * 100) : 0}%)</span></span>} />
+                    <InfoRow label="Errors" value={deployment.numberComponentErrors > 0 ? <span className="font-medium text-red-600 dark:text-red-400">{deployment.numberComponentErrors} <span className="font-normal text-red-400/70 dark:text-red-500/70">({deployment.numberComponentsTotal > 0 ? Math.round(deployment.numberComponentErrors / deployment.numberComponentsTotal * 100) : 0}%)</span></span> : <span>0 <span className="text-muted-foreground">(0%)</span></span>} />
                 </CardContent>
             </Card>
 
             <Card>
-                <CardHeader><CardTitle className="flex items-center gap-2"><FlaskConical className="size-4 text-muted-foreground" />Tests</CardTitle></CardHeader>
+                <CardHeader><CardTitle className="flex items-center gap-2"><FlaskConical className="size-4 text-muted-foreground" />Tests <span className="text-muted-foreground font-normal text-sm">({deployment.numberTestsTotal})</span></CardTitle></CardHeader>
                 <CardContent className="flex flex-col gap-2 text-sm">
-                    <InfoRow label="Completed" value={<span className="font-medium text-green-600 dark:text-green-400">{deployment.numberTestsCompleted}</span>} />
-                    <InfoRow label="Total" value={String(deployment.numberTestsTotal)} />
-                    <InfoRow label="Errors" value={deployment.numberTestErrors > 0 ? <span className="font-medium text-red-600 dark:text-red-400">{deployment.numberTestErrors}</span> : '0'} />
+                    <InfoRow label="Completed" value={<span className="font-medium text-green-600 dark:text-green-400">{deployment.numberTestsCompleted} <span className="font-normal text-muted-foreground">({deployment.numberTestsTotal > 0 ? Math.round(deployment.numberTestsCompleted / deployment.numberTestsTotal * 100) : 0}%)</span></span>} />
+                    <InfoRow label="Errors" value={deployment.numberTestErrors > 0 ? <span className="font-medium text-red-600 dark:text-red-400">{deployment.numberTestErrors} <span className="font-normal text-red-400/70 dark:text-red-500/70">({deployment.numberTestsTotal > 0 ? Math.round(deployment.numberTestErrors / deployment.numberTestsTotal * 100) : 0}%)</span></span> : <span>0 <span className="text-muted-foreground">(0%)</span></span>} />
                 </CardContent>
             </Card>
         </div>
