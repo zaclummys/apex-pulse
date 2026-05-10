@@ -2,6 +2,7 @@ import Link from "next/link"
 import { getOrganizationById } from "@/core"
 
 import { Button } from '@/components/ui/button';
+import { Rocket } from 'lucide-react';
 
 import {
     Table,
@@ -32,6 +33,18 @@ export default function LatestDeploymentsSection() {
 
 async function LatestDeploymentsTable() {
     const deployments = await getLatestDeploymentsAction();
+
+    if (deployments.length === 0) {
+        return (
+            <div className="flex flex-col items-center justify-center gap-3 rounded-lg border border-dashed py-12 text-center">
+                <Rocket className="size-10 text-muted-foreground/50" />
+                <div className="flex flex-col gap-1">
+                    <p className="text-sm font-medium">No deployments yet</p>
+                    <p className="text-xs text-muted-foreground">Your latest deployments will appear here once you create one.</p>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="rounded-lg border overflow-hidden">
