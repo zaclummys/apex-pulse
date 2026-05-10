@@ -31,22 +31,7 @@ export default function Layout ({ children }: { children: React.ReactNode }) {
             title: 'Dashboard',
             url: '/dashboard',
             icon: <LayoutDashboard />,
-        },
-        {
-            title: 'Deployments',
-            url: '/dashboard/deployments',
-            icon: <Rocket />,
-        },
-        {
-            title: 'Organizations',
-            url: '/dashboard/organizations',
-            icon: <Building />,
-        },
-        {
-            title: 'Settings',
-            url: '/dashboard/settings',
-            icon: <Settings />,
-        },
+        }
     ];
 
     return (
