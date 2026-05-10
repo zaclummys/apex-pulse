@@ -40,6 +40,16 @@ export class GetOrganizationByIdService {
         return Math.round(totalMs / deployments.length);
     }
 
+    computeAverageDeploymentSize (deployments: { numberComponentsTotal: number }[]): number {
+        if (deployments.length === 0) {
+            return 0;
+        }
+
+        const total = deployments.reduce((sum, deployment) => sum + deployment.numberComponentsTotal, 0);
+
+        return Math.round(total / deployments.length);
+    }
+
     public async execute (id: string) {
         const organization = await this.organizationRepository.findOrganizationById(id);
 
@@ -56,6 +66,7 @@ export class GetOrganizationByIdService {
         const failedDeployments = totalDeployments - successfulDeployments;
         const deploymentSuccessRate = this.computeDeploymentSuccessRate(deployments);
         const averageDeploymentTimeMs = this.computeAverageDeploymentTime(deployments);
+        const averageDeploymentSize = this.computeAverageDeploymentSize(deployments);
 
         return {
             ...organization,
@@ -64,6 +75,7 @@ export class GetOrganizationByIdService {
             successfulDeployments,
             failedDeployments,
             averageDeploymentTimeMs,
+            averageDeploymentSize,
         };
     }
 }

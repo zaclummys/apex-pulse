@@ -1,5 +1,5 @@
 import { Temporal } from '@js-temporal/polyfill';
-import { Activity, CheckCircle2, Timer, TrendingUp, XCircle } from 'lucide-react';
+import { Activity, CheckCircle2, Package, Timer, TrendingUp, XCircle } from 'lucide-react';
 
 import {
     Card,
@@ -13,9 +13,10 @@ type OrganizationMetricsSectionProps = {
     successfulDeployments: number;
     failedDeployments: number;
     averageDeploymentTimeMs: number;
+    averageDeploymentSize: number;
 };
 
-export default function OrganizationMetricsSection ({ deploymentSuccessRate, successfulDeployments, failedDeployments, averageDeploymentTimeMs }: OrganizationMetricsSectionProps) {
+export default function OrganizationMetricsSection ({ deploymentSuccessRate, successfulDeployments, failedDeployments, averageDeploymentTimeMs, averageDeploymentSize }: OrganizationMetricsSectionProps) {
     const successRateColor = computeSuccessRateColor(deploymentSuccessRate);
     const barColor = computeBarColor(deploymentSuccessRate);
 
@@ -77,6 +78,24 @@ export default function OrganizationMetricsSection ({ deploymentSuccessRate, suc
                             <span className="text-sm text-muted-foreground">No data</span>
                         ) : (
                             <span className="text-2xl font-semibold tabular-nums text-center">{formatDuration(averageDeploymentTimeMs)}</span>
+                        )}
+                    </CardContent>
+                </Card>
+
+                <Card className="flex flex-col">
+                    <CardHeader>
+                        <CardTitle className="flex items-center gap-2 text-sm font-medium">
+                            <Package className="size-4 text-muted-foreground" />
+                            Avg Deployment Size
+                        </CardTitle>
+                    </CardHeader>
+                    <CardContent className="flex flex-1 items-center justify-center">
+                        {averageDeploymentSize === 0 ? (
+                            <span className="text-sm text-muted-foreground">No data</span>
+                        ) : (
+                            <span className="text-2xl font-semibold tabular-nums">
+                                {averageDeploymentSize} components
+                            </span>
                         )}
                     </CardContent>
                 </Card>
