@@ -4,6 +4,7 @@ import {
     CheckCircle2,
     XCircle,
     Clock,
+    Timer,
     Building2,
     User,
     Calendar,
@@ -140,16 +141,9 @@ function OverviewCard({ deployment, organization }: { deployment: Deployment; or
                 </div>
                 <div className="flex flex-col gap-2 flex-1">
                     <InfoRow label="Check Only" value={deployment.checkOnly ? <span className="text-blue-600 dark:text-blue-400">Yes</span> : 'No'} />
-                    <InfoRow
-                        icon={<Calendar className="size-3.5" />}
-                        label="Start Date"
-                        value={new Date(deployment.startDate).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })}
-                    />
-                    <InfoRow
-                        icon={<Calendar className="size-3.5" />}
-                        label="End Date"
-                        value={new Date(deployment.endDate).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })}
-                    />
+                    <InfoRow icon={<Clock className="size-3.5" />} label="Start Date" value={new Date(deployment.startDate).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })} />
+                    <InfoRow icon={<Calendar className="size-3.5" />} label="End Date" value={new Date(deployment.endDate).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })} />
+                    <InfoRow icon={<Timer className="size-3.5" />} label="Duration" value={formatDuration(deployment.deploymentDuration)} />
                 </div>
             </CardContent>
         </Card>
@@ -408,6 +402,12 @@ function CodeCoverageTable({ rows }: { rows: CodeCoverage[] }) {
 
 function computePercent(value: number, total: number) {
     return total > 0 ? Math.round(value / total * 100) : 0;
+}
+
+function formatDuration(duration: { hours: number; minutes: number; seconds: number }) {
+    if (duration.hours > 0) return `${duration.hours}h ${duration.minutes}m ${duration.seconds}s`;
+    if (duration.minutes > 0) return `${duration.minutes}m ${duration.seconds}s`;
+    return `${duration.seconds}s`;
 }
 
 function computeCoverageColor(percent: number) {

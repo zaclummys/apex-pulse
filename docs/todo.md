@@ -1,1 +1,2 @@
 - In Deployment, rename Created By to Deployed By
+- In Tests Card, rename Completed to Successes

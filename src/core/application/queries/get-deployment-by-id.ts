@@ -1,3 +1,4 @@
+import { Temporal } from '@js-temporal/polyfill';
 import DeploymentRepository from '@/core/application/interfaces/deployment-repository';
 import { Deployment } from '@/core/domain/deployment';
 
@@ -6,6 +7,17 @@ export class GetDeploymentByIdService {
 
     constructor (deploymentRepository: DeploymentRepository) {
         this.deploymentRepository = deploymentRepository;
+    }
+
+    computeDuration (startDate: Date, endDate: Date) {
+        const start = Temporal.Instant.fromEpochMilliseconds(startDate.getTime());
+        const end = Temporal.Instant.fromEpochMilliseconds(endDate.getTime());
+        const duration = start.until(end, { largestUnit: 'hours' });
+        return {
+            hours: duration.hours,
+            minutes: duration.minutes,
+            seconds: duration.seconds,
+        };
     }
 
     computeCodeCoverageMetrics (deployment: Deployment) {
@@ -97,6 +109,8 @@ export class GetDeploymentByIdService {
             maxCodeCoverage,
         } = this.computeCodeCoverageMetrics(deployment);
 
+        const deploymentDuration = this.computeDuration(deployment.startDate, deployment.endDate);
+
         return {
             id: deployment.id,
             
@@ -125,6 +139,8 @@ export class GetDeploymentByIdService {
             codeCoverageBelowThresholdPercent,
             minCodeCoverage,
             maxCodeCoverage,
+
+            deploymentDuration,
         }
     }
 }
