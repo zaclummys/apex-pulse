@@ -1,4 +1,5 @@
-import { Activity, CheckCircle2, TrendingUp, XCircle } from 'lucide-react';
+import { Temporal } from '@js-temporal/polyfill';
+import { Activity, CheckCircle2, Timer, TrendingUp, XCircle } from 'lucide-react';
 
 import {
     Card,
@@ -11,22 +12,12 @@ type OrganizationMetricsSectionProps = {
     deploymentSuccessRate: number;
     successfulDeployments: number;
     failedDeployments: number;
+    averageDeploymentTimeMs: number;
 };
 
-export default function OrganizationMetricsSection ({ deploymentSuccessRate, successfulDeployments, failedDeployments }: OrganizationMetricsSectionProps) {
-    const successRateColor =
-        deploymentSuccessRate >= 75
-            ? 'text-green-600 dark:text-green-400'
-            : deploymentSuccessRate >= 50
-                ? 'text-yellow-600 dark:text-yellow-400'
-                : 'text-red-600 dark:text-red-400';
-
-    const barColor =
-        deploymentSuccessRate >= 75
-            ? 'bg-green-500'
-            : deploymentSuccessRate >= 50
-                ? 'bg-yellow-500'
-                : 'bg-red-500';
+export default function OrganizationMetricsSection ({ deploymentSuccessRate, successfulDeployments, failedDeployments, averageDeploymentTimeMs }: OrganizationMetricsSectionProps) {
+    const successRateColor = computeSuccessRateColor(deploymentSuccessRate);
+    const barColor = computeBarColor(deploymentSuccessRate);
 
     return (
         <section className="flex flex-col gap-3">
@@ -73,7 +64,44 @@ export default function OrganizationMetricsSection ({ deploymentSuccessRate, suc
                         </div>
                     </CardContent>
                 </Card>
+
+                <Card className="flex flex-col">
+                    <CardHeader>
+                        <CardTitle className="flex items-center gap-2 text-sm font-medium">
+                            <Timer className="size-4 text-muted-foreground" />
+                            Average Deployment Time
+                        </CardTitle>
+                    </CardHeader>
+                    <CardContent className="flex flex-1 items-center justify-center">
+                        {averageDeploymentTimeMs === 0 ? (
+                            <span className="text-sm text-muted-foreground">No data</span>
+                        ) : (
+                            <span className="text-2xl font-semibold tabular-nums text-center">{formatDuration(averageDeploymentTimeMs)}</span>
+                        )}
+                    </CardContent>
+                </Card>
             </div>
         </section>
     );
+}
+
+function formatDuration (ms: number): string {
+    const duration = Temporal.Duration.from({ milliseconds: ms }).round({
+        largestUnit: 'hours',
+        smallestUnit: 'seconds',
+    });
+
+    return duration.toLocaleString('en-US', { style: 'long' });
+}
+
+function computeSuccessRateColor (rate: number): string {
+    if (rate >= 75) return 'text-green-600 dark:text-green-400';
+    if (rate >= 50) return 'text-yellow-600 dark:text-yellow-400';
+    return 'text-red-600 dark:text-red-400';
+}
+
+function computeBarColor (rate: number): string {
+    if (rate >= 75) return 'bg-green-500';
+    if (rate >= 50) return 'bg-yellow-500';
+    return 'bg-red-500';
 }

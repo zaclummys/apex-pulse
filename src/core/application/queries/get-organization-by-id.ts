@@ -1,6 +1,7 @@
 import { Organization } from '@/core/domain/organization';
 import OrganizationRepository from '@/core/application/interfaces/organization-repository';
 import DeploymentRepository from '@/core/application/interfaces/deployment-repository';
+import { Temporal } from '@js-temporal/polyfill';
 
 export class GetOrganizationByIdService {
     private organizationRepository: OrganizationRepository;
@@ -25,6 +26,20 @@ export class GetOrganizationByIdService {
         return Math.round((successfulDeployments / totalDeployments) * 100);
     }
 
+    computeAverageDeploymentTime (deployments: { startDate: Date; endDate: Date }[]): number {
+        if (deployments.length === 0) {
+            return 0;
+        }
+
+        const totalMs = deployments.reduce((sum, deployment) => {
+            const start = Temporal.Instant.fromEpochMilliseconds(deployment.startDate.getTime());
+            const end = Temporal.Instant.fromEpochMilliseconds(deployment.endDate.getTime());
+            return sum + start.until(end).total('milliseconds');
+        }, 0);
+
+        return Math.round(totalMs / deployments.length);
+    }
+
     public async execute (id: string) {
         const organization = await this.organizationRepository.findOrganizationById(id);
 
@@ -40,6 +55,7 @@ export class GetOrganizationByIdService {
         }, 0);
         const failedDeployments = totalDeployments - successfulDeployments;
         const deploymentSuccessRate = this.computeDeploymentSuccessRate(deployments);
+        const averageDeploymentTimeMs = this.computeAverageDeploymentTime(deployments);
 
         return {
             ...organization,
@@ -47,6 +63,7 @@ export class GetOrganizationByIdService {
             totalDeployments,
             successfulDeployments,
             failedDeployments,
+            averageDeploymentTimeMs,
         };
     }
 }

@@ -37,6 +37,7 @@ export default async function OrganizationPage ({ params }: { params: Promise<{ 
                 deploymentSuccessRate={organization.deploymentSuccessRate}
                 successfulDeployments={organization.successfulDeployments}
                 failedDeployments={organization.failedDeployments}
+                averageDeploymentTimeMs={organization.averageDeploymentTimeMs}
             />
             <DeploymentsSection organizationId={organizationId} />
             <ApiKeysSection organizationId={organizationId} />
