@@ -52,6 +52,16 @@ export default class PrismaDeploymentRepository implements DeploymentRepository 
         });
     }
 
+    public async deleteDeployment (id: string) {
+        await prisma.$transaction([
+            prisma.deployComponentSuccess.deleteMany({ where: { deploymentId: id } }),
+            prisma.deployComponentFailure.deleteMany({ where: { deploymentId: id } }),
+            prisma.deployTestSuccess.deleteMany({ where: { deploymentId: id } }),
+            prisma.deployTestFailure.deleteMany({ where: { deploymentId: id } }),
+            prisma.deployment.delete({ where: { id } }),
+        ]);
+    }
+
     public async deleteDeploymentsByOrganizationId (organizationId: string) {
         const deploymentIds = await prisma.deployment.findMany({
             where: { organizationId },

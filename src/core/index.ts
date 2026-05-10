@@ -27,6 +27,11 @@ import {
 } from '@/core/application/commands/create-deployment';
 
 import {
+    DestroyDeploymentService,
+    DestroyDeploymentInput,
+} from '@/core/application/commands/destroy-deployment';
+
+import {
     CreateApiKeyService,
     CreateApiKeyInput,
 } from '@/core/application/commands/create-api-key';
@@ -104,6 +109,12 @@ export function createDeployment (createDeploymentInput: CreateDeploymentInput) 
     });
 
     return createDeploymentService.execute(createDeploymentInput);
+}
+
+export function destroyDeployment (destroyDeploymentInput: DestroyDeploymentInput) {
+    const destroyDeploymentService = new DestroyDeploymentService(deploymentRepository);
+
+    return destroyDeploymentService.execute(destroyDeploymentInput);
 }
 
 export function createApiKey (createApiKeyInput: CreateApiKeyInput) {

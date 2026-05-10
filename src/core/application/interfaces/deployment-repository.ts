@@ -9,5 +9,6 @@ export default interface DeploymentRepository {
     findDeploymentsByOrganizationId (organizationId: string): Promise<SavedDeployment[]>;
     findLatestDeploymentsByUserId (userId: string): Promise<SavedDeployment[]>;
     saveDeployment (deployment: Deployment): Promise<string>;
+    deleteDeployment (id: string): Promise<void>;
     deleteDeploymentsByOrganizationId (organizationId: string): Promise<void>;
 }

@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { getOrganizationById } from '@/core';
 import getDeploymentByIdAction from '@/actions/queries/get-deployment-by-id';
+import DestroyDeploymentButton from './destroy-deployment-button';
 
 import {
     Card,
@@ -60,18 +61,22 @@ export default async function DeploymentPage({ params }: { params: Promise<{ dep
             <div className="flex flex-grow flex-row items-center justify-between">
                 <span className="text-xl font-semibold">Deployment</span>
 
-                {deployment.deployUrl && (
-                    <a
-                        href={deployment.deployUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-xs font-medium text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
-                    >
-                        <LinkIcon className="size-3.5 shrink-0" />
-                        <span className="truncate max-w-xs">{(() => { try { const u = new URL(deployment.deployUrl); return u.hostname + (u.pathname !== '/' ? u.pathname : ''); } catch { return deployment.deployUrl; } })()}</span>
-                        <ChevronRight className="size-3 shrink-0 opacity-50" />
-                    </a>
-                )}
+                <div className="flex items-center gap-2">
+                    {deployment.deployUrl && (
+                        <a
+                            href={deployment.deployUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-xs font-medium text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+                        >
+                            <LinkIcon className="size-3.5 shrink-0" />
+                            <span className="truncate max-w-xs">{(() => { try { const u = new URL(deployment.deployUrl); return u.hostname + (u.pathname !== '/' ? u.pathname : ''); } catch { return deployment.deployUrl; } })()}</span>
+                            <ChevronRight className="size-3 shrink-0 opacity-50" />
+                        </a>
+                    )}
+
+                    <DestroyDeploymentButton deploymentId={deployment.id} organizationId={deployment.organizationId} />
+                </div>
             </div>
 
             <SummaryCards deployment={deployment} organization={organization} />
