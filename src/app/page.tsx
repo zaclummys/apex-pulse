@@ -15,7 +15,7 @@ const FEATURES = [
     {
         icon: DeploymentIcon,
         title: 'Deployment Tracking',
-        description: 'Monitor every Salesforce deployment in real time — from start to finish, with full status history.',
+        description: 'Monitor every Salesforce deployment in real time, from start to finish, with full status history.',
     },
     {
         icon: TestsIcon,
@@ -65,7 +65,7 @@ export default function Home () {
 
                 <p className="max-w-xl text-lg text-muted-foreground">
                     Track deployments, analyze test results, measure code coverage,
-                    and manage multiple orgs — without juggling tabs or CLI output.
+                    and manage multiple orgs, without juggling tabs or CLI output.
                 </p>
 
                 <div className="flex flex-wrap justify-center gap-3">
@@ -116,7 +116,7 @@ export default function Home () {
                         Works right from your terminal
                     </h2>
                     <p className="text-muted-foreground">
-                        Deploy with the SF CLI and pipe the result straight to Apex Pulse — no extra tooling, no manual uploads.
+                        Deploy with the SF CLI and pipe the result straight to Apex Pulse. No extra tooling, no manual uploads.
                     </p>
                 </div>
 
@@ -165,6 +165,69 @@ export default function Home () {
                         </div>
                     </div>
                 </div>
+            </section>
+
+            {/* Questions */}
+            <section className="px-4 py-24 flex flex-col items-center gap-16 bg-muted/40">
+                <div className="text-center flex flex-col gap-4 max-w-2xl">
+                    <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground">
+                        Can you answer these?{' '}
+                        <span className="text-muted-foreground">We can.</span>
+                    </h2>
+                    <p className="text-lg text-muted-foreground">
+                        Apex Pulse was built so you never have to guess again.
+                    </p>
+                </div>
+
+                <ul className="w-full max-w-4xl flex flex-col divide-y divide-border">
+                    {[
+                        {
+                            q: 'How successful are our deployments?',
+                            desc: 'Track success and failure rates over time and spot trends before they become problems.',
+                        },
+                        {
+                            q: 'How long do deployments take?',
+                            desc: 'Measure average and P95 deployment durations to catch slowdowns early.',
+                        },
+                        {
+                            q: 'How good is our test coverage?',
+                            desc: 'See coverage per class, worst-covered classes, and the percentage below the 75% threshold.',
+                        },
+                        {
+                            q: 'How often do our tests fail?',
+                            desc: 'Identify failing tests, recurring failures, and their impact on deployment success.',
+                        },
+                        {
+                            q: 'How fast do we fix failures?',
+                            desc: 'Measure mean time to recovery, from a failed deploy to the next successful one.',
+                        },
+                        {
+                            q: 'How large are our deployments?',
+                            desc: 'Count changed and new components per deploy and track size trends over time.',
+                        },
+                        {
+                            q: 'How often do we have flaky tests?',
+                            desc: 'Detect tests that sometimes pass and sometimes fail across deployments.',
+                        },
+                        {
+                            q: 'What components fail most often?',
+                            desc: 'Surface the classes and components that cause the most deployment errors.',
+                        },
+                        {
+                            q: 'Are our tests actually meaningful?',
+                            desc: 'Correlate code coverage with deployment outcomes to find gaps that matter.',
+                        },
+                        {
+                            q: 'How do these metrics change over time?',
+                            desc: 'Follow every metric across your deployment history to understand your team\'s trajectory.',
+                        },
+                    ].map(({ q, desc }) => (
+                        <li key={q} className="py-6 flex flex-col gap-1.5">
+                            <span className="text-xl md:text-2xl text-foreground tracking-tight">{q}</span>
+                            <span className="text-sm text-muted-foreground">{desc}</span>
+                        </li>
+                    ))}
+                </ul>
             </section>
 
             {/* CTA */}
