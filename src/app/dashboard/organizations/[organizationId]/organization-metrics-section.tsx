@@ -1,5 +1,5 @@
 import { Temporal } from '@js-temporal/polyfill';
-import { CheckCircle2, Gauge, Package, Timer, TrendingUp, XCircle } from 'lucide-react';
+import { SuccessIcon, DeploymentSuccessRateIcon, PackageSizeIcon, TimerIcon, MetricsIcon, FailureIcon } from '@/components/icons';
 
 import {
     Card,
@@ -23,7 +23,7 @@ export default function OrganizationMetricsSection ({ deploymentSuccessRate, suc
     return (
         <section className="flex flex-col gap-3">
             <span className="flex items-center gap-2 font-medium">
-                <TrendingUp className="size-4 text-muted-foreground" />
+                <MetricsIcon className="size-4 text-muted-foreground" />
                 Metrics
             </span>
 
@@ -31,7 +31,7 @@ export default function OrganizationMetricsSection ({ deploymentSuccessRate, suc
                 <Card>
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2 text-sm font-medium">
-                            <Gauge className="size-4 text-muted-foreground" />
+                            <DeploymentSuccessRateIcon className="size-4 text-muted-foreground" />
                             Deployment Success Rate
                         </CardTitle>
                     </CardHeader>
@@ -50,14 +50,14 @@ export default function OrganizationMetricsSection ({ deploymentSuccessRate, suc
                         <div className="flex flex-col gap-1 text-sm">
                             <div className="flex items-center justify-between">
                                 <span className="flex items-center gap-1.5 text-muted-foreground">
-                                    <CheckCircle2 className="size-3.5 text-green-500" />
+                                    <SuccessIcon className="size-3.5 text-green-500" />
                                     Successful
                                 </span>
                                 <span className="tabular-nums font-medium">{successfulDeployments}</span>
                             </div>
                             <div className="flex items-center justify-between">
                                 <span className="flex items-center gap-1.5 text-muted-foreground">
-                                    <XCircle className="size-3.5 text-red-500" />
+                                    <FailureIcon className="size-3.5 text-red-500" />
                                     Failed
                                 </span>
                                 <span className="tabular-nums font-medium">{failedDeployments}</span>
@@ -69,7 +69,7 @@ export default function OrganizationMetricsSection ({ deploymentSuccessRate, suc
                 <Card className="flex flex-col">
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2 text-sm font-medium">
-                            <Timer className="size-4 text-muted-foreground" />
+                            <TimerIcon className="size-4 text-muted-foreground" />
                             Average Deployment Time
                         </CardTitle>
                     </CardHeader>
@@ -85,7 +85,7 @@ export default function OrganizationMetricsSection ({ deploymentSuccessRate, suc
                 <Card className="flex flex-col">
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2 text-sm font-medium">
-                            <Package className="size-4 text-muted-foreground" />
+                            <PackageSizeIcon className="size-4 text-muted-foreground" />
                             Avg Deployment Size
                         </CardTitle>
                     </CardHeader>

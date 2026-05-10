@@ -1,7 +1,7 @@
 'use client';
 
 import { useActionState, useState } from 'react';
-import { Check, Copy } from 'lucide-react';
+import { CopiedIcon, CopyIcon } from '@/components/icons';
 
 import {
     Sheet,
@@ -83,7 +83,7 @@ export default function CreateApiKeyModal ({ organizationId }: { organizationId:
                             >
                                 <code className="flex-1 truncate text-left text-sm">{state.createdKey}</code>
                                 <span className="shrink-0 text-muted-foreground transition-colors group-hover:text-foreground">
-                                    {copied ? <Check className="size-4 text-green-500" /> : <Copy className="size-4" />}
+                                    {copied ? <CopiedIcon className="size-4 text-green-500" /> : <CopyIcon className="size-4" />}
                                 </span>
                             </button>
                         </div>

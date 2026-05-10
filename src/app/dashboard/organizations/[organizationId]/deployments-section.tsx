@@ -1,4 +1,4 @@
-import { Rocket } from 'lucide-react';
+import { DeploymentIcon } from '@/components/icons';
 
 import { getDeploymentsByOrganizationId } from '@/core';
 
@@ -12,7 +12,7 @@ export default async function DeploymentsSection ({ organizationId }: { organiza
         <section className="flex flex-col gap-3">
             <div className="flex items-center justify-between">
                 <span className="flex items-center gap-2 font-medium">
-                    <Rocket className="size-4 text-muted-foreground" />
+                    <DeploymentIcon className="size-4 text-muted-foreground" />
                     Deployments
                     <span className="text-muted-foreground font-normal">({deploymentIds.length})</span>
                 </span>

@@ -2,18 +2,18 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Temporal } from '@js-temporal/polyfill';
 import {
-    CheckCircle2,
-    XCircle,
-    Clock,
-    Timer,
-    Building2,
-    User,
-    Calendar,
-    Boxes,
-    FlaskConical,
-    ShieldCheck,
-    Activity,
-} from 'lucide-react';
+    SuccessIcon,
+    FailureIcon,
+    ClockIcon,
+    TimerIcon,
+    OrganizationIcon,
+    UserIcon,
+    CalendarIcon,
+    ComponentsIcon,
+    TestsIcon,
+    OverviewIcon,
+    CodeCoverageIcon,
+} from '@/components/icons';
 import ExternalLinkButton from '@/components/external-link-button';
 import { getOrganizationById } from '@/core';
 import getDeploymentByIdAction from '@/actions/queries/get-deployment-by-id';
@@ -84,35 +84,35 @@ export default async function DeploymentPage({ params }: { params: Promise<{ dep
 
             {deployment.componentSuccesses.length > 0 && (
                 <section className="flex flex-col gap-2">
-                    <SectionHeading icon={<CheckCircle2 className="size-4 text-green-500" />} title="Component Successes" count={deployment.componentSuccesses.length} />
+                    <SectionHeading icon={<SuccessIcon className="size-4 text-green-500" />} title="Component Successes" count={deployment.componentSuccesses.length} />
                     <ComponentSuccessesTable rows={deployment.componentSuccesses} />
                 </section>
             )}
 
             {deployment.componentFailures.length > 0 && (
                 <section className="flex flex-col gap-2">
-                    <SectionHeading icon={<XCircle className="size-4 text-red-500" />} title="Component Failures" count={deployment.componentFailures.length} />
+                    <SectionHeading icon={<FailureIcon className="size-4 text-red-500" />} title="Component Failures" count={deployment.componentFailures.length} />
                     <ComponentFailuresTable rows={deployment.componentFailures} />
                 </section>
             )}
 
             {deployment.testSuccesses.length > 0 && (
                 <section className="flex flex-col gap-2">
-                    <SectionHeading icon={<CheckCircle2 className="size-4 text-green-500" />} title="Test Successes" count={deployment.testSuccesses.length} />
+                    <SectionHeading icon={<SuccessIcon className="size-4 text-green-500" />} title="Test Successes" count={deployment.testSuccesses.length} />
                     <TestSuccessesTable rows={deployment.testSuccesses} />
                 </section>
             )}
 
             {deployment.testFailures.length > 0 && (
                 <section className="flex flex-col gap-2">
-                    <SectionHeading icon={<XCircle className="size-4 text-red-500" />} title="Test Failures" count={deployment.testFailures.length} />
+                    <SectionHeading icon={<FailureIcon className="size-4 text-red-500" />} title="Test Failures" count={deployment.testFailures.length} />
                     <TestFailuresTable rows={deployment.testFailures} />
                 </section>
             )}
 
             {deployment.codeCoverages.length > 0 && (
                 <section className="flex flex-col gap-2">
-                    <SectionHeading icon={<Activity className="size-4 text-blue-500" />} title="Code Coverage" count={deployment.codeCoverages.length} />
+                    <SectionHeading icon={<CodeCoverageIcon className="size-4 text-blue-500" />} title="Code Coverage" count={deployment.codeCoverages.length} />
                     <CodeCoverageTable rows={deployment.codeCoverages} />
                 </section>
             )}
@@ -126,13 +126,13 @@ function OverviewCard({ deployment, organization }: { deployment: Deployment; or
     return (
         <Card className="md:col-span-2">
             <CardHeader>
-                <CardTitle className="flex items-center gap-2"><ShieldCheck className="size-4 text-muted-foreground" />Overview</CardTitle>
+                <CardTitle className="flex items-center gap-2"><OverviewIcon className="size-4 text-muted-foreground" />Overview</CardTitle>
             </CardHeader>
             <CardContent className="flex gap-8 text-sm">
                 <div className="flex flex-col gap-2 flex-1">
                     <InfoRow label="Status" value={<StatusBadge status={deployment.status} />} />
                     <InfoRow
-                        icon={<Building2 className="size-3.5" />}
+                        icon={<OrganizationIcon className="size-3.5" />}
                         label="Organization"
                         value={
                             <Link href={`/dashboard/organizations/${organization?.id}`} className="hover:underline">
@@ -140,13 +140,13 @@ function OverviewCard({ deployment, organization }: { deployment: Deployment; or
                             </Link>
                         }
                     />
-                    <InfoRow icon={<User className="size-3.5" />} label="Created By" value={deployment.createdByName} />
+                    <InfoRow icon={<UserIcon className="size-3.5" />} label="Created By" value={deployment.createdByName} />
                 </div>
                 <div className="flex flex-col gap-2 flex-1">
                     <InfoRow label="Check Only" value={deployment.checkOnly ? <span className="text-blue-600 dark:text-blue-400">Yes</span> : 'No'} />
-                    <InfoRow icon={<Clock className="size-3.5" />} label="Start Date" value={new Date(deployment.startDate).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })} />
-                    <InfoRow icon={<Calendar className="size-3.5" />} label="End Date" value={new Date(deployment.endDate).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })} />
-                    <InfoRow icon={<Timer className="size-3.5" />} label="Duration" value={formatDuration(deployment.deploymentDuration)} />
+                    <InfoRow icon={<ClockIcon className="size-3.5" />} label="Start Date" value={new Date(deployment.startDate).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })} />
+                    <InfoRow icon={<CalendarIcon className="size-3.5" />} label="End Date" value={new Date(deployment.endDate).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })} />
+                    <InfoRow icon={<TimerIcon className="size-3.5" />} label="Duration" value={formatDuration(deployment.deploymentDuration)} />
                 </div>
             </CardContent>
         </Card>
@@ -156,7 +156,7 @@ function OverviewCard({ deployment, organization }: { deployment: Deployment; or
 function ComponentsCard({ deployment }: { deployment: Deployment }) {
     return (
         <Card>
-            <CardHeader><CardTitle className="flex items-center gap-2"><Boxes className="size-4 text-muted-foreground" />Components <span className="text-muted-foreground font-normal text-sm">({deployment.numberComponentsTotal})</span></CardTitle></CardHeader>
+            <CardHeader><CardTitle className="flex items-center gap-2"><ComponentsIcon className="size-4 text-muted-foreground" />Components <span className="text-muted-foreground font-normal text-sm">({deployment.numberComponentsTotal})</span></CardTitle></CardHeader>
             <CardContent className="flex flex-col gap-2 text-sm">
                 <InfoRow label="Deployed" value={<span className="font-medium text-green-600 dark:text-green-400">{deployment.numberComponentsDeployed} <span className="font-normal text-muted-foreground">({computePercent(deployment.numberComponentsDeployed, deployment.numberComponentsTotal)}%)</span></span>} />
                 <InfoRow label="Errors" value={deployment.numberComponentErrors > 0 ? <span className="font-medium text-red-600 dark:text-red-400">{deployment.numberComponentErrors} <span className="font-normal text-red-400/70 dark:text-red-500/70">({computePercent(deployment.numberComponentErrors, deployment.numberComponentsTotal)}%)</span></span> : <span>0 <span className="text-muted-foreground">(0%)</span></span>} />
@@ -173,14 +173,14 @@ function ComponentsCard({ deployment }: { deployment: Deployment }) {
 function TestsCard({ deployment }: { deployment: Deployment }) {
     return (
         <Card>
-            <CardHeader><CardTitle className="flex items-center gap-2"><FlaskConical className="size-4 text-muted-foreground" />Tests <span className="text-muted-foreground font-normal text-sm">({deployment.numberTestsTotal})</span></CardTitle></CardHeader>
+            <CardHeader><CardTitle className="flex items-center gap-2"><TestsIcon className="size-4 text-muted-foreground" />Tests <span className="text-muted-foreground font-normal text-sm">({deployment.numberTestsTotal})</span></CardTitle></CardHeader>
             <CardContent className="flex flex-col gap-2 text-sm">
                 <InfoRow label="Successes" value={<span className="font-medium text-green-600 dark:text-green-400">{deployment.numberTestsCompleted} <span className="font-normal text-muted-foreground">({computePercent(deployment.numberTestsCompleted, deployment.numberTestsTotal)}%)</span></span>} />
                 <InfoRow label="Errors" value={deployment.numberTestErrors > 0 ? <span className="font-medium text-red-600 dark:text-red-400">{deployment.numberTestErrors} <span className="font-normal text-red-400/70 dark:text-red-500/70">({computePercent(deployment.numberTestErrors, deployment.numberTestsTotal)}%)</span></span> : <span>0 <span className="text-muted-foreground">(0%)</span></span>} />
                 <Separator className="my-1 opacity-50" />
                 <InfoRow label="Pass Rate" value={<span className={`font-medium ${deployment.testPassRate === 100 ? 'text-green-600 dark:text-green-400' : deployment.testPassRate >= 75 ? 'text-yellow-600 dark:text-yellow-400' : 'text-red-600 dark:text-red-400'}`}>{deployment.testPassRate}%</span>} />
-                <InfoRow icon={<Timer className="size-3.5" />} label="Total Time" value={<span className="tabular-nums">{deployment.totalTestExecutionTime.toLocaleString()} ms</span>} />
-                <InfoRow icon={<Timer className="size-3.5" />} label="Average Time / Test" value={<span className="tabular-nums">{deployment.averageTestExecutionTime.toLocaleString()} ms</span>} />
+                <InfoRow icon={<TimerIcon className="size-3.5" />} label="Total Time" value={<span className="tabular-nums">{deployment.totalTestExecutionTime.toLocaleString()} ms</span>} />
+                <InfoRow icon={<TimerIcon className="size-3.5" />} label="Average Time / Test" value={<span className="tabular-nums">{deployment.averageTestExecutionTime.toLocaleString()} ms</span>} />
             </CardContent>
         </Card>
     );
@@ -192,7 +192,7 @@ function CodeCoverageCard({ deployment }: { deployment: Deployment }) {
             <Card>
                 <CardHeader>
                     <CardTitle className="flex items-center gap-2">
-                        <Activity className="size-4 text-muted-foreground" />
+                        <CodeCoverageIcon className="size-4 text-muted-foreground" />
 
                         <span>Code Coverage</span>
                     </CardTitle>
@@ -213,7 +213,7 @@ function CodeCoverageCard({ deployment }: { deployment: Deployment }) {
         <Card>
             <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                    <Activity className="size-4 text-muted-foreground" />
+                    <CodeCoverageIcon className="size-4 text-muted-foreground" />
                     <span>Code Coverage</span>
                     <span className="text-muted-foreground font-normal text-sm">({deployment.codeCoverages.length} classes)</span>
                 </CardTitle>
@@ -268,9 +268,9 @@ function ComponentSuccessesTable({ rows }: { rows: ComponentSuccess[] }) {
                         <TableRow key={index}>
                             <TableCell>{componentSuccess.fullName}</TableCell>
                             <TableCell><span className="rounded bg-muted px-1.5 py-0.5 text-xs">{componentSuccess.componentType}</span></TableCell>
-                            <TableCell>{componentSuccess.changed ? <CheckCircle2 className="size-4 text-green-500" /> : <span className="text-muted-foreground">—</span>}</TableCell>
-                            <TableCell>{componentSuccess.created ? <CheckCircle2 className="size-4 text-blue-500" /> : <span className="text-muted-foreground">—</span>}</TableCell>
-                            <TableCell>{componentSuccess.deleted ? <XCircle className="size-4 text-red-500" /> : <span className="text-muted-foreground">—</span>}</TableCell>
+                            <TableCell>{componentSuccess.changed ? <SuccessIcon className="size-4 text-green-500" /> : <span className="text-muted-foreground">—</span>}</TableCell>
+                            <TableCell>{componentSuccess.created ? <SuccessIcon className="size-4 text-blue-500" /> : <span className="text-muted-foreground">—</span>}</TableCell>
+                            <TableCell>{componentSuccess.deleted ? <FailureIcon className="size-4 text-red-500" /> : <span className="text-muted-foreground">—</span>}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
@@ -439,7 +439,7 @@ function StatusBadge({ status }: { status: string }) {
     if (normalizedStatus === 'succeeded') {
         return (
             <span className="inline-flex items-center gap-1 rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-700 dark:bg-green-900/30 dark:text-green-400">
-                <CheckCircle2 className="size-3" />
+                <SuccessIcon className="size-3" />
                 {status}
             </span>
         );
@@ -447,14 +447,14 @@ function StatusBadge({ status }: { status: string }) {
     if (normalizedStatus === 'failed') {
         return (
             <span className="inline-flex items-center gap-1 rounded-full bg-red-100 px-2 py-0.5 text-xs font-medium text-red-700 dark:bg-red-900/30 dark:text-red-400">
-                <XCircle className="size-3" />
+                <FailureIcon className="size-3" />
                 {status}
             </span>
         );
     }
     return (
         <span className="inline-flex items-center gap-1 rounded-full bg-yellow-100 px-2 py-0.5 text-xs font-medium text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400">
-            <Clock className="size-3" />
+            <ClockIcon className="size-3" />
             {status}
         </span>
     );

@@ -1,5 +1,5 @@
 import { notFound } from 'next/navigation';
-import { Building2 } from 'lucide-react';
+import { OrganizationIcon } from '@/components/icons';
 import ExternalLinkButton from '@/components/external-link-button';
 
 import { getOrganizationById } from '@/core';
@@ -23,7 +23,7 @@ export default async function OrganizationPage ({ params }: { params: Promise<{ 
             {/* Header */}
             <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                    <Building2 className="size-6 text-muted-foreground" />
+                    <OrganizationIcon className="size-6 text-muted-foreground" />
                     <span className="text-xl font-semibold">{organization.name}</span>
                 </div>
 

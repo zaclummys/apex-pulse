@@ -1,5 +1,5 @@
 import Header from '@/app/header';
-import { Rocket, Zap } from 'lucide-react'
+import { DeploymentIcon, AppIcon } from '@/components/icons';
 import ButtonLink from '@/components/button-link';
 
 export default function Home () {
@@ -40,7 +40,7 @@ export default function Home () {
                     {[1, 2, 3, 4, 5, 6].map((i) => (
                         <div key={i} className="flex flex-col items-start p-6 rounded-xl border border-border bg-card hover:bg-accent/50 transition-colors">
                             <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                                <Rocket className="inline-block" />
+                                <DeploymentIcon className="inline-block" />
                             </div>
 
                             <span>
@@ -72,7 +72,7 @@ export default function Home () {
 
             <footer className="flex flex-row p-4">
                 <div className="grow">
-                    <Zap className='inline-block mr-2' />
+                    <AppIcon className='inline-block mr-2' />
 
                     <span>
                         Apex Pulse

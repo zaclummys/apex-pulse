@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Building2, Calendar, User, CheckCircle2, XCircle, Rocket } from 'lucide-react';
+import { OrganizationIcon, CalendarIcon, UserIcon, SuccessIcon, FailureIcon, DeploymentIcon } from '@/components/icons';
 import { getDeploymentById, getOrganizationById } from '@/core';
 
 import {
@@ -21,7 +21,7 @@ export default function DeploymentTable ({ deploymentIds, showOrganization = tru
     if (deploymentIds.length === 0) {
         return (
             <div className="flex flex-col items-center justify-center gap-3 rounded-lg border border-dashed py-12 text-center">
-                <Rocket className="size-10 text-muted-foreground/50" />
+                <DeploymentIcon className="size-10 text-muted-foreground/50" />
                 <div className="flex flex-col gap-1">
                     <span className="text-sm font-medium">{emptyMessage}</span>
                 </div>
@@ -70,14 +70,14 @@ async function DeploymentRow ({ id, showOrganization }: { id: string; showOrgani
             {showOrganization && (
                 <TableCell>
                     <Link href={`/dashboard/organizations/${organization?.id}`} className="flex items-center gap-1.5 text-muted-foreground hover:text-foreground transition-colors">
-                        <Building2 className="size-3.5 shrink-0" />
+                        <OrganizationIcon className="size-3.5 shrink-0" />
                         {organization?.name ?? deployment.organizationId}
                     </Link>
                 </TableCell>
             )}
             <TableCell>
                 <Link href={`/dashboard/deployments/${deployment.id}`} className="flex items-center gap-1.5 text-muted-foreground">
-                    <User className="size-3.5 shrink-0" />
+                    <UserIcon className="size-3.5 shrink-0" />
                     {deployment.createdByName}
                 </Link>
             </TableCell>
@@ -96,13 +96,13 @@ async function DeploymentRow ({ id, showOrganization }: { id: string; showOrgani
             <TableCell>
                 <Link href={`/dashboard/deployments/${deployment.id}`}>
                     {deployment.checkOnly
-                        ? <CheckCircle2 className="size-4 text-blue-500" />
-                        : <XCircle className="size-4 text-muted-foreground/40" />}
+                        ? <SuccessIcon className="size-4 text-blue-500" />
+                        : <FailureIcon className="size-4 text-muted-foreground/40" />}
                 </Link>
             </TableCell>
             <TableCell>
                 <Link href={`/dashboard/deployments/${deployment.id}`} className="flex items-center gap-1.5 text-muted-foreground text-sm">
-                    <Calendar className="size-3.5 shrink-0" />
+                    <CalendarIcon className="size-3.5 shrink-0" />
                     {new Date(deployment.startDate).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })}
                 </Link>
             </TableCell>
@@ -124,8 +124,8 @@ function StatusBadge ({ status }: { status: string }) {
             isFailure ? 'bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-400' :
             'bg-muted text-muted-foreground',
         ].join(' ')}>
-            {isSuccess && <CheckCircle2 className="size-3" />}
-            {isFailure && <XCircle className="size-3" />}
+            {isSuccess && <SuccessIcon className="size-3" />}
+            {isFailure && <FailureIcon className="size-3" />}
             {status}
         </span>
     );

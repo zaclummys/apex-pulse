@@ -17,20 +17,17 @@ import {
 } from '@/components/ui/sidebar';
 
 import {
-    Building,
-    LayoutDashboard,
-    LogOut,
-    Rocket,
-    Settings,
-    Zap,
-} from 'lucide-react';
+    DashboardIcon,
+    SignOutIcon,
+    AppIcon,
+} from '@/components/icons';
 
 export default function Layout ({ children }: { children: React.ReactNode }) {
     const items = [
         {
             title: 'Dashboard',
             url: '/dashboard',
-            icon: <LayoutDashboard />,
+            icon: <DashboardIcon />,
         }
     ];
 
@@ -42,7 +39,7 @@ export default function Layout ({ children }: { children: React.ReactNode }) {
                         <SidebarMenu>
                             <SidebarMenuItem>
                                 <SidebarMenuButton>
-                                    <Zap />
+                                    <AppIcon />
 
                                     <span className="text-base font-semibold">
                                         Apex Pulse
@@ -76,7 +73,7 @@ export default function Layout ({ children }: { children: React.ReactNode }) {
                             <SidebarMenuItem>
                                 <SidebarMenuButton render={props => (
                                     <Link href="/sign-out" {...props}>
-                                        <LogOut />
+                                        <SignOutIcon />
 
                                         <span>Sign Out</span>
                                     </Link>

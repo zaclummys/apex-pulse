@@ -1,5 +1,5 @@
 import getAllOrganizationsAction from '@/actions/queries/get-all-organizations';
-import { Building2, ChevronRight } from 'lucide-react';
+import { OrganizationIcon, ChevronRightIcon } from '@/components/icons';
 import Link from 'next/link';
 import CreateOrganizationModal from './create-organization-modal';
 
@@ -23,7 +23,7 @@ async function AllOrganizationsGrid () {
     if (organizations.length === 0) {
         return (
             <div className="flex flex-col items-center justify-center gap-3 rounded-lg border border-dashed py-12 text-center">
-                <Building2 className="size-10 text-muted-foreground/50" />
+                <OrganizationIcon className="size-10 text-muted-foreground/50" />
                 <div className="flex flex-col gap-1">
                     <span className="text-sm font-medium">No organizations yet</span>
                     <span className="text-xs text-muted-foreground">Create your first organization to get started.</span>
@@ -62,7 +62,7 @@ function OrganizationCard ({ organization }: { organization: { id: string; name:
                     <span className="truncate text-sm font-medium">{organization.name}</span>
                     <span className="truncate text-xs text-muted-foreground">{displayUrl}</span>
                 </div>
-                <ChevronRight className="size-4 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
+                <ChevronRightIcon className="size-4 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
             </div>
         </Link>
     );

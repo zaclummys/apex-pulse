@@ -1,4 +1,4 @@
-import { KeyRound } from 'lucide-react';
+import { ApiKeyIcon } from '@/components/icons';
 
 import { getApiKeysByOrganizationId } from '@/core';
 
@@ -12,7 +12,7 @@ export default async function ApiKeysSection ({ organizationId }: { organization
         <section className="flex flex-col gap-3">
             <div className="flex items-center justify-between">
                 <span className="flex items-center gap-2 font-medium">
-                    <KeyRound className="size-4 text-muted-foreground" />
+                    <ApiKeyIcon className="size-4 text-muted-foreground" />
                     API Keys
                     <span className="text-muted-foreground font-normal">({apiKeys.length})</span>
                 </span>
@@ -21,7 +21,7 @@ export default async function ApiKeysSection ({ organizationId }: { organization
 
             {apiKeys.length === 0 ? (
                 <div className="flex flex-col items-center justify-center gap-2 rounded-lg border border-dashed py-10 text-center">
-                    <KeyRound className="size-8 text-muted-foreground/50" />
+                    <ApiKeyIcon className="size-8 text-muted-foreground/50" />
                     <p className="text-sm font-medium">No API keys yet</p>
                     <p className="text-xs text-muted-foreground">Create an API key to authenticate requests to this organization.</p>
                 </div>

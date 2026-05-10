@@ -1,6 +1,6 @@
 'use client';
 
-import { Trash2 } from 'lucide-react';
+import { DeleteIcon } from '@/components/icons';
 
 import { Button } from '@/components/ui/button';
 import destroyApiKeyAction from '@/actions/commands/destroy-api-key';
@@ -16,7 +16,7 @@ export default function DestroyApiKeyButton ({ apiKeyId, organizationId }: { api
 
     return (
         <Button variant="ghost" size="sm" onClick={handleDestroy} className="text-destructive hover:text-destructive">
-            <Trash2 className="size-4" />
+            <DeleteIcon className="size-4" />
         </Button>
     );
 }
