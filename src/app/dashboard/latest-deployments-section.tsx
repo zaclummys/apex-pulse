@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/table";
 
 import getLatestDeploymentsAction from "@/actions/queries/get-latest-deployments";
+import getDeploymentByIdAction from "@/actions/queries/get-deployment-by-id";
 import getAllOrganizationsAction from "@/actions/queries/get-all-organizations";
 import CreateDeploymentModal from "./create-deployment-modal";
 
@@ -33,9 +34,9 @@ export default async function LatestDeploymentsSection() {
 }
 
 async function LatestDeploymentsTable() {
-    const deployments = await getLatestDeploymentsAction();
+    const deploymentIds = await getLatestDeploymentsAction();
 
-    if (deployments.length === 0) {
+    if (deploymentIds.length === 0) {
         return (
             <div className="flex flex-col items-center justify-center gap-3 rounded-lg border border-dashed py-12 text-center">
                 <Rocket className="size-10 text-muted-foreground/50" />
@@ -62,8 +63,8 @@ async function LatestDeploymentsTable() {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {deployments.map((deployment) => (
-                        <DeploymentRow key={deployment.id} deployment={deployment} />
+                    {deploymentIds.map((id) => (
+                        <DeploymentRow key={id} id={id} />
                     ))}
                 </TableBody>
             </Table>
@@ -71,26 +72,15 @@ async function LatestDeploymentsTable() {
     )
 }
 
-type DeploymentRowDeployment = {
-    id: string;
-    status: string;
-    organizationId: string;
-    numberComponentsDeployed: number;
-    numberComponentsTotal: number;
-    numberComponentErrors: number;
-    numberTestsCompleted: number;
-    numberTestsTotal: number;
-    numberTestErrors: number;
-    checkOnly: boolean;
-    startDate: Date;
-    createdByName: string;
-}
-
 type DeploymentRowProps = {
-    deployment: DeploymentRowDeployment;
+    id: string;
 }
 
-async function DeploymentRow({ deployment }: DeploymentRowProps) {
+async function DeploymentRow({ id }: DeploymentRowProps) {
+    const deployment = await getDeploymentByIdAction(id);
+
+    if (!deployment) return null;
+
     const organization = await getOrganizationById(deployment.organizationId);
 
     return (

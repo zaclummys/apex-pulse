@@ -8,6 +8,7 @@ export class GetDeploymentsByOrganizationIdService {
     }
 
     public async execute (organizationId: string) {
-        return await this.deploymentRepository.findDeploymentsByOrganizationId(organizationId);
+        const deployments = await this.deploymentRepository.findDeploymentsByOrganizationId(organizationId);
+        return deployments.map(deployment => deployment.id);
     }
 }

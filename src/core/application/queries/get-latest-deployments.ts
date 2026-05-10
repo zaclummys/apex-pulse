@@ -8,6 +8,7 @@ export class GetLatestDeploymentsService {
     }
 
     public async execute (userId: string) {
-        return await this.deploymentRepository.findLatestDeploymentsByUserId(userId);
+        const deployments = await this.deploymentRepository.findLatestDeploymentsByUserId(userId);
+        return deployments.map(deployment => deployment.id);
     }
 }

@@ -6,6 +6,7 @@ import ExternalLinkButton from '@/components/external-link-button';
 import {
     getOrganizationById,
     getDeploymentsByOrganizationId,
+    getDeploymentById,
 } from '@/core';
 
 import {
@@ -29,7 +30,7 @@ export default async function OrganizationPage ({ params }: { params: Promise<{ 
         notFound();
     }
 
-    const deployments = await getDeploymentsByOrganizationId(organizationId);
+    const deploymentIds = await getDeploymentsByOrganizationId(organizationId);
 
     return (
         <div className="flex flex-col gap-6 p-6">
@@ -52,10 +53,10 @@ export default async function OrganizationPage ({ params }: { params: Promise<{ 
                 <span className="flex items-center gap-2 font-medium">
                     <Rocket className="size-4 text-muted-foreground" />
                     Deployments
-                    <span className="text-muted-foreground font-normal">({deployments.length})</span>
+                    <span className="text-muted-foreground font-normal">({deploymentIds.length})</span>
                 </span>
 
-                {deployments.length === 0 ? (
+                {deploymentIds.length === 0 ? (
                     <div className="flex flex-col items-center justify-center gap-3 rounded-lg border border-dashed py-12 text-center">
                         <Rocket className="size-10 text-muted-foreground/50" />
                         <div className="flex flex-col gap-1">
@@ -77,45 +78,8 @@ export default async function OrganizationPage ({ params }: { params: Promise<{ 
                                 </TableRow>
                             </TableHeader>
                             <TableBody>
-                                {deployments.map(deployment => (
-                                    <TableRow key={deployment.id} className="cursor-pointer hover:bg-muted/50">
-                                        <TableCell>
-                                            <Link href={`/dashboard/deployments/${deployment.id}`} className="flex items-center gap-1.5">
-                                                <StatusBadge status={deployment.status} />
-                                            </Link>
-                                        </TableCell>
-                                        <TableCell>
-                                            <Link href={`/dashboard/deployments/${deployment.id}`} className="flex items-center gap-1.5 text-muted-foreground">
-                                                <User className="size-3.5 shrink-0" />
-                                                {deployment.createdByName}
-                                            </Link>
-                                        </TableCell>
-                                        <TableCell>
-                                            <Link href={`/dashboard/deployments/${deployment.id}`} className="text-sm">
-                                                <span className="text-green-600 dark:text-green-400">{deployment.numberComponentsDeployed}</span>
-                                                <span className="text-muted-foreground">/{deployment.numberComponentsTotal}</span>
-                                            </Link>
-                                        </TableCell>
-                                        <TableCell>
-                                            <Link href={`/dashboard/deployments/${deployment.id}`} className="text-sm">
-                                                <span className="text-green-600 dark:text-green-400">{deployment.numberTestsCompleted}</span>
-                                                <span className="text-muted-foreground">/{deployment.numberTestsTotal}</span>
-                                            </Link>
-                                        </TableCell>
-                                        <TableCell>
-                                            <Link href={`/dashboard/deployments/${deployment.id}`}>
-                                                {deployment.checkOnly
-                                                    ? <CheckCircle2 className="size-4 text-blue-500" />
-                                                    : <XCircle className="size-4 text-muted-foreground/40" />}
-                                            </Link>
-                                        </TableCell>
-                                        <TableCell>
-                                            <Link href={`/dashboard/deployments/${deployment.id}`} className="flex items-center gap-1.5 text-muted-foreground text-sm">
-                                                <Calendar className="size-3.5 shrink-0" />
-                                                {new Date(deployment.startDate).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })}
-                                            </Link>
-                                        </TableCell>
-                                    </TableRow>
+                                {deploymentIds.map(id => (
+                                    <DeploymentRow key={id} id={id} />
                                 ))}
                             </TableBody>
                         </Table>
@@ -123,6 +87,53 @@ export default async function OrganizationPage ({ params }: { params: Promise<{ 
                 )}
             </section>
         </div>
+    );
+}
+
+async function DeploymentRow ({ id }: { id: string }) {
+    const deployment = await getDeploymentById(id);
+
+    if (!deployment) return null;
+
+    return (
+        <TableRow className="cursor-pointer hover:bg-muted/50">
+            <TableCell>
+                <Link href={`/dashboard/deployments/${deployment.id}`} className="flex items-center gap-1.5">
+                    <StatusBadge status={deployment.status} />
+                </Link>
+            </TableCell>
+            <TableCell>
+                <Link href={`/dashboard/deployments/${deployment.id}`} className="flex items-center gap-1.5 text-muted-foreground">
+                    <User className="size-3.5 shrink-0" />
+                    {deployment.createdByName}
+                </Link>
+            </TableCell>
+            <TableCell>
+                <Link href={`/dashboard/deployments/${deployment.id}`} className="text-sm">
+                    <span className="text-green-600 dark:text-green-400">{deployment.numberComponentsDeployed}</span>
+                    <span className="text-muted-foreground">/{deployment.numberComponentsTotal}</span>
+                </Link>
+            </TableCell>
+            <TableCell>
+                <Link href={`/dashboard/deployments/${deployment.id}`} className="text-sm">
+                    <span className="text-green-600 dark:text-green-400">{deployment.numberTestsCompleted}</span>
+                    <span className="text-muted-foreground">/{deployment.numberTestsTotal}</span>
+                </Link>
+            </TableCell>
+            <TableCell>
+                <Link href={`/dashboard/deployments/${deployment.id}`}>
+                    {deployment.checkOnly
+                        ? <CheckCircle2 className="size-4 text-blue-500" />
+                        : <XCircle className="size-4 text-muted-foreground/40" />}
+                </Link>
+            </TableCell>
+            <TableCell>
+                <Link href={`/dashboard/deployments/${deployment.id}`} className="flex items-center gap-1.5 text-muted-foreground text-sm">
+                    <Calendar className="size-3.5 shrink-0" />
+                    {new Date(deployment.startDate).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })}
+                </Link>
+            </TableCell>
+        </TableRow>
     );
 }
 
