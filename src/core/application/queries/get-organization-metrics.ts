@@ -1,13 +1,16 @@
-import { Organization } from '@/core/domain/organization';
-import OrganizationRepository from '@/core/application/interfaces/organization-repository';
 import DeploymentRepository from '@/core/application/interfaces/deployment-repository';
 
-export class GetOrganizationByIdService {
-    private organizationRepository: OrganizationRepository;
-    private deploymentRepository: DeploymentRepository;
+export type OrganizationMetrics = {
+    deploymentSuccessRate: number;
+    totalDeployments: number;
+    successfulDeployments: number;
+    failedDeployments: number;
+};
 
-    constructor (organizationRepository: OrganizationRepository, deploymentRepository: DeploymentRepository) {
-        this.organizationRepository = organizationRepository;
+export class GetOrganizationMetricsService {
+    private readonly deploymentRepository: DeploymentRepository;
+
+    constructor (deploymentRepository: DeploymentRepository) {
         this.deploymentRepository = deploymentRepository;
     }
 
@@ -25,14 +28,8 @@ export class GetOrganizationByIdService {
         return Math.round((successfulDeployments / totalDeployments) * 100);
     }
 
-    public async execute (id: string) {
-        const organization = await this.organizationRepository.findOrganizationById(id);
-
-        if (!organization) {
-            throw new Error('Organization not found');
-        }
-
-        const deployments = await this.deploymentRepository.findDeploymentsByOrganizationId(id);
+    async execute (organizationId: string): Promise<OrganizationMetrics> {
+        const deployments = await this.deploymentRepository.findDeploymentsByOrganizationId(organizationId);
 
         const totalDeployments = deployments.length;
         const successfulDeployments = deployments.reduce((count, deployment) => {
@@ -42,7 +39,6 @@ export class GetOrganizationByIdService {
         const deploymentSuccessRate = this.computeDeploymentSuccessRate(deployments);
 
         return {
-            ...organization,
             deploymentSuccessRate,
             totalDeployments,
             successfulDeployments,

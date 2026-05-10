@@ -7,6 +7,7 @@ import { getOrganizationById } from '@/core';
 import DestroyOrganizationButton from './destroy-organization-button';
 import DeploymentsSection from './deployments-section';
 import ApiKeysSection from './api-keys-section';
+import OrganizationMetricsSection from './organization-metrics-section';
 
 export default async function OrganizationPage ({ params }: { params: Promise<{ organizationId: string }> }) {
     const { organizationId } = await params;
@@ -32,6 +33,11 @@ export default async function OrganizationPage ({ params }: { params: Promise<{ 
                 </div>
             </div>
 
+            <OrganizationMetricsSection
+                deploymentSuccessRate={organization.deploymentSuccessRate}
+                successfulDeployments={organization.successfulDeployments}
+                failedDeployments={organization.failedDeployments}
+            />
             <DeploymentsSection organizationId={organizationId} />
             <ApiKeysSection organizationId={organizationId} />
         </div>

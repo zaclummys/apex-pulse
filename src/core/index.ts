@@ -64,7 +64,7 @@ const userRepository = new PrismaUserRepository();
 const sessionRepository = new PrismaSessionRepository();
 
 export function getOrganizationById (id: string) {
-    const getOrganizationByIdService = new GetOrganizationByIdService(organizationRepository);
+    const getOrganizationByIdService = new GetOrganizationByIdService(organizationRepository, deploymentRepository);
 
     return getOrganizationByIdService.execute(id);
 }
