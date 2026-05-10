@@ -8,6 +8,7 @@ import getCurrentUserId from '@/actions/queries/get-current-user-id';
 type CreateOrganizationState = {
     fields: {
         organizationName: string;
+        organizationUrl: string;
     };
     errors?: {
         message: string;
@@ -18,10 +19,12 @@ export default async function createOrganizationAction (state: CreateOrganizatio
     const currentUserId = await getCurrentUserId();
 
     const organizationName = formData.get("organizationName") as string;
+    const organizationUrl = formData.get("organizationUrl") as string;
 
     try {
         await createOrganization({
             name: organizationName,
+            url: organizationUrl,
             userId: currentUserId,
         });
     } catch (error) {
@@ -30,6 +33,7 @@ export default async function createOrganizationAction (state: CreateOrganizatio
         return {
             fields: {
                 organizationName,
+                organizationUrl,
             },
             errors: {
                 message: 'An unexpected error occurred. Please try again later.',

@@ -17,6 +17,7 @@ export default class PrismaOrganizationRepository implements OrganizationReposit
             data: {
                 id: organization.id,
                 name: organization.name,
+                url: organization.url,
                 userId: organization.userId,
             },
         });

@@ -3,6 +3,7 @@ import { Organization } from '@/core/domain/organization';
 
 export type CreateOrganizationInput = {
     name: string;
+    url: string;
     userId: string;
 };
 
@@ -19,10 +20,12 @@ export class CreateOrganizationService {
 
     public async execute ({
         name,
+        url,
         userId,
     }: CreateOrganizationInput): Promise<CreateOrganizationOutput> {
         const organization: Organization = {
             name,
+            url,
             userId,
         };
         

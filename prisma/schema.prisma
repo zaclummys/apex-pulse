@@ -38,6 +38,7 @@ model Session {
 model Organization {
     id String @id @default(uuid())
     name String
+    url String
 
     deployments Deployment[]
     

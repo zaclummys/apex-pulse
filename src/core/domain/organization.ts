@@ -1,5 +1,6 @@
 export type Organization = {
     id?: string;
     name: string;
+    url: string;
     userId: string;
 };

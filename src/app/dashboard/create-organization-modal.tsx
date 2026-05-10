@@ -19,7 +19,7 @@ import { Field, FieldLabel } from '@/components/ui/field';
 import createOrganizationAction from '@/actions/commands/create-organization';
 
 const initialState: Parameters<typeof createOrganizationAction>[0] = {
-    fields: { organizationName: '' },
+    fields: { organizationName: '', organizationUrl: '' },
 };
 
 export default function CreateOrganizationModal () {
@@ -51,6 +51,18 @@ export default function CreateOrganizationModal () {
                             name="organizationName"
                             placeholder="My Organization"
                             defaultValue={state.fields.organizationName}
+                            required
+                        />
+                    </Field>
+
+                    <Field>
+                        <FieldLabel htmlFor="organizationUrl">URL</FieldLabel>
+                        <Input
+                            id="organizationUrl"
+                            name="organizationUrl"
+                            type="url"
+                            placeholder="https://my-org.salesforce.com"
+                            defaultValue={state.fields.organizationUrl}
                             required
                         />
                     </Field>

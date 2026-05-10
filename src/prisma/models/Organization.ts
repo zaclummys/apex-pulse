@@ -27,18 +27,21 @@ export type AggregateOrganization = {
 export type OrganizationMinAggregateOutputType = {
   id: string | null
   name: string | null
+  url: string | null
   userId: string | null
 }
 
 export type OrganizationMaxAggregateOutputType = {
   id: string | null
   name: string | null
+  url: string | null
   userId: string | null
 }
 
 export type OrganizationCountAggregateOutputType = {
   id: number
   name: number
+  url: number
   userId: number
   _all: number
 }
@@ -47,18 +50,21 @@ export type OrganizationCountAggregateOutputType = {
 export type OrganizationMinAggregateInputType = {
   id?: true
   name?: true
+  url?: true
   userId?: true
 }
 
 export type OrganizationMaxAggregateInputType = {
   id?: true
   name?: true
+  url?: true
   userId?: true
 }
 
 export type OrganizationCountAggregateInputType = {
   id?: true
   name?: true
+  url?: true
   userId?: true
   _all?: true
 }
@@ -138,6 +144,7 @@ export type OrganizationGroupByArgs<ExtArgs extends runtime.Types.Extensions.Int
 export type OrganizationGroupByOutputType = {
   id: string
   name: string
+  url: string
   userId: string
   _count: OrganizationCountAggregateOutputType | null
   _min: OrganizationMinAggregateOutputType | null
@@ -165,6 +172,7 @@ export type OrganizationWhereInput = {
   NOT?: Prisma.OrganizationWhereInput | Prisma.OrganizationWhereInput[]
   id?: Prisma.StringFilter<"Organization"> | string
   name?: Prisma.StringFilter<"Organization"> | string
+  url?: Prisma.StringFilter<"Organization"> | string
   userId?: Prisma.StringFilter<"Organization"> | string
   deployments?: Prisma.DeploymentListRelationFilter
   User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -174,6 +182,7 @@ export type OrganizationWhereInput = {
 export type OrganizationOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  url?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   deployments?: Prisma.DeploymentOrderByRelationAggregateInput
   User?: Prisma.UserOrderByWithRelationInput
@@ -186,6 +195,7 @@ export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.OrganizationWhereInput[]
   NOT?: Prisma.OrganizationWhereInput | Prisma.OrganizationWhereInput[]
   name?: Prisma.StringFilter<"Organization"> | string
+  url?: Prisma.StringFilter<"Organization"> | string
   userId?: Prisma.StringFilter<"Organization"> | string
   deployments?: Prisma.DeploymentListRelationFilter
   User?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
@@ -195,6 +205,7 @@ export type OrganizationWhereUniqueInput = Prisma.AtLeast<{
 export type OrganizationOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  url?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   _count?: Prisma.OrganizationCountOrderByAggregateInput
   _max?: Prisma.OrganizationMaxOrderByAggregateInput
@@ -207,12 +218,14 @@ export type OrganizationScalarWhereWithAggregatesInput = {
   NOT?: Prisma.OrganizationScalarWhereWithAggregatesInput | Prisma.OrganizationScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Organization"> | string
   name?: Prisma.StringWithAggregatesFilter<"Organization"> | string
+  url?: Prisma.StringWithAggregatesFilter<"Organization"> | string
   userId?: Prisma.StringWithAggregatesFilter<"Organization"> | string
 }
 
 export type OrganizationCreateInput = {
   id?: string
   name: string
+  url: string
   deployments?: Prisma.DeploymentCreateNestedManyWithoutOrganizationInput
   User: Prisma.UserCreateNestedOneWithoutOrganizationsInput
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
@@ -221,6 +234,7 @@ export type OrganizationCreateInput = {
 export type OrganizationUncheckedCreateInput = {
   id?: string
   name: string
+  url: string
   userId: string
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
@@ -229,6 +243,7 @@ export type OrganizationUncheckedCreateInput = {
 export type OrganizationUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.StringFieldUpdateOperationsInput | string
   deployments?: Prisma.DeploymentUpdateManyWithoutOrganizationNestedInput
   User?: Prisma.UserUpdateOneRequiredWithoutOrganizationsNestedInput
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
@@ -237,6 +252,7 @@ export type OrganizationUpdateInput = {
 export type OrganizationUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
@@ -245,17 +261,20 @@ export type OrganizationUncheckedUpdateInput = {
 export type OrganizationCreateManyInput = {
   id?: string
   name: string
+  url: string
   userId: string
 }
 
 export type OrganizationUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type OrganizationUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -272,18 +291,21 @@ export type OrganizationOrderByRelationAggregateInput = {
 export type OrganizationCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  url?: Prisma.SortOrder
   userId?: Prisma.SortOrder
 }
 
 export type OrganizationMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  url?: Prisma.SortOrder
   userId?: Prisma.SortOrder
 }
 
 export type OrganizationMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  url?: Prisma.SortOrder
   userId?: Prisma.SortOrder
 }
 
@@ -365,6 +387,7 @@ export type OrganizationUpdateOneRequiredWithoutDeploymentsNestedInput = {
 export type OrganizationCreateWithoutUserInput = {
   id?: string
   name: string
+  url: string
   deployments?: Prisma.DeploymentCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
 }
@@ -372,6 +395,7 @@ export type OrganizationCreateWithoutUserInput = {
 export type OrganizationUncheckedCreateWithoutUserInput = {
   id?: string
   name: string
+  url: string
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutOrganizationInput
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
 }
@@ -408,12 +432,14 @@ export type OrganizationScalarWhereInput = {
   NOT?: Prisma.OrganizationScalarWhereInput | Prisma.OrganizationScalarWhereInput[]
   id?: Prisma.StringFilter<"Organization"> | string
   name?: Prisma.StringFilter<"Organization"> | string
+  url?: Prisma.StringFilter<"Organization"> | string
   userId?: Prisma.StringFilter<"Organization"> | string
 }
 
 export type OrganizationCreateWithoutApiKeysInput = {
   id?: string
   name: string
+  url: string
   deployments?: Prisma.DeploymentCreateNestedManyWithoutOrganizationInput
   User: Prisma.UserCreateNestedOneWithoutOrganizationsInput
 }
@@ -421,6 +447,7 @@ export type OrganizationCreateWithoutApiKeysInput = {
 export type OrganizationUncheckedCreateWithoutApiKeysInput = {
   id?: string
   name: string
+  url: string
   userId: string
   deployments?: Prisma.DeploymentUncheckedCreateNestedManyWithoutOrganizationInput
 }
@@ -444,6 +471,7 @@ export type OrganizationUpdateToOneWithWhereWithoutApiKeysInput = {
 export type OrganizationUpdateWithoutApiKeysInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.StringFieldUpdateOperationsInput | string
   deployments?: Prisma.DeploymentUpdateManyWithoutOrganizationNestedInput
   User?: Prisma.UserUpdateOneRequiredWithoutOrganizationsNestedInput
 }
@@ -451,6 +479,7 @@ export type OrganizationUpdateWithoutApiKeysInput = {
 export type OrganizationUncheckedUpdateWithoutApiKeysInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutOrganizationNestedInput
 }
@@ -458,6 +487,7 @@ export type OrganizationUncheckedUpdateWithoutApiKeysInput = {
 export type OrganizationCreateWithoutDeploymentsInput = {
   id?: string
   name: string
+  url: string
   User: Prisma.UserCreateNestedOneWithoutOrganizationsInput
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutOrganizationInput
 }
@@ -465,6 +495,7 @@ export type OrganizationCreateWithoutDeploymentsInput = {
 export type OrganizationUncheckedCreateWithoutDeploymentsInput = {
   id?: string
   name: string
+  url: string
   userId: string
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutOrganizationInput
 }
@@ -488,6 +519,7 @@ export type OrganizationUpdateToOneWithWhereWithoutDeploymentsInput = {
 export type OrganizationUpdateWithoutDeploymentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.StringFieldUpdateOperationsInput | string
   User?: Prisma.UserUpdateOneRequiredWithoutOrganizationsNestedInput
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
 }
@@ -495,6 +527,7 @@ export type OrganizationUpdateWithoutDeploymentsInput = {
 export type OrganizationUncheckedUpdateWithoutDeploymentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
 }
@@ -502,11 +535,13 @@ export type OrganizationUncheckedUpdateWithoutDeploymentsInput = {
 export type OrganizationCreateManyUserInput = {
   id?: string
   name: string
+  url: string
 }
 
 export type OrganizationUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.StringFieldUpdateOperationsInput | string
   deployments?: Prisma.DeploymentUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutOrganizationNestedInput
 }
@@ -514,6 +549,7 @@ export type OrganizationUpdateWithoutUserInput = {
 export type OrganizationUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.StringFieldUpdateOperationsInput | string
   deployments?: Prisma.DeploymentUncheckedUpdateManyWithoutOrganizationNestedInput
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutOrganizationNestedInput
 }
@@ -521,6 +557,7 @@ export type OrganizationUncheckedUpdateWithoutUserInput = {
 export type OrganizationUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 
@@ -566,6 +603,7 @@ export type OrganizationCountOutputTypeCountApiKeysArgs<ExtArgs extends runtime.
 export type OrganizationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  url?: boolean
   userId?: boolean
   deployments?: boolean | Prisma.Organization$deploymentsArgs<ExtArgs>
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -576,6 +614,7 @@ export type OrganizationSelect<ExtArgs extends runtime.Types.Extensions.Internal
 export type OrganizationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  url?: boolean
   userId?: boolean
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["organization"]>
@@ -583,6 +622,7 @@ export type OrganizationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
 export type OrganizationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
+  url?: boolean
   userId?: boolean
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["organization"]>
@@ -590,10 +630,11 @@ export type OrganizationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
 export type OrganizationSelectScalar = {
   id?: boolean
   name?: boolean
+  url?: boolean
   userId?: boolean
 }
 
-export type OrganizationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "userId", ExtArgs["result"]["organization"]>
+export type OrganizationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "url" | "userId", ExtArgs["result"]["organization"]>
 export type OrganizationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   deployments?: boolean | Prisma.Organization$deploymentsArgs<ExtArgs>
   User?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -617,6 +658,7 @@ export type $OrganizationPayload<ExtArgs extends runtime.Types.Extensions.Intern
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     name: string
+    url: string
     userId: string
   }, ExtArgs["result"]["organization"]>
   composites: {}
@@ -1046,6 +1088,7 @@ export interface Prisma__OrganizationClient<T, Null = never, ExtArgs extends run
 export interface OrganizationFieldRefs {
   readonly id: Prisma.FieldRef<"Organization", 'String'>
   readonly name: Prisma.FieldRef<"Organization", 'String'>
+  readonly url: Prisma.FieldRef<"Organization", 'String'>
   readonly userId: Prisma.FieldRef<"Organization", 'String'>
 }
     
