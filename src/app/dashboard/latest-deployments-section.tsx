@@ -40,8 +40,8 @@ async function LatestDeploymentsTable() {
             <div className="flex flex-col items-center justify-center gap-3 rounded-lg border border-dashed py-12 text-center">
                 <Rocket className="size-10 text-muted-foreground/50" />
                 <div className="flex flex-col gap-1">
-                    <p className="text-sm font-medium">No deployments yet</p>
-                    <p className="text-xs text-muted-foreground">Your latest deployments will appear here once you create one.</p>
+                    <span className="text-sm font-medium">No deployments yet</span>
+                    <span className="text-xs text-muted-foreground">Your latest deployments will appear here once you create one.</span>
                 </div>
             </div>
         );

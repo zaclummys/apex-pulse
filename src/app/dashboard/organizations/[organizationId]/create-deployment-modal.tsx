@@ -40,7 +40,7 @@ export default function CreateDeploymentModal ({ organizationId }: { organizatio
                     <input type="hidden" name="organizationId" value={organizationId} />
 
                     {state?.errors?.message && (
-                        <p className="text-sm text-red-500">{state.errors.message}</p>
+                        <span className="text-sm text-red-500">{state.errors.message}</span>
                     )}
 
                     <Field>

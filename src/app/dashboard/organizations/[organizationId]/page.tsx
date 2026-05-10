@@ -36,7 +36,7 @@ export default async function OrganizationPage ({ params }: { params: Promise<{ 
             <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                     <Building2 className="size-6 text-muted-foreground" />
-                    <h1 className="text-xl font-semibold">{organization.name}</h1>
+                    <span className="text-xl font-semibold">{organization.name}</span>
                 </div>
 
                 <div className="flex items-center gap-2">
@@ -47,18 +47,18 @@ export default async function OrganizationPage ({ params }: { params: Promise<{ 
 
             {/* Deployments */}
             <section className="flex flex-col gap-3">
-                <h2 className="flex items-center gap-2 font-medium">
+                <span className="flex items-center gap-2 font-medium">
                     <Rocket className="size-4 text-muted-foreground" />
                     Deployments
                     <span className="text-muted-foreground font-normal">({deployments.length})</span>
-                </h2>
+                </span>
 
                 {deployments.length === 0 ? (
                     <div className="flex flex-col items-center justify-center gap-3 rounded-lg border border-dashed py-12 text-center">
                         <Rocket className="size-10 text-muted-foreground/50" />
                         <div className="flex flex-col gap-1">
-                            <p className="text-sm font-medium">No deployments yet</p>
-                            <p className="text-xs text-muted-foreground">Create your first deployment to get started.</p>
+                            <span className="text-sm font-medium">No deployments yet</span>
+                            <span className="text-xs text-muted-foreground">Create your first deployment to get started.</span>
                         </div>
                     </div>
                 ) : (

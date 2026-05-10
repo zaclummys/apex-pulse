@@ -38,7 +38,7 @@ export default function SignIn() {
                     <CardContent>
                         <form id="form" className="flex flex-col gap-6" action={action}>
                             {state?.errors?.message && (
-                                <p className="text-sm text-red-500">{state.errors.message}</p>
+                                <span className="text-sm text-red-500">{state.errors.message}</span>
                             )}
 
                             <Field>

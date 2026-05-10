@@ -176,11 +176,11 @@ function SummaryCards({ deployment, organization }: { deployment: Deployment; or
 
 function SectionHeading({ icon, title, count }: { icon: React.ReactNode; title: string; count: number }) {
     return (
-        <h2 className="flex items-center gap-2 font-medium">
+        <span className="flex items-center gap-2 font-medium">
             {icon}
             {title}
             <span className="text-muted-foreground font-normal">({count})</span>
-        </h2>
+        </span>
     );
 }
 

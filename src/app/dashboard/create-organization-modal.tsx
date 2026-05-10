@@ -41,7 +41,7 @@ export default function CreateOrganizationModal () {
 
                 <form className="flex flex-col gap-4 p-4" action={action}>
                     {state?.errors?.message && (
-                        <p className="text-sm text-red-500">{state.errors.message}</p>
+                        <span className="text-sm text-red-500">{state.errors.message}</span>
                     )}
 
                     <Field>
