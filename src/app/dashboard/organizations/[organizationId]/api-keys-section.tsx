@@ -26,10 +26,10 @@ export default async function ApiKeysSection ({ organizationId }: { organization
                     <p className="text-xs text-muted-foreground">Create an API key to authenticate requests to this organization.</p>
                 </div>
             ) : (
-                <div className="flex flex-col gap-2">
+                <div className="rounded-lg border divide-y">
                     {apiKeys.map((apiKey) => (
-                        <div key={apiKey.id} className="flex items-center justify-between rounded-lg border px-4 py-3">
-                            <div className="flex flex-col gap-0.5">
+                        <div key={apiKey.id} className="flex items-center justify-between px-4 py-3 first:rounded-t-lg last:rounded-b-lg">
+                            <div className="flex flex-col">
                                 <span className="text-sm font-medium">{apiKey.name}</span>
                                 <span className="text-xs text-muted-foreground">
                                     Created {new Date(apiKey.createdAt).toLocaleDateString()}
