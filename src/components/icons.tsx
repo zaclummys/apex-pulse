@@ -23,6 +23,7 @@ export {
     Trash2 as DeleteIcon,
     TrendingUp as MetricsIcon,
     User as UserIcon,
+    Users as UsersIcon,
     XCircle as FailureIcon,
     Zap as AppIcon,
 } from 'lucide-react';

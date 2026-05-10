@@ -22,7 +22,7 @@ export default function SignUp() {
                 </Link>
 
                 <p className="text-lg text-foreground leading-relaxed">
-                    Shipping to production without visibility isn&apos;t confidence — it&apos;s luck.
+                    Shipping to production without visibility isn&apos;t confidence, it&apos;s luck.
                 </p>
             </div>
 

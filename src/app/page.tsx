@@ -6,8 +6,8 @@ import {
     OrganizationIcon,
     CodeCoverageIcon,
     DeploymentSuccessRateIcon,
-    ApiKeyIcon,
     SuccessIcon,
+    UsersIcon,
 } from '@/components/icons';
 import ButtonLink from '@/components/button-link';
 
@@ -38,9 +38,9 @@ const FEATURES = [
         description: 'Visualize your team\'s deployment success rate over time and identify patterns at a glance.',
     },
     {
-        icon: ApiKeyIcon,
-        title: 'API Key Access',
-        description: 'Generate and manage API keys to integrate Apex Pulse into your CI/CD pipelines seamlessly.',
+        icon: UsersIcon,
+        title: 'Multi-Team Management',
+        description: 'Organize users into teams, scope deployments per team, and track metrics across your whole engineering org.',
     },
 ];
 
