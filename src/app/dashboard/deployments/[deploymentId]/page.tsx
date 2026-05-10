@@ -197,13 +197,13 @@ function ComponentSuccessesTable({ rows }: { rows: ComponentSuccess[] }) {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {rows.map((c, i) => (
-                        <TableRow key={i}>
-                            <TableCell>{c.fullName}</TableCell>
-                            <TableCell><span className="rounded bg-muted px-1.5 py-0.5 text-xs">{c.componentType}</span></TableCell>
-                            <TableCell>{c.changed ? <CheckCircle2 className="size-4 text-green-500" /> : <span className="text-muted-foreground">—</span>}</TableCell>
-                            <TableCell>{c.created ? <CheckCircle2 className="size-4 text-blue-500" /> : <span className="text-muted-foreground">—</span>}</TableCell>
-                            <TableCell>{c.deleted ? <XCircle className="size-4 text-red-500" /> : <span className="text-muted-foreground">—</span>}</TableCell>
+                    {rows.map((componentSuccess, index) => (
+                        <TableRow key={index}>
+                            <TableCell>{componentSuccess.fullName}</TableCell>
+                            <TableCell><span className="rounded bg-muted px-1.5 py-0.5 text-xs">{componentSuccess.componentType}</span></TableCell>
+                            <TableCell>{componentSuccess.changed ? <CheckCircle2 className="size-4 text-green-500" /> : <span className="text-muted-foreground">—</span>}</TableCell>
+                            <TableCell>{componentSuccess.created ? <CheckCircle2 className="size-4 text-blue-500" /> : <span className="text-muted-foreground">—</span>}</TableCell>
+                            <TableCell>{componentSuccess.deleted ? <XCircle className="size-4 text-red-500" /> : <span className="text-muted-foreground">—</span>}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
@@ -227,14 +227,14 @@ function ComponentFailuresTable({ rows }: { rows: ComponentFailure[] }) {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {rows.map((c, i) => (
-                        <TableRow key={i} className="bg-red-50/50 dark:bg-red-950/20">
-                            <TableCell>{c.fullName}</TableCell>
-                            <TableCell><span className="rounded bg-muted px-1.5 py-0.5 text-xs">{c.componentType}</span></TableCell>
-                            <TableCell className="max-w-xs truncate text-red-700 dark:text-red-400">{c.problem}</TableCell>
-                            <TableCell><span className="rounded bg-red-100 dark:bg-red-900/40 px-1.5 py-0.5 text-xs text-red-700 dark:text-red-400">{c.problemType}</span></TableCell>
-                            <TableCell className="text-muted-foreground">{c.lineNumber}</TableCell>
-                            <TableCell className="text-muted-foreground">{c.columnNumber}</TableCell>
+                    {rows.map((componentFailure, index) => (
+                        <TableRow key={index} className="bg-red-50/50 dark:bg-red-950/20">
+                            <TableCell>{componentFailure.fullName}</TableCell>
+                            <TableCell><span className="rounded bg-muted px-1.5 py-0.5 text-xs">{componentFailure.componentType}</span></TableCell>
+                            <TableCell className="max-w-xs truncate text-red-700 dark:text-red-400">{componentFailure.problem}</TableCell>
+                            <TableCell><span className="rounded bg-red-100 dark:bg-red-900/40 px-1.5 py-0.5 text-xs text-red-700 dark:text-red-400">{componentFailure.problemType}</span></TableCell>
+                            <TableCell className="text-muted-foreground">{componentFailure.lineNumber}</TableCell>
+                            <TableCell className="text-muted-foreground">{componentFailure.columnNumber}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
@@ -256,12 +256,12 @@ function TestSuccessesTable({ rows }: { rows: TestSuccess[] }) {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {rows.map((t) => (
-                        <TableRow key={t.id}>
-                            <TableCell>{t.className}</TableCell>
-                            <TableCell>{t.methodName}</TableCell>
-                            <TableCell className="text-muted-foreground">{t.namespace ?? '—'}</TableCell>
-                            <TableCell>{t.time}</TableCell>
+                    {rows.map((testSuccess) => (
+                        <TableRow key={testSuccess.id}>
+                            <TableCell>{testSuccess.className}</TableCell>
+                            <TableCell>{testSuccess.methodName}</TableCell>
+                            <TableCell className="text-muted-foreground">{testSuccess.namespace ?? '—'}</TableCell>
+                            <TableCell>{testSuccess.time}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
@@ -284,13 +284,13 @@ function TestFailuresTable({ rows }: { rows: TestFailure[] }) {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {rows.map((t) => (
-                        <TableRow key={t.id} className="bg-red-50/50 dark:bg-red-950/20">
-                            <TableCell>{t.className}</TableCell>
-                            <TableCell>{t.methodName}</TableCell>
-                            <TableCell className="text-muted-foreground">{t.namespace ?? '—'}</TableCell>
-                            <TableCell className="max-w-xs truncate text-red-700 dark:text-red-400">{t.message}</TableCell>
-                            <TableCell className="text-muted-foreground">{t.time}</TableCell>
+                    {rows.map((testFailure) => (
+                        <TableRow key={testFailure.id} className="bg-red-50/50 dark:bg-red-950/20">
+                            <TableCell>{testFailure.className}</TableCell>
+                            <TableCell>{testFailure.methodName}</TableCell>
+                            <TableCell className="text-muted-foreground">{testFailure.namespace ?? '—'}</TableCell>
+                            <TableCell className="max-w-xs truncate text-red-700 dark:text-red-400">{testFailure.message}</TableCell>
+                            <TableCell className="text-muted-foreground">{testFailure.time}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>
@@ -313,36 +313,36 @@ function CodeCoverageTable({ rows }: { rows: CodeCoverage[] }) {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {rows.map((c, i) => {
-                        const covered = c.numLocations - c.numLocationsNotCovered;
-                        const pct = c.numLocations > 0 ? Math.round((covered / c.numLocations) * 100) : 0;
-                        const color =
-                            pct >= 75
+                    {rows.map((coverage, index) => {
+                        const coveredLines = coverage.numLocations - coverage.numLocationsNotCovered;
+                        const coveragePercent = coverage.numLocations > 0 ? Math.round((coveredLines / coverage.numLocations) * 100) : 0;
+                        const coverageColor =
+                            coveragePercent >= 75
                                 ? 'text-green-600 dark:text-green-400'
-                                : pct >= 50
+                                : coveragePercent >= 50
                                   ? 'text-yellow-600 dark:text-yellow-400'
                                   : 'text-red-600 dark:text-red-400';
                         return (
-                            <TableRow key={i}>
-                                <TableCell>{c.className}</TableCell>
-                                <TableCell className="text-green-600 dark:text-green-400">{covered}</TableCell>
-                                <TableCell className={c.numLocationsNotCovered > 0 ? 'text-red-600 dark:text-red-400' : 'text-muted-foreground'}>{c.numLocationsNotCovered}</TableCell>
-                                <TableCell className="text-muted-foreground">{c.numLocations}</TableCell>
+                            <TableRow key={index}>
+                                <TableCell>{coverage.className}</TableCell>
+                                <TableCell className="text-green-600 dark:text-green-400">{coveredLines}</TableCell>
+                                <TableCell className={coverage.numLocationsNotCovered > 0 ? 'text-red-600 dark:text-red-400' : 'text-muted-foreground'}>{coverage.numLocationsNotCovered}</TableCell>
+                                <TableCell className="text-muted-foreground">{coverage.numLocations}</TableCell>
                                 <TableCell>
                                     <div className="flex items-center gap-2">
                                         <div className="h-1.5 w-24 rounded-full bg-muted overflow-hidden">
                                             <div
                                                 className={`h-full rounded-full ${
-                                                    pct >= 75
+                                                    coveragePercent >= 75
                                                         ? 'bg-green-500'
-                                                        : pct >= 50
+                                                        : coveragePercent >= 50
                                                           ? 'bg-yellow-500'
                                                           : 'bg-red-500'
                                                 }`}
-                                                style={{ width: `${pct}%` }}
+                                                style={{ width: `${coveragePercent}%` }}
                                             />
                                         </div>
-                                        <span className={`text-sm font-medium ${color}`}>{pct}%</span>
+                                        <span className={`text-sm font-medium ${coverageColor}`}>{coveragePercent}%</span>
                                     </div>
                                 </TableCell>
                             </TableRow>
@@ -357,8 +357,8 @@ function CodeCoverageTable({ rows }: { rows: CodeCoverage[] }) {
 // ─── Primitives ──────────────────────────────────────────────────────────────
 
 function StatusBadge({ status }: { status: string }) {
-    const s = status.toLowerCase();
-    if (s === 'succeeded') {
+    const normalizedStatus = status.toLowerCase();
+    if (normalizedStatus === 'succeeded') {
         return (
             <span className="inline-flex items-center gap-1 rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-700 dark:bg-green-900/30 dark:text-green-400">
                 <CheckCircle2 className="size-3" />
@@ -366,7 +366,7 @@ function StatusBadge({ status }: { status: string }) {
             </span>
         );
     }
-    if (s === 'failed') {
+    if (normalizedStatus === 'failed') {
         return (
             <span className="inline-flex items-center gap-1 rounded-full bg-red-100 px-2 py-0.5 text-xs font-medium text-red-700 dark:bg-red-900/30 dark:text-red-400">
                 <XCircle className="size-3" />
