@@ -416,7 +416,7 @@ function computePercent(value: number, total: number) {
     return total > 0 ? Math.round(value / total * 100) : 0;
 }
 
-function formatDuration(duration: { hours: number; minutes: number; seconds: number }) {
+function formatDuration(duration: any) {
     return Temporal.Duration.from(duration).toLocaleString('en-US', { style: 'long' });
 }
 
