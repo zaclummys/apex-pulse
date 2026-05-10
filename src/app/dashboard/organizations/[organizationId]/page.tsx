@@ -59,7 +59,11 @@ export default async function OrganizationPage ({ params }: { params: Promise<{ 
                 </span>
 
                 {apiKeys.length === 0 ? (
-                    <p className="text-sm text-muted-foreground">No API keys yet.</p>
+                    <div className="flex flex-col items-center justify-center gap-2 rounded-lg border border-dashed py-10 text-center">
+                        <KeyRound className="size-8 text-muted-foreground/50" />
+                        <p className="text-sm font-medium">No API keys yet</p>
+                        <p className="text-xs text-muted-foreground">Create an API key to authenticate requests to this organization.</p>
+                    </div>
                 ) : (
                     <div className="flex flex-col gap-2">
                         {apiKeys.map((apiKey) => (
