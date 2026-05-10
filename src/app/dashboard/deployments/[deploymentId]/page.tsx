@@ -69,7 +69,12 @@ export default async function DeploymentPage({ params }: { params: Promise<{ dep
                 </div>
             </div>
 
-            <SummaryCards deployment={deployment} organization={organization} />
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 items-start">
+                <OverviewCard deployment={deployment} organization={organization} />
+                <ComponentsCard deployment={deployment} />
+                <TestsCard deployment={deployment} />
+                {deployment.codeCoverages.length > 0 && <CodeCoverageCard deployment={deployment} />}
+            </div>
 
             {deployment.componentSuccesses.length > 0 && (
                 <section className="flex flex-col gap-2">
@@ -109,57 +114,45 @@ export default async function DeploymentPage({ params }: { params: Promise<{ dep
     );
 }
 
-// ─── Summary Cards ───────────────────────────────────────────────────────────
+// ─── Cards ──────────────────────────────────────────────────────────────────
 
-function SummaryCards({ deployment, organization }: { deployment: Deployment; organization: Organization }) {
+function OverviewCard({ deployment, organization }: { deployment: Deployment; organization: Organization }) {
     return (
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 items-start">
-            <Card className="md:col-span-2">
-                <CardHeader>
-                    <CardTitle className="flex items-center gap-2"><ShieldCheck className="size-4 text-muted-foreground" />Overview</CardTitle>
-                </CardHeader>
-
-                <CardContent className="flex gap-8 text-sm">
-                    <div className="flex flex-col gap-2 flex-1">
-                        <InfoRow label="Status" value={<StatusBadge status={deployment.status} />} />
-                        <InfoRow
-                            icon={<Building2 className="size-3.5" />}
-                            label="Organization"
-                            value={
-                                <Link href={`/dashboard/organizations/${organization?.id}`} className="hover:underline">
-                                    {organization?.name ?? deployment.organizationId}
-                                </Link>
-                            }
-                        />
-                        <InfoRow icon={<User className="size-3.5" />} label="Created By" value={deployment.createdByName} />
-                    </div>
-                    <div className="flex flex-col gap-2 flex-1">
-                        <InfoRow label="Check Only" value={deployment.checkOnly ? <span className="text-blue-600 dark:text-blue-400">Yes</span> : 'No'} />
-
-                        <InfoRow
-                            icon={<Calendar className="size-3.5" />}
-                            label="Start Date"
-                            value={new Date(deployment.startDate).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })}
-                        />
-                        <InfoRow
-                            icon={<Calendar className="size-3.5" />}
-                            label="End Date"
-                            value={new Date(deployment.endDate).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })}
-                        />
-                    </div>
-                </CardContent>
-            </Card>
-
-            <ComponentsCard deployment={deployment} />
-
-            <TestsCard deployment={deployment} />
-
-            <CodeCoverageCard deployment={deployment} />
-        </div>
+        <Card className="md:col-span-2">
+            <CardHeader>
+                <CardTitle className="flex items-center gap-2"><ShieldCheck className="size-4 text-muted-foreground" />Overview</CardTitle>
+            </CardHeader>
+            <CardContent className="flex gap-8 text-sm">
+                <div className="flex flex-col gap-2 flex-1">
+                    <InfoRow label="Status" value={<StatusBadge status={deployment.status} />} />
+                    <InfoRow
+                        icon={<Building2 className="size-3.5" />}
+                        label="Organization"
+                        value={
+                            <Link href={`/dashboard/organizations/${organization?.id}`} className="hover:underline">
+                                {organization?.name ?? deployment.organizationId}
+                            </Link>
+                        }
+                    />
+                    <InfoRow icon={<User className="size-3.5" />} label="Created By" value={deployment.createdByName} />
+                </div>
+                <div className="flex flex-col gap-2 flex-1">
+                    <InfoRow label="Check Only" value={deployment.checkOnly ? <span className="text-blue-600 dark:text-blue-400">Yes</span> : 'No'} />
+                    <InfoRow
+                        icon={<Calendar className="size-3.5" />}
+                        label="Start Date"
+                        value={new Date(deployment.startDate).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })}
+                    />
+                    <InfoRow
+                        icon={<Calendar className="size-3.5" />}
+                        label="End Date"
+                        value={new Date(deployment.endDate).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' })}
+                    />
+                </div>
+            </CardContent>
+        </Card>
     );
 }
-
-// ─── Summary Sub-Cards ───────────────────────────────────────────────────────
 
 function ComponentsCard({ deployment }: { deployment: Deployment }) {
     return (
