@@ -12,12 +12,8 @@ export class GetDeploymentByIdService {
     computeDuration (startDate: Date, endDate: Date) {
         const start = Temporal.Instant.fromEpochMilliseconds(startDate.getTime());
         const end = Temporal.Instant.fromEpochMilliseconds(endDate.getTime());
-        const duration = start.until(end, { largestUnit: 'hours' });
-        return {
-            hours: duration.hours,
-            minutes: duration.minutes,
-            seconds: duration.seconds,
-        };
+        
+        return start.until(end, { largestUnit: 'hours' });
     }
 
     computeCodeCoverageMetrics (deployment: Deployment) {

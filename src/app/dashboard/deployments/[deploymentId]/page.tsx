@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { Temporal } from '@js-temporal/polyfill';
 import {
     CheckCircle2,
     XCircle,
@@ -405,9 +406,7 @@ function computePercent(value: number, total: number) {
 }
 
 function formatDuration(duration: { hours: number; minutes: number; seconds: number }) {
-    if (duration.hours > 0) return `${duration.hours}h ${duration.minutes}m ${duration.seconds}s`;
-    if (duration.minutes > 0) return `${duration.minutes}m ${duration.seconds}s`;
-    return `${duration.seconds}s`;
+    return Temporal.Duration.from(duration).toLocaleString('en-US', { style: 'long' });
 }
 
 function computeCoverageColor(percent: number) {
