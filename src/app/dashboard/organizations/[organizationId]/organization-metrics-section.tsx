@@ -1,5 +1,5 @@
 import { Temporal } from '@js-temporal/polyfill';
-import { Activity, CheckCircle2, Package, Timer, TrendingUp, XCircle } from 'lucide-react';
+import { CheckCircle2, Gauge, Package, Timer, TrendingUp, XCircle } from 'lucide-react';
 
 import {
     Card,
@@ -31,7 +31,7 @@ export default function OrganizationMetricsSection ({ deploymentSuccessRate, suc
                 <Card>
                     <CardHeader>
                         <CardTitle className="flex items-center gap-2 text-sm font-medium">
-                            <Activity className="size-4 text-muted-foreground" />
+                            <Gauge className="size-4 text-muted-foreground" />
                             Deployment Success Rate
                         </CardTitle>
                     </CardHeader>
