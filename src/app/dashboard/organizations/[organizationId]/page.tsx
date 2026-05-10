@@ -94,18 +94,12 @@ export default async function OrganizationPage ({ params }: { params: Promise<{ 
                                             <Link href={`/dashboard/deployments/${deployment.id}`} className="text-sm">
                                                 <span className="text-green-600 dark:text-green-400">{deployment.numberComponentsDeployed}</span>
                                                 <span className="text-muted-foreground">/{deployment.numberComponentsTotal}</span>
-                                                {deployment.numberComponentErrors > 0 && (
-                                                    <span className="ml-1.5 text-red-600 dark:text-red-400">({deployment.numberComponentErrors} err)</span>
-                                                )}
                                             </Link>
                                         </TableCell>
                                         <TableCell>
                                             <Link href={`/dashboard/deployments/${deployment.id}`} className="text-sm">
                                                 <span className="text-green-600 dark:text-green-400">{deployment.numberTestsCompleted}</span>
                                                 <span className="text-muted-foreground">/{deployment.numberTestsTotal}</span>
-                                                {deployment.numberTestErrors > 0 && (
-                                                    <span className="ml-1.5 text-red-600 dark:text-red-400">({deployment.numberTestErrors} err)</span>
-                                                )}
                                             </Link>
                                         </TableCell>
                                         <TableCell>
