@@ -1,5 +1,7 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
+
 import { createApiKey } from '@/core';
 
 type CreateApiKeyState = {
@@ -18,6 +20,8 @@ export default async function createApiKeyAction (state: CreateApiKeyState, form
 
     try {
         const result = await createApiKey({ name, organizationId });
+
+        revalidatePath(`/dashboard/organizations/${organizationId}`);
 
         return {
             fields: { name },
