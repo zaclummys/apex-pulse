@@ -30,13 +30,13 @@ export class GetDeploymentByIdService {
         const componentDeployRate = calculateDeployRate(deployment.componentSuccesses.length, totalComponents);
 
         const changedComponents = deployment.componentSuccesses.reduce((count, component) => count + (component.changed ? 1 : 0), 0);
-        const newComponents = deployment.componentSuccesses.reduce((count, component) => count + (component.created ? 1 : 0), 0);
+        const createdComponents = deployment.componentSuccesses.reduce((count, component) => count + (component.created ? 1 : 0), 0);
         const deletedComponents = deployment.componentSuccesses.reduce((count, component) => count + (component.deleted ? 1 : 0), 0);
 
         return {
             componentDeployRate,
             changedComponents,
-            newComponents,
+            createdComponents,
             deletedComponents,
         };
     }
@@ -157,7 +157,7 @@ export class GetDeploymentByIdService {
         const {
             componentDeployRate,
             changedComponents,
-            newComponents,
+            createdComponents,
             deletedComponents,
         } = this.computeComponentMetrics(deployment);
 
@@ -198,7 +198,7 @@ export class GetDeploymentByIdService {
 
             componentDeployRate,
             changedComponents,
-            newComponents,
+            createdComponents,
             deletedComponents,
 
             deploymentDuration,

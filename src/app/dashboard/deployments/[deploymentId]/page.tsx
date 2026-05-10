@@ -163,7 +163,7 @@ function ComponentsCard({ deployment }: { deployment: Deployment }) {
                 <Separator className="my-1 opacity-50" />
                 <InfoRow label="Deploy Rate" value={<span className={`font-medium ${deployment.componentDeployRate === 100 ? 'text-green-600 dark:text-green-400' : deployment.componentDeployRate >= 75 ? 'text-yellow-600 dark:text-yellow-400' : 'text-red-600 dark:text-red-400'}`}>{deployment.componentDeployRate}%</span>} />
                 <InfoRow label="Changed" value={<span className="tabular-nums">{deployment.changedComponents}</span>} />
-                <InfoRow label="New" value={<span className="tabular-nums">{deployment.newComponents}</span>} />
+                <InfoRow label="Created" value={<span className="tabular-nums">{deployment.createdComponents}</span>} />
                 <InfoRow label="Deleted" value={<span className="tabular-nums">{deployment.deletedComponents}</span>} />
             </CardContent>
         </Card>
