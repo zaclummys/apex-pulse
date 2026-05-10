@@ -77,7 +77,7 @@ export class SignInService {
     }) {
         return {
             userId: userId,
-            token: crypto.randomBytes(32).toString('hex'),
+            token: crypto.randomBytes(64).toString('hex'),
             expiresAt: new Date(Date.now() + durationInMilliseconds),
         };
     }
