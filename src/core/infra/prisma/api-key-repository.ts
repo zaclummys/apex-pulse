@@ -22,4 +22,11 @@ export default class PrismaApiKeyRepository implements ApiKeyRepository {
             },
         });
     }
+
+    public async findApiKeysByOrganizationId (organizationId: string) {
+        return await prisma.apiKey.findMany({
+            where: { organizationId },
+            orderBy: { createdAt: 'desc' },
+        });
+    }
 }

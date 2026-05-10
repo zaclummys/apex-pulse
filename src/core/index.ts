@@ -10,6 +10,7 @@ import { GetDeploymentByIdService } from '@/core/application/queries/get-deploym
 import { GetDeploymentsByOrganizationIdService } from '@/core/application/queries/get-deployments-by-organization-id';
 import { GetLatestDeploymentsService } from '@/core/application/queries/get-latest-deployments';
 import { GetUserIdByTokenService } from '@/core/application/queries/get-user-id-by-token';
+import { GetApiKeysByOrganizationIdService } from '@/core/application/queries/get-api-keys-by-organization-id';
 
 import {
     CreateOrganizationService,
@@ -124,6 +125,12 @@ export function createApiKey (createApiKeyInput: CreateApiKeyInput) {
     });
 
     return createApiKeyService.execute(createApiKeyInput);
+}
+
+export function getApiKeysByOrganizationId (organizationId: string) {
+    const getApiKeysByOrganizationIdService = new GetApiKeysByOrganizationIdService(apiKeyRepository);
+
+    return getApiKeysByOrganizationIdService.execute(organizationId);
 }
 
 export function signIn (signInInput: SignInInput) {
