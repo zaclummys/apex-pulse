@@ -62,3 +62,8 @@ export type DeployTestSuccess = Prisma.DeployTestSuccessModel
  * 
  */
 export type DeployTestFailure = Prisma.DeployTestFailureModel
+/**
+ * Model DeployCodeCoverage
+ * 
+ */
+export type DeployCodeCoverage = Prisma.DeployCodeCoverageModel

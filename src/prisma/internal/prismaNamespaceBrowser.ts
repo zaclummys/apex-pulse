@@ -59,7 +59,8 @@ export const ModelName = {
   DeployComponentSuccess: 'DeployComponentSuccess',
   DeployComponentFailure: 'DeployComponentFailure',
   DeployTestSuccess: 'DeployTestSuccess',
-  DeployTestFailure: 'DeployTestFailure'
+  DeployTestFailure: 'DeployTestFailure',
+  DeployCodeCoverage: 'DeployCodeCoverage'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -196,6 +197,17 @@ export const DeployTestFailureScalarFieldEnum = {
 } as const
 
 export type DeployTestFailureScalarFieldEnum = (typeof DeployTestFailureScalarFieldEnum)[keyof typeof DeployTestFailureScalarFieldEnum]
+
+
+export const DeployCodeCoverageScalarFieldEnum = {
+  id: 'id',
+  className: 'className',
+  numLocations: 'numLocations',
+  numLocationsNotCovered: 'numLocationsNotCovered',
+  deploymentId: 'deploymentId'
+} as const
+
+export type DeployCodeCoverageScalarFieldEnum = (typeof DeployCodeCoverageScalarFieldEnum)[keyof typeof DeployCodeCoverageScalarFieldEnum]
 
 
 export const SortOrder = {

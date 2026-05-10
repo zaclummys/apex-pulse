@@ -22,21 +22,29 @@
 
 
 ## List
-- Deployment Success Rate
-- Failure Rate By Failure Type
+
+### Deployment-Level
+> Computed from a single deployment record and its related test/component data.
+
 - Deployment Duration (Completed Date - Start Date)
+- Failure Rate By Failure Type
 - Test Execution Time (Run Test Result Total Time)
-- Average Deployment Time
-- P95 Deployment Time
 - Test Execution Time Per Test (totalTime / numTestsRun)
 - Coverage Per Class (1 - (numLocationsNotCovered / numLocations))
 - Minimum Coverage (Worst Class)
 - Maximum Coverage (Best Class)
 - % classes below 75% coverage
 - Test pass rate (numTestsRun - numFailures) / numTestsRun
-- Flaky test detection (Same test sometimes in successes, sometimes in failures)
 - Changed components per deploy
 - New components vs modified
+
+### Organization-Level
+> Aggregated across all deployments in an organization over time.
+
+- Deployment Success Rate
+- Average Deployment Time
+- P95 Deployment Time
 - Deployment size trend
+- Flaky test detection (Same test sometimes in successes, sometimes in failures)
 - Mean Time To Recovery (MTTR) between failed deploy → next successful deploy
 - Correlation between code coverage and deployment success

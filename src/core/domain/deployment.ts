@@ -26,6 +26,14 @@ export type Deployment = {
 
     testSuccesses: DeployTestSuccess[];
     testFailures: DeployTestFailure[];
+
+    codeCoverages: DeployCodeCoverage[];
+}
+
+export type DeployCodeCoverage = {
+    className: string;
+    numLocations: number;
+    numLocationsNotCovered: number;
 }
 
 export type DeployComponentSuccess = {

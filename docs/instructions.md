@@ -1,2 +1,3 @@
 - Always use <span> over <p>, <h1>, <h2>, <h3>, <h4>, <h5>, <h6> for text elements in the UI.
 - Avoid X (close button) and cancel button at the same time in modals. Only use one of them, preferably the cancel button, to avoid confusion.
+- Never use single letter variables in code (e.g. `x`, `y`, `z`, `i`, `j`, `k`). Always use descriptive variable names to improve readability and maintainability of the code.

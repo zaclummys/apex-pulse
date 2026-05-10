@@ -14,6 +14,7 @@ export default class PrismaDeploymentRepository implements DeploymentRepository 
                 componentFailures: true,
                 testSuccesses: true,
                 testFailures: true,
+                codeCoverages: true,
             },
         });
     }
@@ -34,6 +35,7 @@ export default class PrismaDeploymentRepository implements DeploymentRepository 
                 componentFailures: true,
                 testSuccesses: true,
                 testFailures: true,
+                codeCoverages: true,
             },
         });
     }
@@ -48,6 +50,7 @@ export default class PrismaDeploymentRepository implements DeploymentRepository 
                 componentFailures: true,
                 testSuccesses: true,
                 testFailures: true,
+                codeCoverages: true,
             },
         });
     }
@@ -58,6 +61,7 @@ export default class PrismaDeploymentRepository implements DeploymentRepository 
             prisma.deployComponentFailure.deleteMany({ where: { deploymentId: id } }),
             prisma.deployTestSuccess.deleteMany({ where: { deploymentId: id } }),
             prisma.deployTestFailure.deleteMany({ where: { deploymentId: id } }),
+            prisma.deployCodeCoverage.deleteMany({ where: { deploymentId: id } }),
             prisma.deployment.delete({ where: { id } }),
         ]);
     }
@@ -75,6 +79,7 @@ export default class PrismaDeploymentRepository implements DeploymentRepository 
             prisma.deployComponentFailure.deleteMany({ where: { deploymentId: { in: ids } } }),
             prisma.deployTestSuccess.deleteMany({ where: { deploymentId: { in: ids } } }),
             prisma.deployTestFailure.deleteMany({ where: { deploymentId: { in: ids } } }),
+            prisma.deployCodeCoverage.deleteMany({ where: { deploymentId: { in: ids } } }),
             prisma.deployment.deleteMany({ where: { organizationId } }),
         ]);
     }
@@ -151,6 +156,16 @@ export default class PrismaDeploymentRepository implements DeploymentRepository 
                             stackTrace: failure.stackTrace,
                             time: failure.time,
                             type: failure.type,
+                        })),
+                    },
+                },
+
+                codeCoverages: {
+                    createMany: {
+                        data: deployResult.codeCoverages.map(coverage => ({
+                            className: coverage.className,
+                            numLocations: coverage.numLocations,
+                            numLocationsNotCovered: coverage.numLocationsNotCovered,
                         })),
                     },
                 },

@@ -10,6 +10,7 @@ import {
     Boxes,
     FlaskConical,
     ShieldCheck,
+    Activity,
 } from 'lucide-react';
 import ExternalLinkButton from '@/components/external-link-button';
 import { getOrganizationById } from '@/core';
@@ -41,6 +42,7 @@ type ComponentFailure = Deployment['componentFailures'][number];
 type TestSuccess = Deployment['testSuccesses'][number];
 type TestFailure = Deployment['testFailures'][number];
 type Organization = Awaited<ReturnType<typeof getOrganizationById>>;
+type CodeCoverage = Deployment['codeCoverages'][number];
 
 // ─── Page ────────────────────────────────────────────────────────────────────
 
@@ -94,6 +96,13 @@ export default async function DeploymentPage({ params }: { params: Promise<{ dep
                 <section className="flex flex-col gap-2">
                     <SectionHeading icon={<XCircle className="size-4 text-red-500" />} title="Test Failures" count={deployment.testFailures.length} />
                     <TestFailuresTable rows={deployment.testFailures} />
+                </section>
+            )}
+
+            {deployment.codeCoverages.length > 0 && (
+                <section className="flex flex-col gap-2">
+                    <SectionHeading icon={<Activity className="size-4 text-blue-500" />} title="Code Coverage" count={deployment.codeCoverages.length} />
+                    <CodeCoverageTable rows={deployment.codeCoverages} />
                 </section>
             )}
         </div>
@@ -284,6 +293,61 @@ function TestFailuresTable({ rows }: { rows: TestFailure[] }) {
                             <TableCell className="text-muted-foreground">{t.time}</TableCell>
                         </TableRow>
                     ))}
+                </TableBody>
+            </Table>
+        </div>
+    );
+}
+
+function CodeCoverageTable({ rows }: { rows: CodeCoverage[] }) {
+    return (
+        <div className="rounded-lg border overflow-hidden">
+            <Table>
+                <TableHeader className="bg-muted">
+                    <TableRow>
+                        <TableHead>Class</TableHead>
+                        <TableHead>Covered Lines</TableHead>
+                        <TableHead>Uncovered Lines</TableHead>
+                        <TableHead>Total Lines</TableHead>
+                        <TableHead>Coverage</TableHead>
+                    </TableRow>
+                </TableHeader>
+                <TableBody>
+                    {rows.map((c, i) => {
+                        const covered = c.numLocations - c.numLocationsNotCovered;
+                        const pct = c.numLocations > 0 ? Math.round((covered / c.numLocations) * 100) : 0;
+                        const color =
+                            pct >= 75
+                                ? 'text-green-600 dark:text-green-400'
+                                : pct >= 50
+                                  ? 'text-yellow-600 dark:text-yellow-400'
+                                  : 'text-red-600 dark:text-red-400';
+                        return (
+                            <TableRow key={i}>
+                                <TableCell>{c.className}</TableCell>
+                                <TableCell className="text-green-600 dark:text-green-400">{covered}</TableCell>
+                                <TableCell className={c.numLocationsNotCovered > 0 ? 'text-red-600 dark:text-red-400' : 'text-muted-foreground'}>{c.numLocationsNotCovered}</TableCell>
+                                <TableCell className="text-muted-foreground">{c.numLocations}</TableCell>
+                                <TableCell>
+                                    <div className="flex items-center gap-2">
+                                        <div className="h-1.5 w-24 rounded-full bg-muted overflow-hidden">
+                                            <div
+                                                className={`h-full rounded-full ${
+                                                    pct >= 75
+                                                        ? 'bg-green-500'
+                                                        : pct >= 50
+                                                          ? 'bg-yellow-500'
+                                                          : 'bg-red-500'
+                                                }`}
+                                                style={{ width: `${pct}%` }}
+                                            />
+                                        </div>
+                                        <span className={`text-sm font-medium ${color}`}>{pct}%</span>
+                                    </div>
+                                </TableCell>
+                            </TableRow>
+                        );
+                    })}
                 </TableBody>
             </Table>
         </div>

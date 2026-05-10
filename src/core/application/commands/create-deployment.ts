@@ -39,6 +39,14 @@ type DeployDetailsJson = {
 type RunTestResultJson = {
     successes: RunTestSuccessJson[];
     failures: RunTestFailureJson[];
+    codeCoverage: RunTestCodeCoverageJson[];
+}
+
+type RunTestCodeCoverageJson = {
+    name: string;
+    namespace: string | null;
+    numLocations: number;
+    numLocationsNotCovered: number;
 }
 
 type DeployMessageSuccessJson = {
@@ -179,6 +187,12 @@ export class CreateDeploymentService {
                 stackTrace: failure.stackTrace,
                 time: failure.time,
                 type: failure.type,
+            })),
+
+            codeCoverages: deployResponse.result.details.runTestResult.codeCoverage.map((coverage) => ({
+                className: coverage.name,
+                numLocations: coverage.numLocations,
+                numLocationsNotCovered: coverage.numLocationsNotCovered,
             })),
 
             organizationId: organization.id,

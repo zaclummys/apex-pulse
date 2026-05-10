@@ -320,6 +320,7 @@ export type DeploymentWhereInput = {
   componentFailures?: Prisma.DeployComponentFailureListRelationFilter
   testSuccesses?: Prisma.DeployTestSuccessListRelationFilter
   testFailures?: Prisma.DeployTestFailureListRelationFilter
+  codeCoverages?: Prisma.DeployCodeCoverageListRelationFilter
   Organization?: Prisma.XOR<Prisma.OrganizationScalarRelationFilter, Prisma.OrganizationWhereInput>
 }
 
@@ -343,6 +344,7 @@ export type DeploymentOrderByWithRelationInput = {
   componentFailures?: Prisma.DeployComponentFailureOrderByRelationAggregateInput
   testSuccesses?: Prisma.DeployTestSuccessOrderByRelationAggregateInput
   testFailures?: Prisma.DeployTestFailureOrderByRelationAggregateInput
+  codeCoverages?: Prisma.DeployCodeCoverageOrderByRelationAggregateInput
   Organization?: Prisma.OrganizationOrderByWithRelationInput
 }
 
@@ -369,6 +371,7 @@ export type DeploymentWhereUniqueInput = Prisma.AtLeast<{
   componentFailures?: Prisma.DeployComponentFailureListRelationFilter
   testSuccesses?: Prisma.DeployTestSuccessListRelationFilter
   testFailures?: Prisma.DeployTestFailureListRelationFilter
+  codeCoverages?: Prisma.DeployCodeCoverageListRelationFilter
   Organization?: Prisma.XOR<Prisma.OrganizationScalarRelationFilter, Prisma.OrganizationWhereInput>
 }, "id">
 
@@ -435,6 +438,7 @@ export type DeploymentCreateInput = {
   componentFailures?: Prisma.DeployComponentFailureCreateNestedManyWithoutDeploymentInput
   testSuccesses?: Prisma.DeployTestSuccessCreateNestedManyWithoutDeploymentInput
   testFailures?: Prisma.DeployTestFailureCreateNestedManyWithoutDeploymentInput
+  codeCoverages?: Prisma.DeployCodeCoverageCreateNestedManyWithoutDeploymentInput
   Organization: Prisma.OrganizationCreateNestedOneWithoutDeploymentsInput
 }
 
@@ -458,6 +462,7 @@ export type DeploymentUncheckedCreateInput = {
   componentFailures?: Prisma.DeployComponentFailureUncheckedCreateNestedManyWithoutDeploymentInput
   testSuccesses?: Prisma.DeployTestSuccessUncheckedCreateNestedManyWithoutDeploymentInput
   testFailures?: Prisma.DeployTestFailureUncheckedCreateNestedManyWithoutDeploymentInput
+  codeCoverages?: Prisma.DeployCodeCoverageUncheckedCreateNestedManyWithoutDeploymentInput
 }
 
 export type DeploymentUpdateInput = {
@@ -479,6 +484,7 @@ export type DeploymentUpdateInput = {
   componentFailures?: Prisma.DeployComponentFailureUpdateManyWithoutDeploymentNestedInput
   testSuccesses?: Prisma.DeployTestSuccessUpdateManyWithoutDeploymentNestedInput
   testFailures?: Prisma.DeployTestFailureUpdateManyWithoutDeploymentNestedInput
+  codeCoverages?: Prisma.DeployCodeCoverageUpdateManyWithoutDeploymentNestedInput
   Organization?: Prisma.OrganizationUpdateOneRequiredWithoutDeploymentsNestedInput
 }
 
@@ -502,6 +508,7 @@ export type DeploymentUncheckedUpdateInput = {
   componentFailures?: Prisma.DeployComponentFailureUncheckedUpdateManyWithoutDeploymentNestedInput
   testSuccesses?: Prisma.DeployTestSuccessUncheckedUpdateManyWithoutDeploymentNestedInput
   testFailures?: Prisma.DeployTestFailureUncheckedUpdateManyWithoutDeploymentNestedInput
+  codeCoverages?: Prisma.DeployCodeCoverageUncheckedUpdateManyWithoutDeploymentNestedInput
 }
 
 export type DeploymentCreateManyInput = {
@@ -754,6 +761,20 @@ export type DeploymentUpdateOneRequiredWithoutTestFailuresNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.DeploymentUpdateToOneWithWhereWithoutTestFailuresInput, Prisma.DeploymentUpdateWithoutTestFailuresInput>, Prisma.DeploymentUncheckedUpdateWithoutTestFailuresInput>
 }
 
+export type DeploymentCreateNestedOneWithoutCodeCoveragesInput = {
+  create?: Prisma.XOR<Prisma.DeploymentCreateWithoutCodeCoveragesInput, Prisma.DeploymentUncheckedCreateWithoutCodeCoveragesInput>
+  connectOrCreate?: Prisma.DeploymentCreateOrConnectWithoutCodeCoveragesInput
+  connect?: Prisma.DeploymentWhereUniqueInput
+}
+
+export type DeploymentUpdateOneRequiredWithoutCodeCoveragesNestedInput = {
+  create?: Prisma.XOR<Prisma.DeploymentCreateWithoutCodeCoveragesInput, Prisma.DeploymentUncheckedCreateWithoutCodeCoveragesInput>
+  connectOrCreate?: Prisma.DeploymentCreateOrConnectWithoutCodeCoveragesInput
+  upsert?: Prisma.DeploymentUpsertWithoutCodeCoveragesInput
+  connect?: Prisma.DeploymentWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.DeploymentUpdateToOneWithWhereWithoutCodeCoveragesInput, Prisma.DeploymentUpdateWithoutCodeCoveragesInput>, Prisma.DeploymentUncheckedUpdateWithoutCodeCoveragesInput>
+}
+
 export type DeploymentCreateWithoutOrganizationInput = {
   id?: string
   status: string
@@ -773,6 +794,7 @@ export type DeploymentCreateWithoutOrganizationInput = {
   componentFailures?: Prisma.DeployComponentFailureCreateNestedManyWithoutDeploymentInput
   testSuccesses?: Prisma.DeployTestSuccessCreateNestedManyWithoutDeploymentInput
   testFailures?: Prisma.DeployTestFailureCreateNestedManyWithoutDeploymentInput
+  codeCoverages?: Prisma.DeployCodeCoverageCreateNestedManyWithoutDeploymentInput
 }
 
 export type DeploymentUncheckedCreateWithoutOrganizationInput = {
@@ -794,6 +816,7 @@ export type DeploymentUncheckedCreateWithoutOrganizationInput = {
   componentFailures?: Prisma.DeployComponentFailureUncheckedCreateNestedManyWithoutDeploymentInput
   testSuccesses?: Prisma.DeployTestSuccessUncheckedCreateNestedManyWithoutDeploymentInput
   testFailures?: Prisma.DeployTestFailureUncheckedCreateNestedManyWithoutDeploymentInput
+  codeCoverages?: Prisma.DeployCodeCoverageUncheckedCreateNestedManyWithoutDeploymentInput
 }
 
 export type DeploymentCreateOrConnectWithoutOrganizationInput = {
@@ -861,6 +884,7 @@ export type DeploymentCreateWithoutComponentSuccessesInput = {
   componentFailures?: Prisma.DeployComponentFailureCreateNestedManyWithoutDeploymentInput
   testSuccesses?: Prisma.DeployTestSuccessCreateNestedManyWithoutDeploymentInput
   testFailures?: Prisma.DeployTestFailureCreateNestedManyWithoutDeploymentInput
+  codeCoverages?: Prisma.DeployCodeCoverageCreateNestedManyWithoutDeploymentInput
   Organization: Prisma.OrganizationCreateNestedOneWithoutDeploymentsInput
 }
 
@@ -883,6 +907,7 @@ export type DeploymentUncheckedCreateWithoutComponentSuccessesInput = {
   componentFailures?: Prisma.DeployComponentFailureUncheckedCreateNestedManyWithoutDeploymentInput
   testSuccesses?: Prisma.DeployTestSuccessUncheckedCreateNestedManyWithoutDeploymentInput
   testFailures?: Prisma.DeployTestFailureUncheckedCreateNestedManyWithoutDeploymentInput
+  codeCoverages?: Prisma.DeployCodeCoverageUncheckedCreateNestedManyWithoutDeploymentInput
 }
 
 export type DeploymentCreateOrConnectWithoutComponentSuccessesInput = {
@@ -919,6 +944,7 @@ export type DeploymentUpdateWithoutComponentSuccessesInput = {
   componentFailures?: Prisma.DeployComponentFailureUpdateManyWithoutDeploymentNestedInput
   testSuccesses?: Prisma.DeployTestSuccessUpdateManyWithoutDeploymentNestedInput
   testFailures?: Prisma.DeployTestFailureUpdateManyWithoutDeploymentNestedInput
+  codeCoverages?: Prisma.DeployCodeCoverageUpdateManyWithoutDeploymentNestedInput
   Organization?: Prisma.OrganizationUpdateOneRequiredWithoutDeploymentsNestedInput
 }
 
@@ -941,6 +967,7 @@ export type DeploymentUncheckedUpdateWithoutComponentSuccessesInput = {
   componentFailures?: Prisma.DeployComponentFailureUncheckedUpdateManyWithoutDeploymentNestedInput
   testSuccesses?: Prisma.DeployTestSuccessUncheckedUpdateManyWithoutDeploymentNestedInput
   testFailures?: Prisma.DeployTestFailureUncheckedUpdateManyWithoutDeploymentNestedInput
+  codeCoverages?: Prisma.DeployCodeCoverageUncheckedUpdateManyWithoutDeploymentNestedInput
 }
 
 export type DeploymentCreateWithoutComponentFailuresInput = {
@@ -961,6 +988,7 @@ export type DeploymentCreateWithoutComponentFailuresInput = {
   componentSuccesses?: Prisma.DeployComponentSuccessCreateNestedManyWithoutDeploymentInput
   testSuccesses?: Prisma.DeployTestSuccessCreateNestedManyWithoutDeploymentInput
   testFailures?: Prisma.DeployTestFailureCreateNestedManyWithoutDeploymentInput
+  codeCoverages?: Prisma.DeployCodeCoverageCreateNestedManyWithoutDeploymentInput
   Organization: Prisma.OrganizationCreateNestedOneWithoutDeploymentsInput
 }
 
@@ -983,6 +1011,7 @@ export type DeploymentUncheckedCreateWithoutComponentFailuresInput = {
   componentSuccesses?: Prisma.DeployComponentSuccessUncheckedCreateNestedManyWithoutDeploymentInput
   testSuccesses?: Prisma.DeployTestSuccessUncheckedCreateNestedManyWithoutDeploymentInput
   testFailures?: Prisma.DeployTestFailureUncheckedCreateNestedManyWithoutDeploymentInput
+  codeCoverages?: Prisma.DeployCodeCoverageUncheckedCreateNestedManyWithoutDeploymentInput
 }
 
 export type DeploymentCreateOrConnectWithoutComponentFailuresInput = {
@@ -1019,6 +1048,7 @@ export type DeploymentUpdateWithoutComponentFailuresInput = {
   componentSuccesses?: Prisma.DeployComponentSuccessUpdateManyWithoutDeploymentNestedInput
   testSuccesses?: Prisma.DeployTestSuccessUpdateManyWithoutDeploymentNestedInput
   testFailures?: Prisma.DeployTestFailureUpdateManyWithoutDeploymentNestedInput
+  codeCoverages?: Prisma.DeployCodeCoverageUpdateManyWithoutDeploymentNestedInput
   Organization?: Prisma.OrganizationUpdateOneRequiredWithoutDeploymentsNestedInput
 }
 
@@ -1041,6 +1071,7 @@ export type DeploymentUncheckedUpdateWithoutComponentFailuresInput = {
   componentSuccesses?: Prisma.DeployComponentSuccessUncheckedUpdateManyWithoutDeploymentNestedInput
   testSuccesses?: Prisma.DeployTestSuccessUncheckedUpdateManyWithoutDeploymentNestedInput
   testFailures?: Prisma.DeployTestFailureUncheckedUpdateManyWithoutDeploymentNestedInput
+  codeCoverages?: Prisma.DeployCodeCoverageUncheckedUpdateManyWithoutDeploymentNestedInput
 }
 
 export type DeploymentCreateWithoutTestSuccessesInput = {
@@ -1061,6 +1092,7 @@ export type DeploymentCreateWithoutTestSuccessesInput = {
   componentSuccesses?: Prisma.DeployComponentSuccessCreateNestedManyWithoutDeploymentInput
   componentFailures?: Prisma.DeployComponentFailureCreateNestedManyWithoutDeploymentInput
   testFailures?: Prisma.DeployTestFailureCreateNestedManyWithoutDeploymentInput
+  codeCoverages?: Prisma.DeployCodeCoverageCreateNestedManyWithoutDeploymentInput
   Organization: Prisma.OrganizationCreateNestedOneWithoutDeploymentsInput
 }
 
@@ -1083,6 +1115,7 @@ export type DeploymentUncheckedCreateWithoutTestSuccessesInput = {
   componentSuccesses?: Prisma.DeployComponentSuccessUncheckedCreateNestedManyWithoutDeploymentInput
   componentFailures?: Prisma.DeployComponentFailureUncheckedCreateNestedManyWithoutDeploymentInput
   testFailures?: Prisma.DeployTestFailureUncheckedCreateNestedManyWithoutDeploymentInput
+  codeCoverages?: Prisma.DeployCodeCoverageUncheckedCreateNestedManyWithoutDeploymentInput
 }
 
 export type DeploymentCreateOrConnectWithoutTestSuccessesInput = {
@@ -1119,6 +1152,7 @@ export type DeploymentUpdateWithoutTestSuccessesInput = {
   componentSuccesses?: Prisma.DeployComponentSuccessUpdateManyWithoutDeploymentNestedInput
   componentFailures?: Prisma.DeployComponentFailureUpdateManyWithoutDeploymentNestedInput
   testFailures?: Prisma.DeployTestFailureUpdateManyWithoutDeploymentNestedInput
+  codeCoverages?: Prisma.DeployCodeCoverageUpdateManyWithoutDeploymentNestedInput
   Organization?: Prisma.OrganizationUpdateOneRequiredWithoutDeploymentsNestedInput
 }
 
@@ -1141,6 +1175,7 @@ export type DeploymentUncheckedUpdateWithoutTestSuccessesInput = {
   componentSuccesses?: Prisma.DeployComponentSuccessUncheckedUpdateManyWithoutDeploymentNestedInput
   componentFailures?: Prisma.DeployComponentFailureUncheckedUpdateManyWithoutDeploymentNestedInput
   testFailures?: Prisma.DeployTestFailureUncheckedUpdateManyWithoutDeploymentNestedInput
+  codeCoverages?: Prisma.DeployCodeCoverageUncheckedUpdateManyWithoutDeploymentNestedInput
 }
 
 export type DeploymentCreateWithoutTestFailuresInput = {
@@ -1161,6 +1196,7 @@ export type DeploymentCreateWithoutTestFailuresInput = {
   componentSuccesses?: Prisma.DeployComponentSuccessCreateNestedManyWithoutDeploymentInput
   componentFailures?: Prisma.DeployComponentFailureCreateNestedManyWithoutDeploymentInput
   testSuccesses?: Prisma.DeployTestSuccessCreateNestedManyWithoutDeploymentInput
+  codeCoverages?: Prisma.DeployCodeCoverageCreateNestedManyWithoutDeploymentInput
   Organization: Prisma.OrganizationCreateNestedOneWithoutDeploymentsInput
 }
 
@@ -1183,6 +1219,7 @@ export type DeploymentUncheckedCreateWithoutTestFailuresInput = {
   componentSuccesses?: Prisma.DeployComponentSuccessUncheckedCreateNestedManyWithoutDeploymentInput
   componentFailures?: Prisma.DeployComponentFailureUncheckedCreateNestedManyWithoutDeploymentInput
   testSuccesses?: Prisma.DeployTestSuccessUncheckedCreateNestedManyWithoutDeploymentInput
+  codeCoverages?: Prisma.DeployCodeCoverageUncheckedCreateNestedManyWithoutDeploymentInput
 }
 
 export type DeploymentCreateOrConnectWithoutTestFailuresInput = {
@@ -1219,6 +1256,7 @@ export type DeploymentUpdateWithoutTestFailuresInput = {
   componentSuccesses?: Prisma.DeployComponentSuccessUpdateManyWithoutDeploymentNestedInput
   componentFailures?: Prisma.DeployComponentFailureUpdateManyWithoutDeploymentNestedInput
   testSuccesses?: Prisma.DeployTestSuccessUpdateManyWithoutDeploymentNestedInput
+  codeCoverages?: Prisma.DeployCodeCoverageUpdateManyWithoutDeploymentNestedInput
   Organization?: Prisma.OrganizationUpdateOneRequiredWithoutDeploymentsNestedInput
 }
 
@@ -1241,6 +1279,111 @@ export type DeploymentUncheckedUpdateWithoutTestFailuresInput = {
   componentSuccesses?: Prisma.DeployComponentSuccessUncheckedUpdateManyWithoutDeploymentNestedInput
   componentFailures?: Prisma.DeployComponentFailureUncheckedUpdateManyWithoutDeploymentNestedInput
   testSuccesses?: Prisma.DeployTestSuccessUncheckedUpdateManyWithoutDeploymentNestedInput
+  codeCoverages?: Prisma.DeployCodeCoverageUncheckedUpdateManyWithoutDeploymentNestedInput
+}
+
+export type DeploymentCreateWithoutCodeCoveragesInput = {
+  id?: string
+  status: string
+  createdBy: string
+  createdByName: string
+  startDate: Date | string
+  endDate: Date | string
+  numberTestsCompleted: number
+  numberTestsTotal: number
+  numberTestErrors: number
+  numberComponentsDeployed: number
+  numberComponentsTotal: number
+  numberComponentErrors: number
+  checkOnly: boolean
+  deployUrl: string
+  componentSuccesses?: Prisma.DeployComponentSuccessCreateNestedManyWithoutDeploymentInput
+  componentFailures?: Prisma.DeployComponentFailureCreateNestedManyWithoutDeploymentInput
+  testSuccesses?: Prisma.DeployTestSuccessCreateNestedManyWithoutDeploymentInput
+  testFailures?: Prisma.DeployTestFailureCreateNestedManyWithoutDeploymentInput
+  Organization: Prisma.OrganizationCreateNestedOneWithoutDeploymentsInput
+}
+
+export type DeploymentUncheckedCreateWithoutCodeCoveragesInput = {
+  id?: string
+  status: string
+  createdBy: string
+  createdByName: string
+  startDate: Date | string
+  endDate: Date | string
+  numberTestsCompleted: number
+  numberTestsTotal: number
+  numberTestErrors: number
+  numberComponentsDeployed: number
+  numberComponentsTotal: number
+  numberComponentErrors: number
+  checkOnly: boolean
+  deployUrl: string
+  organizationId: string
+  componentSuccesses?: Prisma.DeployComponentSuccessUncheckedCreateNestedManyWithoutDeploymentInput
+  componentFailures?: Prisma.DeployComponentFailureUncheckedCreateNestedManyWithoutDeploymentInput
+  testSuccesses?: Prisma.DeployTestSuccessUncheckedCreateNestedManyWithoutDeploymentInput
+  testFailures?: Prisma.DeployTestFailureUncheckedCreateNestedManyWithoutDeploymentInput
+}
+
+export type DeploymentCreateOrConnectWithoutCodeCoveragesInput = {
+  where: Prisma.DeploymentWhereUniqueInput
+  create: Prisma.XOR<Prisma.DeploymentCreateWithoutCodeCoveragesInput, Prisma.DeploymentUncheckedCreateWithoutCodeCoveragesInput>
+}
+
+export type DeploymentUpsertWithoutCodeCoveragesInput = {
+  update: Prisma.XOR<Prisma.DeploymentUpdateWithoutCodeCoveragesInput, Prisma.DeploymentUncheckedUpdateWithoutCodeCoveragesInput>
+  create: Prisma.XOR<Prisma.DeploymentCreateWithoutCodeCoveragesInput, Prisma.DeploymentUncheckedCreateWithoutCodeCoveragesInput>
+  where?: Prisma.DeploymentWhereInput
+}
+
+export type DeploymentUpdateToOneWithWhereWithoutCodeCoveragesInput = {
+  where?: Prisma.DeploymentWhereInput
+  data: Prisma.XOR<Prisma.DeploymentUpdateWithoutCodeCoveragesInput, Prisma.DeploymentUncheckedUpdateWithoutCodeCoveragesInput>
+}
+
+export type DeploymentUpdateWithoutCodeCoveragesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
+  createdByName?: Prisma.StringFieldUpdateOperationsInput | string
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  numberTestsCompleted?: Prisma.IntFieldUpdateOperationsInput | number
+  numberTestsTotal?: Prisma.IntFieldUpdateOperationsInput | number
+  numberTestErrors?: Prisma.IntFieldUpdateOperationsInput | number
+  numberComponentsDeployed?: Prisma.IntFieldUpdateOperationsInput | number
+  numberComponentsTotal?: Prisma.IntFieldUpdateOperationsInput | number
+  numberComponentErrors?: Prisma.IntFieldUpdateOperationsInput | number
+  checkOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deployUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  componentSuccesses?: Prisma.DeployComponentSuccessUpdateManyWithoutDeploymentNestedInput
+  componentFailures?: Prisma.DeployComponentFailureUpdateManyWithoutDeploymentNestedInput
+  testSuccesses?: Prisma.DeployTestSuccessUpdateManyWithoutDeploymentNestedInput
+  testFailures?: Prisma.DeployTestFailureUpdateManyWithoutDeploymentNestedInput
+  Organization?: Prisma.OrganizationUpdateOneRequiredWithoutDeploymentsNestedInput
+}
+
+export type DeploymentUncheckedUpdateWithoutCodeCoveragesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
+  createdByName?: Prisma.StringFieldUpdateOperationsInput | string
+  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  numberTestsCompleted?: Prisma.IntFieldUpdateOperationsInput | number
+  numberTestsTotal?: Prisma.IntFieldUpdateOperationsInput | number
+  numberTestErrors?: Prisma.IntFieldUpdateOperationsInput | number
+  numberComponentsDeployed?: Prisma.IntFieldUpdateOperationsInput | number
+  numberComponentsTotal?: Prisma.IntFieldUpdateOperationsInput | number
+  numberComponentErrors?: Prisma.IntFieldUpdateOperationsInput | number
+  checkOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  deployUrl?: Prisma.StringFieldUpdateOperationsInput | string
+  organizationId?: Prisma.StringFieldUpdateOperationsInput | string
+  componentSuccesses?: Prisma.DeployComponentSuccessUncheckedUpdateManyWithoutDeploymentNestedInput
+  componentFailures?: Prisma.DeployComponentFailureUncheckedUpdateManyWithoutDeploymentNestedInput
+  testSuccesses?: Prisma.DeployTestSuccessUncheckedUpdateManyWithoutDeploymentNestedInput
+  testFailures?: Prisma.DeployTestFailureUncheckedUpdateManyWithoutDeploymentNestedInput
 }
 
 export type DeploymentCreateManyOrganizationInput = {
@@ -1279,6 +1422,7 @@ export type DeploymentUpdateWithoutOrganizationInput = {
   componentFailures?: Prisma.DeployComponentFailureUpdateManyWithoutDeploymentNestedInput
   testSuccesses?: Prisma.DeployTestSuccessUpdateManyWithoutDeploymentNestedInput
   testFailures?: Prisma.DeployTestFailureUpdateManyWithoutDeploymentNestedInput
+  codeCoverages?: Prisma.DeployCodeCoverageUpdateManyWithoutDeploymentNestedInput
 }
 
 export type DeploymentUncheckedUpdateWithoutOrganizationInput = {
@@ -1300,6 +1444,7 @@ export type DeploymentUncheckedUpdateWithoutOrganizationInput = {
   componentFailures?: Prisma.DeployComponentFailureUncheckedUpdateManyWithoutDeploymentNestedInput
   testSuccesses?: Prisma.DeployTestSuccessUncheckedUpdateManyWithoutDeploymentNestedInput
   testFailures?: Prisma.DeployTestFailureUncheckedUpdateManyWithoutDeploymentNestedInput
+  codeCoverages?: Prisma.DeployCodeCoverageUncheckedUpdateManyWithoutDeploymentNestedInput
 }
 
 export type DeploymentUncheckedUpdateManyWithoutOrganizationInput = {
@@ -1329,6 +1474,7 @@ export type DeploymentCountOutputType = {
   componentFailures: number
   testSuccesses: number
   testFailures: number
+  codeCoverages: number
 }
 
 export type DeploymentCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1336,6 +1482,7 @@ export type DeploymentCountOutputTypeSelect<ExtArgs extends runtime.Types.Extens
   componentFailures?: boolean | DeploymentCountOutputTypeCountComponentFailuresArgs
   testSuccesses?: boolean | DeploymentCountOutputTypeCountTestSuccessesArgs
   testFailures?: boolean | DeploymentCountOutputTypeCountTestFailuresArgs
+  codeCoverages?: boolean | DeploymentCountOutputTypeCountCodeCoveragesArgs
 }
 
 /**
@@ -1376,6 +1523,13 @@ export type DeploymentCountOutputTypeCountTestFailuresArgs<ExtArgs extends runti
   where?: Prisma.DeployTestFailureWhereInput
 }
 
+/**
+ * DeploymentCountOutputType without action
+ */
+export type DeploymentCountOutputTypeCountCodeCoveragesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DeployCodeCoverageWhereInput
+}
+
 
 export type DeploymentSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1397,6 +1551,7 @@ export type DeploymentSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   componentFailures?: boolean | Prisma.Deployment$componentFailuresArgs<ExtArgs>
   testSuccesses?: boolean | Prisma.Deployment$testSuccessesArgs<ExtArgs>
   testFailures?: boolean | Prisma.Deployment$testFailuresArgs<ExtArgs>
+  codeCoverages?: boolean | Prisma.Deployment$codeCoveragesArgs<ExtArgs>
   Organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.DeploymentCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["deployment"]>
@@ -1463,6 +1618,7 @@ export type DeploymentInclude<ExtArgs extends runtime.Types.Extensions.InternalA
   componentFailures?: boolean | Prisma.Deployment$componentFailuresArgs<ExtArgs>
   testSuccesses?: boolean | Prisma.Deployment$testSuccessesArgs<ExtArgs>
   testFailures?: boolean | Prisma.Deployment$testFailuresArgs<ExtArgs>
+  codeCoverages?: boolean | Prisma.Deployment$codeCoveragesArgs<ExtArgs>
   Organization?: boolean | Prisma.OrganizationDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.DeploymentCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -1480,6 +1636,7 @@ export type $DeploymentPayload<ExtArgs extends runtime.Types.Extensions.Internal
     componentFailures: Prisma.$DeployComponentFailurePayload<ExtArgs>[]
     testSuccesses: Prisma.$DeployTestSuccessPayload<ExtArgs>[]
     testFailures: Prisma.$DeployTestFailurePayload<ExtArgs>[]
+    codeCoverages: Prisma.$DeployCodeCoveragePayload<ExtArgs>[]
     Organization: Prisma.$OrganizationPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1896,6 +2053,7 @@ export interface Prisma__DeploymentClient<T, Null = never, ExtArgs extends runti
   componentFailures<T extends Prisma.Deployment$componentFailuresArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Deployment$componentFailuresArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DeployComponentFailurePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   testSuccesses<T extends Prisma.Deployment$testSuccessesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Deployment$testSuccessesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DeployTestSuccessPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   testFailures<T extends Prisma.Deployment$testFailuresArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Deployment$testFailuresArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DeployTestFailurePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  codeCoverages<T extends Prisma.Deployment$codeCoveragesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Deployment$codeCoveragesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DeployCodeCoveragePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   Organization<T extends Prisma.OrganizationDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.OrganizationDefaultArgs<ExtArgs>>): Prisma.Prisma__OrganizationClient<runtime.Types.Result.GetResult<Prisma.$OrganizationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -2435,6 +2593,30 @@ export type Deployment$testFailuresArgs<ExtArgs extends runtime.Types.Extensions
   take?: number
   skip?: number
   distinct?: Prisma.DeployTestFailureScalarFieldEnum | Prisma.DeployTestFailureScalarFieldEnum[]
+}
+
+/**
+ * Deployment.codeCoverages
+ */
+export type Deployment$codeCoveragesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DeployCodeCoverage
+   */
+  select?: Prisma.DeployCodeCoverageSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DeployCodeCoverage
+   */
+  omit?: Prisma.DeployCodeCoverageOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DeployCodeCoverageInclude<ExtArgs> | null
+  where?: Prisma.DeployCodeCoverageWhereInput
+  orderBy?: Prisma.DeployCodeCoverageOrderByWithRelationInput | Prisma.DeployCodeCoverageOrderByWithRelationInput[]
+  cursor?: Prisma.DeployCodeCoverageWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DeployCodeCoverageScalarFieldEnum | Prisma.DeployCodeCoverageScalarFieldEnum[]
 }
 
 /**

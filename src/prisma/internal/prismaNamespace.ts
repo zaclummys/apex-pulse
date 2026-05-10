@@ -392,7 +392,8 @@ export const ModelName = {
   DeployComponentSuccess: 'DeployComponentSuccess',
   DeployComponentFailure: 'DeployComponentFailure',
   DeployTestSuccess: 'DeployTestSuccess',
-  DeployTestFailure: 'DeployTestFailure'
+  DeployTestFailure: 'DeployTestFailure',
+  DeployCodeCoverage: 'DeployCodeCoverage'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -408,7 +409,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "organization" | "apiKey" | "deployment" | "deployComponentSuccess" | "deployComponentFailure" | "deployTestSuccess" | "deployTestFailure"
+    modelProps: "user" | "session" | "organization" | "apiKey" | "deployment" | "deployComponentSuccess" | "deployComponentFailure" | "deployTestSuccess" | "deployTestFailure" | "deployCodeCoverage"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1078,6 +1079,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    DeployCodeCoverage: {
+      payload: Prisma.$DeployCodeCoveragePayload<ExtArgs>
+      fields: Prisma.DeployCodeCoverageFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DeployCodeCoverageFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeployCodeCoveragePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DeployCodeCoverageFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeployCodeCoveragePayload>
+        }
+        findFirst: {
+          args: Prisma.DeployCodeCoverageFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeployCodeCoveragePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DeployCodeCoverageFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeployCodeCoveragePayload>
+        }
+        findMany: {
+          args: Prisma.DeployCodeCoverageFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeployCodeCoveragePayload>[]
+        }
+        create: {
+          args: Prisma.DeployCodeCoverageCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeployCodeCoveragePayload>
+        }
+        createMany: {
+          args: Prisma.DeployCodeCoverageCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.DeployCodeCoverageCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeployCodeCoveragePayload>[]
+        }
+        delete: {
+          args: Prisma.DeployCodeCoverageDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeployCodeCoveragePayload>
+        }
+        update: {
+          args: Prisma.DeployCodeCoverageUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeployCodeCoveragePayload>
+        }
+        deleteMany: {
+          args: Prisma.DeployCodeCoverageDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DeployCodeCoverageUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.DeployCodeCoverageUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeployCodeCoveragePayload>[]
+        }
+        upsert: {
+          args: Prisma.DeployCodeCoverageUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DeployCodeCoveragePayload>
+        }
+        aggregate: {
+          args: Prisma.DeployCodeCoverageAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDeployCodeCoverage>
+        }
+        groupBy: {
+          args: Prisma.DeployCodeCoverageGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DeployCodeCoverageGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DeployCodeCoverageCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DeployCodeCoverageCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1235,6 +1310,17 @@ export const DeployTestFailureScalarFieldEnum = {
 } as const
 
 export type DeployTestFailureScalarFieldEnum = (typeof DeployTestFailureScalarFieldEnum)[keyof typeof DeployTestFailureScalarFieldEnum]
+
+
+export const DeployCodeCoverageScalarFieldEnum = {
+  id: 'id',
+  className: 'className',
+  numLocations: 'numLocations',
+  numLocationsNotCovered: 'numLocationsNotCovered',
+  deploymentId: 'deploymentId'
+} as const
+
+export type DeployCodeCoverageScalarFieldEnum = (typeof DeployCodeCoverageScalarFieldEnum)[keyof typeof DeployCodeCoverageScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1433,6 +1519,7 @@ export type GlobalOmitConfig = {
   deployComponentFailure?: Prisma.DeployComponentFailureOmit
   deployTestSuccess?: Prisma.DeployTestSuccessOmit
   deployTestFailure?: Prisma.DeployTestFailureOmit
+  deployCodeCoverage?: Prisma.DeployCodeCoverageOmit
 }
 
 /* Types for Logging */

@@ -87,6 +87,7 @@ model Deployment {
     componentFailures DeployComponentFailure[]
     testSuccesses DeployTestSuccess[]
     testFailures DeployTestFailure[]
+    codeCoverages DeployCodeCoverage[]
 
     organizationId String
     Organization Organization @relation(fields: [organizationId], references: [id])
@@ -151,6 +152,17 @@ model DeployTestFailure {
 
     time Int
     type String
+
+    deploymentId String
+    Deployment Deployment @relation(fields: [deploymentId], references: [id])
+}
+
+model DeployCodeCoverage {
+    id String @id @default(uuid())
+
+    className String
+    numLocations Int
+    numLocationsNotCovered Int
 
     deploymentId String
     Deployment Deployment @relation(fields: [deploymentId], references: [id])
