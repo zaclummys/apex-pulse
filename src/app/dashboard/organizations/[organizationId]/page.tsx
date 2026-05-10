@@ -6,6 +6,7 @@ import {
 } from '@/core';
 
 import CreateDeploymentModal from './create-deployment-modal';
+import DestroyOrganizationButton from './destroy-organization-button';
 
 export default async function OrganizationPage ({ params }: { params: Promise<{ organizationId: string }> }) {
     const { organizationId } = await params;
@@ -23,6 +24,7 @@ export default async function OrganizationPage ({ params }: { params: Promise<{ 
             <h1>{organization.name}</h1>
 
             <CreateDeploymentModal organizationId={organizationId} />
+            <DestroyOrganizationButton organizationId={organizationId} />
 
             <h2>Deployments</h2>
 

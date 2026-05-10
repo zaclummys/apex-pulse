@@ -29,4 +29,10 @@ export default class PrismaOrganizationRepository implements OrganizationReposit
             },
         });
     }
+
+    public async deleteOrganization (id: string) {
+        await prisma.organization.delete({
+            where: { id },
+        });
+    }
 }

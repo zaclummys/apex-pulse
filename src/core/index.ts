@@ -17,6 +17,11 @@ import {
 } from '@/core/application/commands/create-organization';
 
 import {
+    DestroyOrganizationService,
+    DestroyOrganizationInput,
+} from '@/core/application/commands/destroy-organization';
+
+import {
     CreateDeploymentService,
     CreateDeploymentInput,
 } from '@/core/application/commands/create-deployment';
@@ -81,6 +86,15 @@ export function createOrganization (createOrganizationInput: CreateOrganizationI
     const createOrganizationService = new CreateOrganizationService(organizationRepository);
 
     return createOrganizationService.execute(createOrganizationInput);
+}
+
+export function destroyOrganization (destroyOrganizationInput: DestroyOrganizationInput) {
+    const destroyOrganizationService = new DestroyOrganizationService({
+        organizationRepository,
+        deploymentRepository,
+    });
+
+    return destroyOrganizationService.execute(destroyOrganizationInput);
 }
 
 export function createDeployment (createDeploymentInput: CreateDeploymentInput) {
