@@ -165,6 +165,47 @@ function SummaryCards({ deployment, organization }: { deployment: Deployment; or
                     <InfoRow label="Errors" value={deployment.numberTestErrors > 0 ? <span className="font-medium text-red-600 dark:text-red-400">{deployment.numberTestErrors} <span className="font-normal text-red-400/70 dark:text-red-500/70">({deployment.numberTestsTotal > 0 ? Math.round(deployment.numberTestErrors / deployment.numberTestsTotal * 100) : 0}%)</span></span> : <span>0 <span className="text-muted-foreground">(0%)</span></span>} />
                 </CardContent>
             </Card>
+
+            {deployment.codeCoverages.length > 0 && (() => {
+                const totalLocations = deployment.codeCoverages.reduce((sum, c) => sum + c.numLocations, 0);
+                const totalNotCovered = deployment.codeCoverages.reduce((sum, c) => sum + c.numLocationsNotCovered, 0);
+                const overallPercent = totalLocations > 0 ? Math.round((totalLocations - totalNotCovered) / totalLocations * 100) : 0;
+
+                const perClass = deployment.codeCoverages.map(c => ({
+                    className: c.className,
+                    percent: c.numLocations > 0 ? Math.round((c.numLocations - c.numLocationsNotCovered) / c.numLocations * 100) : 0,
+                }));
+                const minClass = perClass.reduce((a, b) => a.percent <= b.percent ? a : b);
+                const maxClass = perClass.reduce((a, b) => a.percent >= b.percent ? a : b);
+                const belowThreshold = perClass.filter(c => c.percent < 75).length;
+
+                const coverageColor = overallPercent >= 75
+                    ? 'text-green-600 dark:text-green-400'
+                    : overallPercent >= 50
+                    ? 'text-yellow-600 dark:text-yellow-400'
+                    : 'text-red-600 dark:text-red-400';
+
+                const barColor = overallPercent >= 75 ? 'bg-green-500' : overallPercent >= 50 ? 'bg-yellow-500' : 'bg-red-500';
+
+                return (
+                    <Card>
+                        <CardHeader><CardTitle className="flex items-center gap-2"><Activity className="size-4 text-muted-foreground" />Code Coverage <span className="text-muted-foreground font-normal text-sm">({deployment.codeCoverages.length} classes)</span></CardTitle></CardHeader>
+                        <CardContent className="flex flex-col gap-4 text-sm">
+                            <div className="flex items-center gap-3">
+                                <div className="h-2 flex-1 rounded-full bg-muted overflow-hidden">
+                                    <div className={`h-full rounded-full ${barColor}`} style={{ width: `${overallPercent}%` }} />
+                                </div>
+                                <span className={`text-base font-semibold tabular-nums ${coverageColor}`}>{overallPercent}%</span>
+                            </div>
+                            <div className="flex flex-col gap-2">
+                                <InfoRow label="Best class" value={<span className="font-medium text-green-600 dark:text-green-400">{maxClass.className} ({maxClass.percent}%)</span>} />
+                                <InfoRow label="Worst class" value={<span className="font-medium text-red-600 dark:text-red-400">{minClass.className} ({minClass.percent}%)</span>} />
+                                <InfoRow label="Classes below 75%" value={belowThreshold > 0 ? <span className="font-medium text-red-600 dark:text-red-400">{belowThreshold} of {perClass.length}</span> : <span className="font-medium text-green-600 dark:text-green-400">None</span>} />
+                            </div>
+                        </CardContent>
+                    </Card>
+                );
+            })()}
         </div>
     );
 }
