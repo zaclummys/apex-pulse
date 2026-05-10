@@ -7,6 +7,7 @@ import { getOrganizationById, getDeploymentsByOrganizationId, getApiKeysByOrgani
 import CreateDeploymentModal from './create-deployment-modal';
 import CreateApiKeyModal from './create-api-key-modal';
 import DestroyOrganizationButton from './destroy-organization-button';
+import DestroyApiKeyButton from './destroy-api-key-button';
 import DeploymentTable from '@/app/dashboard/deployment-table';
 
 export default async function OrganizationPage ({ params }: { params: Promise<{ organizationId: string }> }) {
@@ -69,6 +70,7 @@ export default async function OrganizationPage ({ params }: { params: Promise<{ 
                                         Created {new Date(apiKey.createdAt).toLocaleDateString()}
                                     </span>
                                 </div>
+                                <DestroyApiKeyButton apiKeyId={apiKey.id} organizationId={organizationId} />
                             </div>
                         ))}
                     </div>

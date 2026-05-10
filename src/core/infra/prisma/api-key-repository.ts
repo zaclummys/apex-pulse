@@ -29,4 +29,10 @@ export default class PrismaApiKeyRepository implements ApiKeyRepository {
             orderBy: { createdAt: 'desc' },
         });
     }
+
+    public async deleteApiKey (id: string) {
+        await prisma.apiKey.delete({
+            where: { id },
+        });
+    }
 }

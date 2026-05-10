@@ -38,6 +38,11 @@ import {
 } from '@/core/application/commands/create-api-key';
 
 import {
+    DestroyApiKeyService,
+    DestroyApiKeyInput,
+} from '@/core/application/commands/destroy-api-key';
+
+import {
     SignInService,
     SignInInput,
 } from '@/core/application/commands/sign-in';
@@ -131,6 +136,12 @@ export function getApiKeysByOrganizationId (organizationId: string) {
     const getApiKeysByOrganizationIdService = new GetApiKeysByOrganizationIdService(apiKeyRepository);
 
     return getApiKeysByOrganizationIdService.execute(organizationId);
+}
+
+export function destroyApiKey (destroyApiKeyInput: DestroyApiKeyInput) {
+    const destroyApiKeyService = new DestroyApiKeyService(apiKeyRepository);
+
+    return destroyApiKeyService.execute(destroyApiKeyInput);
 }
 
 export function signIn (signInInput: SignInInput) {
