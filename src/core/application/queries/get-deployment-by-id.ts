@@ -16,6 +16,49 @@ export class GetDeploymentByIdService {
         return start.until(end, { largestUnit: 'hours' });
     }
 
+    computeComponentMetrics (deployment: Deployment) {
+        const totalComponents = deployment.componentSuccesses.length + deployment.componentFailures.length;
+
+        const calculateDeployRate = (numDeployed: number, total: number) => {
+            if (total === 0) {
+                return 0;
+            }
+
+            return Math.round((numDeployed / total) * 100);
+        };
+        
+        const componentDeployRate = calculateDeployRate(deployment.componentSuccesses.length, totalComponents);
+
+        const changedComponents = deployment.componentSuccesses.reduce((count, component) => count + (component.changed ? 1 : 0), 0);
+        const newComponents = deployment.componentSuccesses.reduce((count, component) => count + (component.created ? 1 : 0), 0);
+        const deletedComponents = deployment.componentSuccesses.reduce((count, component) => count + (component.deleted ? 1 : 0), 0);
+
+        return {
+            componentDeployRate,
+            changedComponents,
+            newComponents,
+            deletedComponents,
+        };
+    }
+
+    computeTestMetrics (deployment: Deployment) {
+        const allTests = [
+            ...deployment.testSuccesses,
+            ...deployment.testFailures,
+        ];
+
+        const totalTestExecutionTime = allTests.reduce((sum, test) => sum + test.time, 0);
+        const numTestsRun = allTests.length;
+        const averageTestExecutionTime = numTestsRun > 0 ? Math.round(totalTestExecutionTime / numTestsRun) : 0;
+        const testPassRate = numTestsRun > 0 ? Math.round((deployment.testSuccesses.length / numTestsRun) * 100) : 0;
+
+        return {
+            totalTestExecutionTime,
+            averageTestExecutionTime,
+            testPassRate,
+        };
+    }
+
     computeCodeCoverageMetrics (deployment: Deployment) {
         const calculateBelowThresholdPercentage = (
             num: number,
@@ -105,6 +148,19 @@ export class GetDeploymentByIdService {
             maxCodeCoverage,
         } = this.computeCodeCoverageMetrics(deployment);
 
+        const {
+            totalTestExecutionTime,
+            averageTestExecutionTime,
+            testPassRate,
+        } = this.computeTestMetrics(deployment);
+
+        const {
+            componentDeployRate,
+            changedComponents,
+            newComponents,
+            deletedComponents,
+        } = this.computeComponentMetrics(deployment);
+
         const deploymentDuration = this.computeDuration(deployment.startDate, deployment.endDate);
 
         return {
@@ -135,6 +191,15 @@ export class GetDeploymentByIdService {
             codeCoverageBelowThresholdPercent,
             minCodeCoverage,
             maxCodeCoverage,
+
+            totalTestExecutionTime,
+            averageTestExecutionTime,
+            testPassRate,
+
+            componentDeployRate,
+            changedComponents,
+            newComponents,
+            deletedComponents,
 
             deploymentDuration,
         }

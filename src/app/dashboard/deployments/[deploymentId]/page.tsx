@@ -35,6 +35,8 @@ import {
     TableRow,
 } from '@/components/ui/table';
 
+import { Separator } from '@/components/ui/separator';
+
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -158,6 +160,11 @@ function ComponentsCard({ deployment }: { deployment: Deployment }) {
             <CardContent className="flex flex-col gap-2 text-sm">
                 <InfoRow label="Deployed" value={<span className="font-medium text-green-600 dark:text-green-400">{deployment.numberComponentsDeployed} <span className="font-normal text-muted-foreground">({computePercent(deployment.numberComponentsDeployed, deployment.numberComponentsTotal)}%)</span></span>} />
                 <InfoRow label="Errors" value={deployment.numberComponentErrors > 0 ? <span className="font-medium text-red-600 dark:text-red-400">{deployment.numberComponentErrors} <span className="font-normal text-red-400/70 dark:text-red-500/70">({computePercent(deployment.numberComponentErrors, deployment.numberComponentsTotal)}%)</span></span> : <span>0 <span className="text-muted-foreground">(0%)</span></span>} />
+                <Separator className="my-1 opacity-50" />
+                <InfoRow label="Deploy Rate" value={<span className={`font-medium ${deployment.componentDeployRate === 100 ? 'text-green-600 dark:text-green-400' : deployment.componentDeployRate >= 75 ? 'text-yellow-600 dark:text-yellow-400' : 'text-red-600 dark:text-red-400'}`}>{deployment.componentDeployRate}%</span>} />
+                <InfoRow label="Changed" value={<span className="tabular-nums">{deployment.changedComponents}</span>} />
+                <InfoRow label="New" value={<span className="tabular-nums">{deployment.newComponents}</span>} />
+                <InfoRow label="Deleted" value={<span className="tabular-nums">{deployment.deletedComponents}</span>} />
             </CardContent>
         </Card>
     );
@@ -168,8 +175,12 @@ function TestsCard({ deployment }: { deployment: Deployment }) {
         <Card>
             <CardHeader><CardTitle className="flex items-center gap-2"><FlaskConical className="size-4 text-muted-foreground" />Tests <span className="text-muted-foreground font-normal text-sm">({deployment.numberTestsTotal})</span></CardTitle></CardHeader>
             <CardContent className="flex flex-col gap-2 text-sm">
-                <InfoRow label="Completed" value={<span className="font-medium text-green-600 dark:text-green-400">{deployment.numberTestsCompleted} <span className="font-normal text-muted-foreground">({computePercent(deployment.numberTestsCompleted, deployment.numberTestsTotal)}%)</span></span>} />
+                <InfoRow label="Successes" value={<span className="font-medium text-green-600 dark:text-green-400">{deployment.numberTestsCompleted} <span className="font-normal text-muted-foreground">({computePercent(deployment.numberTestsCompleted, deployment.numberTestsTotal)}%)</span></span>} />
                 <InfoRow label="Errors" value={deployment.numberTestErrors > 0 ? <span className="font-medium text-red-600 dark:text-red-400">{deployment.numberTestErrors} <span className="font-normal text-red-400/70 dark:text-red-500/70">({computePercent(deployment.numberTestErrors, deployment.numberTestsTotal)}%)</span></span> : <span>0 <span className="text-muted-foreground">(0%)</span></span>} />
+                <Separator className="my-1 opacity-50" />
+                <InfoRow label="Pass Rate" value={<span className={`font-medium ${deployment.testPassRate === 100 ? 'text-green-600 dark:text-green-400' : deployment.testPassRate >= 75 ? 'text-yellow-600 dark:text-yellow-400' : 'text-red-600 dark:text-red-400'}`}>{deployment.testPassRate}%</span>} />
+                <InfoRow icon={<Timer className="size-3.5" />} label="Total Time" value={<span className="tabular-nums">{deployment.totalTestExecutionTime.toLocaleString()} ms</span>} />
+                <InfoRow icon={<Timer className="size-3.5" />} label="Average Time / Test" value={<span className="tabular-nums">{deployment.averageTestExecutionTime.toLocaleString()} ms</span>} />
             </CardContent>
         </Card>
     );
