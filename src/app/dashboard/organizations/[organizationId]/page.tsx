@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Building2, Rocket, Calendar, User, CheckCircle2, XCircle } from 'lucide-react';
+import ExternalLinkButton from '@/components/external-link-button';
 
 import {
     getOrganizationById,
@@ -40,6 +41,7 @@ export default async function OrganizationPage ({ params }: { params: Promise<{ 
                 </div>
 
                 <div className="flex items-center gap-2">
+                    {organization.url && <ExternalLinkButton href={organization.url} />}
                     <CreateDeploymentModal organizationId={organizationId} />
                     <DestroyOrganizationButton organizationId={organizationId} />
                 </div>

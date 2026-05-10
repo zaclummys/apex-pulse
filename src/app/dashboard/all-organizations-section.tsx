@@ -1,10 +1,5 @@
 import getAllOrganizationsAction from '@/actions/queries/get-all-organizations';
-import {
-    Card,
-    CardTitle,
-    CardHeader,
-} from '@/components/ui/card';
-import { Building2 } from 'lucide-react';
+import { Building2, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import CreateOrganizationModal from './create-organization-modal';
 
@@ -38,10 +33,10 @@ async function AllOrganizationsGrid () {
     }
 
     return (
-        <div className="grid grid-cols-3 gap-2">
+        <div className="grid grid-cols-3 gap-3">
             {organizations.map((organization) => (
                 <OrganizationCard
-                    key={organization.name}
+                    key={organization.id}
                     organization={organization}
                 />
             ))}
@@ -49,16 +44,26 @@ async function AllOrganizationsGrid () {
     );
 }
 
-function OrganizationCard ({ organization }: { organization: { id: string, name: string } }) {
+function getInitial (name: string) {
+    return name[0].toUpperCase();
+}
+
+function OrganizationCard ({ organization }: { organization: { id: string; name: string; url: string } }) {
+    const initial = getInitial(organization.name);
+    const displayUrl = organization.url.replace(/^https?:\/\//, '');
+
     return (
         <Link href={`/dashboard/organizations/${organization.id}`}>
-            <Card
-                key={organization.name}
-                className="cursor-pointer hover:bg-muted transition-colors">
-                <CardHeader>
-                    <CardTitle>{organization.name}</CardTitle>
-                </CardHeader>
-            </Card>
+            <div className="group flex items-center gap-4 rounded-xl border bg-card px-4 py-4 ring-1 ring-foreground/10 transition-colors hover:bg-muted cursor-pointer">
+                <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-sm font-semibold text-primary">
+                    {initial}
+                </div>
+                <div className="flex min-w-0 flex-1 flex-col gap-0.5">
+                    <span className="truncate text-sm font-medium">{organization.name}</span>
+                    <span className="truncate text-xs text-muted-foreground">{displayUrl}</span>
+                </div>
+                <ChevronRight className="size-4 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
+            </div>
         </Link>
     );
 }
