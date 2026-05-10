@@ -13,7 +13,8 @@ export class GetDeploymentByIdService {
         const start = Temporal.Instant.fromEpochMilliseconds(startDate.getTime());
         const end = Temporal.Instant.fromEpochMilliseconds(endDate.getTime());
         
-        return start.until(end, { largestUnit: 'hours' });
+        const duration = start.until(end, { largestUnit: 'hours' });
+        return duration.toString();
     }
 
     computeComponentMetrics (deployment: Deployment) {
