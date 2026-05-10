@@ -33,7 +33,6 @@ export default async function OrganizationPage ({ params }: { params: Promise<{ 
 
                 <div className="flex items-center gap-2">
                     {organization.url && <ExternalLinkButton href={organization.url} />}
-                    <CreateApiKeyModal organizationId={organizationId} />
                     <CreateDeploymentModal organizationId={organizationId} />
                     <DestroyOrganizationButton organizationId={organizationId} />
                 </div>
@@ -52,11 +51,14 @@ export default async function OrganizationPage ({ params }: { params: Promise<{ 
 
             {/* API Keys */}
             <section className="flex flex-col gap-3">
-                <span className="flex items-center gap-2 font-medium">
-                    <KeyRound className="size-4 text-muted-foreground" />
-                    API Keys
-                    <span className="text-muted-foreground font-normal">({apiKeys.length})</span>
-                </span>
+                <div className="flex items-center justify-between">
+                    <span className="flex items-center gap-2 font-medium">
+                        <KeyRound className="size-4 text-muted-foreground" />
+                        API Keys
+                        <span className="text-muted-foreground font-normal">({apiKeys.length})</span>
+                    </span>
+                    <CreateApiKeyModal organizationId={organizationId} />
+                </div>
 
                 {apiKeys.length === 0 ? (
                     <div className="flex flex-col items-center justify-center gap-2 rounded-lg border border-dashed py-10 text-center">
