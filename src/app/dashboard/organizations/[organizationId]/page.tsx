@@ -5,6 +5,7 @@ import ExternalLinkButton from '@/components/external-link-button';
 import { getOrganizationById, getDeploymentsByOrganizationId } from '@/core';
 
 import CreateDeploymentModal from './create-deployment-modal';
+import CreateApiKeyModal from './create-api-key-modal';
 import DestroyOrganizationButton from './destroy-organization-button';
 import DeploymentTable from '@/app/dashboard/deployment-table';
 
@@ -30,6 +31,7 @@ export default async function OrganizationPage ({ params }: { params: Promise<{ 
 
                 <div className="flex items-center gap-2">
                     {organization.url && <ExternalLinkButton href={organization.url} />}
+                    <CreateApiKeyModal organizationId={organizationId} />
                     <CreateDeploymentModal organizationId={organizationId} />
                     <DestroyOrganizationButton organizationId={organizationId} />
                 </div>
