@@ -69,12 +69,14 @@ export default async function DeploymentPage({ params }: { params: Promise<{ dep
                 </div>
             </div>
 
+            <OverviewCard deployment={deployment} organization={organization} />
+
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2 items-start">
-                <OverviewCard deployment={deployment} organization={organization} />
                 <ComponentsCard deployment={deployment} />
                 <TestsCard deployment={deployment} />
-                {deployment.codeCoverages.length > 0 && <CodeCoverageCard deployment={deployment} />}
             </div>
+
+            {deployment.codeCoverages.length > 0 && <CodeCoverageCard deployment={deployment} />}
 
             {deployment.componentSuccesses.length > 0 && (
                 <section className="flex flex-col gap-2">
