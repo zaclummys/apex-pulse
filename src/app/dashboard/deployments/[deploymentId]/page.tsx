@@ -76,7 +76,7 @@ export default async function DeploymentPage({ params }: { params: Promise<{ dep
                 <TestsCard deployment={deployment} />
             </div>
 
-            {deployment.codeCoverages.length > 0 && <CodeCoverageCard deployment={deployment} />}
+            <CodeCoverageCard deployment={deployment} />
 
             {deployment.componentSuccesses.length > 0 && (
                 <section className="flex flex-col gap-2">
@@ -181,41 +181,49 @@ function TestsCard({ deployment }: { deployment: Deployment }) {
 }
 
 function CodeCoverageCard({ deployment }: { deployment: Deployment }) {
-    const codeCoverages = deployment.codeCoverages;
-    const totalLocations = codeCoverages.reduce((sum, c) => sum + c.numLocations, 0);
-    const totalNotCovered = codeCoverages.reduce((sum, c) => sum + c.numLocationsNotCovered, 0);
-    const overallPercent = totalLocations > 0 ? Math.round((totalLocations - totalNotCovered) / totalLocations * 100) : 0;
+    if (deployment.codeCoverages.length === 0) {
+        return (
+            <Card>
+                <CardHeader>
+                    <CardTitle className="flex items-center gap-2">
+                        <Activity className="size-4 text-muted-foreground" />
 
-    const perClass = codeCoverages.map(c => ({
-        className: c.className,
-        percent: c.numLocations > 0 ? Math.round((c.numLocations - c.numLocationsNotCovered) / c.numLocations * 100) : 0,
-    }));
-    const minClass = perClass.reduce((a, b) => a.percent <= b.percent ? a : b);
-    const maxClass = perClass.reduce((a, b) => a.percent >= b.percent ? a : b);
-    const belowThreshold = perClass.filter(c => c.percent < 75).length;
+                        <span>Code Coverage</span>
+                    </CardTitle>
+                </CardHeader>
 
-    const coverageColor = overallPercent >= 75
-        ? 'text-green-600 dark:text-green-400'
-        : overallPercent >= 50
-        ? 'text-yellow-600 dark:text-yellow-400'
-        : 'text-red-600 dark:text-red-400';
+                <CardContent className="text-sm">
+                    <p className="text-muted-foreground">No code coverage data available for this deployment.</p>
+                </CardContent>
+            </Card>
+        );
+    }
 
-    const barColor = overallPercent >= 75 ? 'bg-green-500' : overallPercent >= 50 ? 'bg-yellow-500' : 'bg-red-500';
+    const { codeCoveragePercent, minCodeCoverage, maxCodeCoverage, codeCoverageBelowThresholdPercent } = deployment;
+    const coverageColor = computeCoverageColor(codeCoveragePercent);
+    const barColor = computeCoverageBarColor(codeCoveragePercent);
 
     return (
         <Card>
-            <CardHeader><CardTitle className="flex items-center gap-2"><Activity className="size-4 text-muted-foreground" />Code Coverage <span className="text-muted-foreground font-normal text-sm">({codeCoverages.length} classes)</span></CardTitle></CardHeader>
+            <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                    <Activity className="size-4 text-muted-foreground" />
+                    <span>Code Coverage</span>
+                    <span className="text-muted-foreground font-normal text-sm">({deployment.codeCoverages.length} classes)</span>
+                </CardTitle>
+            </CardHeader>
+
             <CardContent className="flex flex-col gap-4 text-sm">
                 <div className="flex items-center gap-3">
                     <div className="h-2 flex-1 rounded-full bg-muted overflow-hidden">
-                        <div className={`h-full rounded-full ${barColor}`} style={{ width: `${overallPercent}%` }} />
+                        <div className={`h-full rounded-full ${barColor}`} style={{ width: `${codeCoveragePercent}%` }} />
                     </div>
-                    <span className={`text-base font-semibold tabular-nums ${coverageColor}`}>{overallPercent}%</span>
+                    <span className={`text-base font-semibold tabular-nums ${coverageColor}`}>{codeCoveragePercent}%</span>
                 </div>
                 <div className="flex flex-col gap-2">
-                    <InfoRow label="Best class" value={<span className="font-medium text-green-600 dark:text-green-400">{maxClass.className} ({maxClass.percent}%)</span>} />
-                    <InfoRow label="Worst class" value={<span className="font-medium text-red-600 dark:text-red-400">{minClass.className} ({minClass.percent}%)</span>} />
-                    <InfoRow label="Classes below 75%" value={belowThreshold > 0 ? <span className="font-medium text-red-600 dark:text-red-400">{belowThreshold} of {perClass.length}</span> : <span className="font-medium text-green-600 dark:text-green-400">None</span>} />
+                    {maxCodeCoverage && <InfoRow label="Best class" value={<span className="font-medium text-green-600 dark:text-green-400">{maxCodeCoverage.className} ({maxCodeCoverage.percentage}%)</span>} />}
+                    {minCodeCoverage && <InfoRow label="Worst class" value={<span className="font-medium text-red-600 dark:text-red-400">{minCodeCoverage.className} ({minCodeCoverage.percentage}%)</span>} />}
+                    <InfoRow label="Classes below 75%" value={<span className={`font-medium ${codeCoverageBelowThresholdPercent > 0 ? 'text-red-600 dark:text-red-400' : 'text-green-600 dark:text-green-400'}`}>{codeCoverageBelowThresholdPercent}%</span>} />
                 </div>
             </CardContent>
         </Card>
@@ -369,12 +377,7 @@ function CodeCoverageTable({ rows }: { rows: CodeCoverage[] }) {
                     {rows.map((coverage, index) => {
                         const coveredLines = coverage.numLocations - coverage.numLocationsNotCovered;
                         const coveragePercent = coverage.numLocations > 0 ? Math.round((coveredLines / coverage.numLocations) * 100) : 0;
-                        const coverageColor =
-                            coveragePercent >= 75
-                                ? 'text-green-600 dark:text-green-400'
-                                : coveragePercent >= 50
-                                  ? 'text-yellow-600 dark:text-yellow-400'
-                                  : 'text-red-600 dark:text-red-400';
+                        const coverageColor = computeCoverageColor(coveragePercent);
                         return (
                             <TableRow key={index}>
                                 <TableCell>{coverage.className}</TableCell>
@@ -385,13 +388,7 @@ function CodeCoverageTable({ rows }: { rows: CodeCoverage[] }) {
                                     <div className="flex items-center gap-2">
                                         <div className="h-1.5 w-24 rounded-full bg-muted overflow-hidden">
                                             <div
-                                                className={`h-full rounded-full ${
-                                                    coveragePercent >= 75
-                                                        ? 'bg-green-500'
-                                                        : coveragePercent >= 50
-                                                          ? 'bg-yellow-500'
-                                                          : 'bg-red-500'
-                                                }`}
+                                                className={`h-full rounded-full ${computeCoverageBarColor(coveragePercent)}`}
                                                 style={{ width: `${coveragePercent}%` }}
                                             />
                                         </div>
@@ -405,6 +402,20 @@ function CodeCoverageTable({ rows }: { rows: CodeCoverage[] }) {
             </Table>
         </div>
     );
+}
+
+// ─── Helpers ─────────────────────────────────────────────────────────────────
+
+function computeCoverageColor(percent: number) {
+    if (percent >= 75) return 'text-green-600 dark:text-green-400';
+    if (percent >= 50) return 'text-yellow-600 dark:text-yellow-400';
+    return 'text-red-600 dark:text-red-400';
+}
+
+function computeCoverageBarColor(percent: number) {
+    if (percent >= 75) return 'bg-green-500';
+    if (percent >= 50) return 'bg-yellow-500';
+    return 'bg-red-500';
 }
 
 // ─── Primitives ──────────────────────────────────────────────────────────────
