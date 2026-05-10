@@ -55,7 +55,7 @@ export default function Home () {
 
                 <div className="inline-flex items-center gap-2 rounded-full border border-border bg-muted px-4 py-1.5 text-sm text-muted-foreground">
                     <SuccessIcon className="w-3.5 h-3.5 text-primary" />
-                    Built for Salesforce teams
+                    From Salesforce engineers, to Salesforce engineers
                 </div>
 
                 <h1 className="max-w-3xl text-4xl md:text-6xl font-bold tracking-tight text-foreground leading-tight">

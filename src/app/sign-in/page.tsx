@@ -21,13 +21,9 @@ export default function SignIn() {
                     Apex Pulse
                 </Link>
 
-                <blockquote className="flex flex-col gap-3">
-                    <p className="text-lg text-foreground">
-                        &ldquo;Apex Pulse cut our time spent digging through deployment logs in half.
-                        Every result is right there, organized and searchable.&rdquo;
-                    </p>
-                    <footer className="text-sm text-muted-foreground">— Salesforce Developer</footer>
-                </blockquote>
+                <p className="text-lg text-foreground leading-relaxed">
+                    Every Salesforce deployment tells a story. Apex Pulse makes sure you can read it.
+                </p>
             </div>
 
             {/* Right form panel */}

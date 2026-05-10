@@ -21,13 +21,9 @@ export default function SignUp() {
                     Apex Pulse
                 </Link>
 
-                <blockquote className="flex flex-col gap-3">
-                    <p className="text-lg text-foreground">
-                        &ldquo;Finally, a tool that makes Salesforce deployments visible.
-                        We caught a test regression the same day it was introduced.&rdquo;
-                    </p>
-                    <footer className="text-sm text-muted-foreground">&mdash; Salesforce Developer</footer>
-                </blockquote>
+                <p className="text-lg text-foreground leading-relaxed">
+                    Shipping to production without visibility isn&apos;t confidence — it&apos;s luck.
+                </p>
             </div>
 
             {/* Right form panel */}
