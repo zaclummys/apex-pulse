@@ -33,18 +33,20 @@ export default async function OrganizationPage ({ params }: { params: Promise<{ 
 
                 <div className="flex items-center gap-2">
                     {organization.url && <ExternalLinkButton href={organization.url} />}
-                    <CreateDeploymentModal organizationId={organizationId} />
                     <DestroyOrganizationButton organizationId={organizationId} />
                 </div>
             </div>
 
             {/* Deployments */}
             <section className="flex flex-col gap-3">
-                <span className="flex items-center gap-2 font-medium">
-                    <Rocket className="size-4 text-muted-foreground" />
-                    Deployments
-                    <span className="text-muted-foreground font-normal">({deploymentIds.length})</span>
-                </span>
+                <div className="flex items-center justify-between">
+                    <span className="flex items-center gap-2 font-medium">
+                        <Rocket className="size-4 text-muted-foreground" />
+                        Deployments
+                        <span className="text-muted-foreground font-normal">({deploymentIds.length})</span>
+                    </span>
+                    <CreateDeploymentModal organizationId={organizationId} />
+                </div>
 
                 <DeploymentTable deploymentIds={deploymentIds} showOrganization={false} />
             </section>

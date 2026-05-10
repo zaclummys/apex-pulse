@@ -24,7 +24,7 @@ export default function CreateDeploymentModal ({ organizationId }: { organizatio
     
     return (
         <Sheet>
-            <SheetTrigger render={<Button />}>
+            <SheetTrigger render={<Button variant="outline" size="sm" />}>
                 Create Deployment
             </SheetTrigger>
 
