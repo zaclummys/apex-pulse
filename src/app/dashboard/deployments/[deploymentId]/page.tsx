@@ -161,8 +161,8 @@ function ComponentsCard({ deployment }: { deployment: Deployment }) {
         <Card>
             <CardHeader><CardTitle className="flex items-center gap-2"><Boxes className="size-4 text-muted-foreground" />Components <span className="text-muted-foreground font-normal text-sm">({deployment.numberComponentsTotal})</span></CardTitle></CardHeader>
             <CardContent className="flex flex-col gap-2 text-sm">
-                <InfoRow label="Deployed" value={<span className="font-medium text-green-600 dark:text-green-400">{deployment.numberComponentsDeployed} <span className="font-normal text-muted-foreground">({deployment.numberComponentsTotal > 0 ? Math.round(deployment.numberComponentsDeployed / deployment.numberComponentsTotal * 100) : 0}%)</span></span>} />
-                <InfoRow label="Errors" value={deployment.numberComponentErrors > 0 ? <span className="font-medium text-red-600 dark:text-red-400">{deployment.numberComponentErrors} <span className="font-normal text-red-400/70 dark:text-red-500/70">({deployment.numberComponentsTotal > 0 ? Math.round(deployment.numberComponentErrors / deployment.numberComponentsTotal * 100) : 0}%)</span></span> : <span>0 <span className="text-muted-foreground">(0%)</span></span>} />
+                <InfoRow label="Deployed" value={<span className="font-medium text-green-600 dark:text-green-400">{deployment.numberComponentsDeployed} <span className="font-normal text-muted-foreground">({computePercent(deployment.numberComponentsDeployed, deployment.numberComponentsTotal)}%)</span></span>} />
+                <InfoRow label="Errors" value={deployment.numberComponentErrors > 0 ? <span className="font-medium text-red-600 dark:text-red-400">{deployment.numberComponentErrors} <span className="font-normal text-red-400/70 dark:text-red-500/70">({computePercent(deployment.numberComponentErrors, deployment.numberComponentsTotal)}%)</span></span> : <span>0 <span className="text-muted-foreground">(0%)</span></span>} />
             </CardContent>
         </Card>
     );
@@ -173,8 +173,8 @@ function TestsCard({ deployment }: { deployment: Deployment }) {
         <Card>
             <CardHeader><CardTitle className="flex items-center gap-2"><FlaskConical className="size-4 text-muted-foreground" />Tests <span className="text-muted-foreground font-normal text-sm">({deployment.numberTestsTotal})</span></CardTitle></CardHeader>
             <CardContent className="flex flex-col gap-2 text-sm">
-                <InfoRow label="Completed" value={<span className="font-medium text-green-600 dark:text-green-400">{deployment.numberTestsCompleted} <span className="font-normal text-muted-foreground">({deployment.numberTestsTotal > 0 ? Math.round(deployment.numberTestsCompleted / deployment.numberTestsTotal * 100) : 0}%)</span></span>} />
-                <InfoRow label="Errors" value={deployment.numberTestErrors > 0 ? <span className="font-medium text-red-600 dark:text-red-400">{deployment.numberTestErrors} <span className="font-normal text-red-400/70 dark:text-red-500/70">({deployment.numberTestsTotal > 0 ? Math.round(deployment.numberTestErrors / deployment.numberTestsTotal * 100) : 0}%)</span></span> : <span>0 <span className="text-muted-foreground">(0%)</span></span>} />
+                <InfoRow label="Completed" value={<span className="font-medium text-green-600 dark:text-green-400">{deployment.numberTestsCompleted} <span className="font-normal text-muted-foreground">({computePercent(deployment.numberTestsCompleted, deployment.numberTestsTotal)}%)</span></span>} />
+                <InfoRow label="Errors" value={deployment.numberTestErrors > 0 ? <span className="font-medium text-red-600 dark:text-red-400">{deployment.numberTestErrors} <span className="font-normal text-red-400/70 dark:text-red-500/70">({computePercent(deployment.numberTestErrors, deployment.numberTestsTotal)}%)</span></span> : <span>0 <span className="text-muted-foreground">(0%)</span></span>} />
             </CardContent>
         </Card>
     );
@@ -405,6 +405,10 @@ function CodeCoverageTable({ rows }: { rows: CodeCoverage[] }) {
 }
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
+
+function computePercent(value: number, total: number) {
+    return total > 0 ? Math.round(value / total * 100) : 0;
+}
 
 function computeCoverageColor(percent: number) {
     if (percent >= 75) return 'text-green-600 dark:text-green-400';
