@@ -1,5 +1,4 @@
 import getAllOrganizationsAction from '@/actions/queries/get-all-organizations';
-import { Button } from '@/components/ui/button';
 import {
     Card,
     CardTitle,
@@ -7,6 +6,7 @@ import {
 } from '@/components/ui/card';
 import { Building2 } from 'lucide-react';
 import Link from 'next/link';
+import CreateOrganizationModal from './create-organization-modal';
 
 export default function AllOrganizationsSection () {
     return (
@@ -14,9 +14,7 @@ export default function AllOrganizationsSection () {
             <div className="flex items-center justify-between">
                 <span>All Organizations</span>
 
-                <Button variant="outline" size="sm">
-                    Create organization
-                </Button>
+                <CreateOrganizationModal />
             </div>
 
             <AllOrganizationsGrid />

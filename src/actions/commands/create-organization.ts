@@ -37,5 +37,5 @@ export default async function createOrganizationAction (state: CreateOrganizatio
         };
     }
 
-    redirect("/dashboard/organizations");
+    redirect("/dashboard");
 }
