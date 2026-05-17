@@ -5,6 +5,13 @@
 - Create Organization 
 - Destroy Organization
 
+## API Key
+
+- Create API Key
+- Destroy API Key
+- Validate API Key
+- List API Keys
+
 ## Deployment
 
 - Start Deployment

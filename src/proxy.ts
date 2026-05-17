@@ -1,14 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { sessionCookieName } from '@/config';
 
-const protectedRoutes = ['/dashboard'];
-
 export function proxy (request: NextRequest) {
     const { pathname } = request.nextUrl;
 
-    const isProtected = protectedRoutes.some(route => pathname.startsWith(route));
-
-    if (!isProtected) {
+    if (!pathname.startsWith('/dashboard')) {
         return NextResponse.next();
     }
 

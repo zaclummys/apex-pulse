@@ -1,8 +1,9 @@
 import { NextRequest } from 'next/server';
 
 import { createDeployment } from '@/core';
+import { withApiKey } from '@/lib/api-auth';
 
-export async function POST (request: NextRequest, context: any) {
+async function postDeployment (request: NextRequest, context: any) {
     const { organizationId } = await context.params;
 
     const deployResponseJson = await request.json();
@@ -19,3 +20,5 @@ export async function POST (request: NextRequest, context: any) {
         },
     });
 }
+
+export const POST = withApiKey(postDeployment);

@@ -11,6 +11,10 @@ import { GetDeploymentsByOrganizationIdService } from '@/core/application/querie
 import { GetLatestDeploymentsService } from '@/core/application/queries/get-latest-deployments';
 import { GetUserIdByTokenService } from '@/core/application/queries/get-user-id-by-token';
 import { GetApiKeysByOrganizationIdService } from '@/core/application/queries/get-api-keys-by-organization-id';
+import {
+    ValidateApiKeyService,
+    ValidateApiKeyInput,
+} from '@/core/application/queries/validate-api-key';
 
 import {
     CreateOrganizationService,
@@ -136,6 +140,12 @@ export function getApiKeysByOrganizationId (organizationId: string) {
     const getApiKeysByOrganizationIdService = new GetApiKeysByOrganizationIdService(apiKeyRepository);
 
     return getApiKeysByOrganizationIdService.execute(organizationId);
+}
+
+export function validateApiKey (validateApiKeyInput: ValidateApiKeyInput) {
+    const validateApiKeyService = new ValidateApiKeyService(apiKeyRepository);
+
+    return validateApiKeyService.execute(validateApiKeyInput);
 }
 
 export function destroyApiKey (destroyApiKeyInput: DestroyApiKeyInput) {
