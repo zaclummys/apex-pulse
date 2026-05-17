@@ -417,6 +417,8 @@ function computePercent(value: number, total: number) {
 }
 
 function formatDuration(duration: any) {
+    if (!duration) return null;
+    
     return Temporal.Duration.from(duration).toLocaleString('en-US', { style: 'long' });
 }
 

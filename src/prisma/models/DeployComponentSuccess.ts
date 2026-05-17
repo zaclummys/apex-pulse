@@ -403,6 +403,10 @@ export type DeployComponentSuccessUncheckedUpdateManyWithoutDeploymentNestedInpu
   deleteMany?: Prisma.DeployComponentSuccessScalarWhereInput | Prisma.DeployComponentSuccessScalarWhereInput[]
 }
 
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
+}
+
 export type DeployComponentSuccessCreateWithoutDeploymentInput = {
   id?: string
   fullName: string

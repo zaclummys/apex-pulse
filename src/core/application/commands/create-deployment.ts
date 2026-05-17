@@ -116,6 +116,15 @@ export class CreateDeploymentService {
         this.deploymentRepository = deploymentRepository;
         this.organizationRepository = organizationRepository;
     }
+
+    createDate (dateString: string | undefined): Date | null {
+        if (!dateString) {
+            return null;
+        }
+
+        return new Date(dateString);
+    }
+
     public async execute ({
         organizationId,
         deployResponse,
@@ -127,26 +136,26 @@ export class CreateDeploymentService {
         }
 
         const deployment: Deployment = {
-            status: deployResponse.result.status,
+            status: deployResponse.result?.status,
 
-            createdBy: deployResponse.result.createdBy,
-            createdByName: deployResponse.result.createdByName,
+            createdBy: deployResponse.result?.createdBy,
+            createdByName: deployResponse.result?.createdByName,
 
-            startDate: new Date(deployResponse.result.startDate),
-            endDate: new Date(deployResponse.result.completedDate),
+            startDate: this.createDate(deployResponse.result?.startDate),
+            endDate: this.createDate(deployResponse.result?.completedDate),
 
-            checkOnly: deployResponse.result.checkOnly,
-            deployUrl: deployResponse.result.deployUrl,
+            checkOnly: deployResponse.result?.checkOnly,
+            deployUrl: deployResponse.result?.deployUrl,
 
-            numberComponentsDeployed: deployResponse.result.numberComponentsDeployed,
-            numberComponentErrors: deployResponse.result.numberComponentErrors,
-            numberComponentsTotal: deployResponse.result.numberComponentsTotal,
+            numberComponentsDeployed: deployResponse.result?.numberComponentsDeployed,
+            numberComponentErrors: deployResponse.result?.numberComponentErrors,
+            numberComponentsTotal: deployResponse.result?.numberComponentsTotal,
 
-            numberTestErrors: deployResponse.result.numberTestErrors,
-            numberTestsCompleted: deployResponse.result.numberTestsCompleted,
-            numberTestsTotal: deployResponse.result.numberTestsTotal,
+            numberTestErrors: deployResponse.result?.numberTestErrors,
+            numberTestsCompleted: deployResponse.result?.numberTestsCompleted,
+            numberTestsTotal: deployResponse.result?.numberTestsTotal,
 
-            componentSuccesses: deployResponse.result.details.componentSuccesses
+            componentSuccesses: deployResponse.result?.details?.componentSuccesses
                 .filter(success => success.componentType === 'ApexClass')
                 .map((success) => ({
                     fullName: success.fullName,
@@ -156,7 +165,7 @@ export class CreateDeploymentService {
                     deleted: success.deleted,
                 })),
 
-            componentFailures: deployResponse.result.details.componentFailures
+            componentFailures: deployResponse.result?.details?.componentFailures
                 .filter(failure => failure.componentType === 'ApexClass')
                 .map((failure) => ({
                     fullName: failure.fullName,
@@ -170,7 +179,7 @@ export class CreateDeploymentService {
                     problemType: failure.problemType,
                 })),
 
-            testSuccesses: deployResponse.result.details.runTestResult.successes.map((success) => ({
+            testSuccesses: deployResponse.result?.details?.runTestResult.successes.map((success) => ({
                 className: success.name,
                 methodName: success.methodName,
                 namespace: success.namespace,
@@ -178,7 +187,7 @@ export class CreateDeploymentService {
                 time: success.time,
             })),
 
-            testFailures: deployResponse.result.details.runTestResult.failures.map((failure) => ({
+            testFailures: deployResponse.result?.details?.runTestResult.failures.map((failure) => ({
                 id: failure.id,
                 className: failure.name,
                 methodName: failure.methodName,
@@ -189,7 +198,7 @@ export class CreateDeploymentService {
                 type: failure.type,
             })),
 
-            codeCoverages: deployResponse.result.details.runTestResult.codeCoverage.map((coverage) => ({
+            codeCoverages: deployResponse.result?.details?.runTestResult.codeCoverage.map((coverage) => ({
                 className: coverage.name,
                 numLocations: coverage.numLocations,
                 numLocationsNotCovered: coverage.numLocationsNotCovered,

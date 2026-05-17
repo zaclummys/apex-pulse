@@ -4,30 +4,30 @@ export type Deployment = {
 
     organizationId: string;
 
-    numberComponentsDeployed: number;
-    numberComponentErrors: number;
-    numberComponentsTotal: number;
+    numberComponentsDeployed?: number;
+    numberComponentErrors?: number;
+    numberComponentsTotal?: number;
 
-    numberTestErrors: number;
-    numberTestsCompleted: number;
-    numberTestsTotal: number;
+    numberTestErrors?: number;
+    numberTestsCompleted?: number;
+    numberTestsTotal?: number;
 
-    createdBy: string;
-    createdByName: string;
+    createdBy?: string;
+    createdByName?: string;
 
-    startDate: Date;
-    endDate: Date;
+    startDate?: Date;
+    endDate?: Date;
 
-    checkOnly: boolean;
+    checkOnly?: boolean;
     deployUrl: string;
 
-    componentSuccesses: DeployComponentSuccess[];
-    componentFailures: DeployComponentFailure[];
+    componentSuccesses?: DeployComponentSuccess[];
+    componentFailures?: DeployComponentFailure[];
 
-    testSuccesses: DeployTestSuccess[];
-    testFailures: DeployTestFailure[];
+    testSuccesses?: DeployTestSuccess[];
+    testFailures?: DeployTestFailure[];
 
-    codeCoverages: DeployCodeCoverage[];
+    codeCoverages?: DeployCodeCoverage[];
 }
 
 export type DeployCodeCoverage = {

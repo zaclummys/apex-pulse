@@ -1,0 +1,13 @@
+{
+  "status": 0,
+  "result": {
+    "id": "0Afbm00000Txb7hCAB",
+    "done": false,
+    "status": "Queued",
+    "files": [],
+    "zipSize": 1378,
+    "zipFileCount": 5,
+    "deployUrl": "https://brave-hawk-otbxo5-dev-ed.trailblaze.my.salesforce.com/lightning/setup/DeployStatus/page?address=%2Fchangemgmt%2FmonitorDeploymentsDetails.apexp%3FasyncId%3D0Afbm00000Txb7hCAB%26retURL%3D%252Fchangemgmt%252FmonitorDeployment.apexp"
+  },
+  "warnings": []
+}

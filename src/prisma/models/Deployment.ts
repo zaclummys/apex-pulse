@@ -262,17 +262,17 @@ export type DeploymentGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inter
 export type DeploymentGroupByOutputType = {
   id: string
   status: string
-  createdBy: string
-  createdByName: string
-  startDate: Date
-  endDate: Date
-  numberTestsCompleted: number
-  numberTestsTotal: number
-  numberTestErrors: number
-  numberComponentsDeployed: number
-  numberComponentsTotal: number
-  numberComponentErrors: number
-  checkOnly: boolean
+  createdBy: string | null
+  createdByName: string | null
+  startDate: Date | null
+  endDate: Date | null
+  numberTestsCompleted: number | null
+  numberTestsTotal: number | null
+  numberTestErrors: number | null
+  numberComponentsDeployed: number | null
+  numberComponentsTotal: number | null
+  numberComponentErrors: number | null
+  checkOnly: boolean | null
   deployUrl: string
   organizationId: string
   _count: DeploymentCountAggregateOutputType | null
@@ -303,17 +303,17 @@ export type DeploymentWhereInput = {
   NOT?: Prisma.DeploymentWhereInput | Prisma.DeploymentWhereInput[]
   id?: Prisma.StringFilter<"Deployment"> | string
   status?: Prisma.StringFilter<"Deployment"> | string
-  createdBy?: Prisma.StringFilter<"Deployment"> | string
-  createdByName?: Prisma.StringFilter<"Deployment"> | string
-  startDate?: Prisma.DateTimeFilter<"Deployment"> | Date | string
-  endDate?: Prisma.DateTimeFilter<"Deployment"> | Date | string
-  numberTestsCompleted?: Prisma.IntFilter<"Deployment"> | number
-  numberTestsTotal?: Prisma.IntFilter<"Deployment"> | number
-  numberTestErrors?: Prisma.IntFilter<"Deployment"> | number
-  numberComponentsDeployed?: Prisma.IntFilter<"Deployment"> | number
-  numberComponentsTotal?: Prisma.IntFilter<"Deployment"> | number
-  numberComponentErrors?: Prisma.IntFilter<"Deployment"> | number
-  checkOnly?: Prisma.BoolFilter<"Deployment"> | boolean
+  createdBy?: Prisma.StringNullableFilter<"Deployment"> | string | null
+  createdByName?: Prisma.StringNullableFilter<"Deployment"> | string | null
+  startDate?: Prisma.DateTimeNullableFilter<"Deployment"> | Date | string | null
+  endDate?: Prisma.DateTimeNullableFilter<"Deployment"> | Date | string | null
+  numberTestsCompleted?: Prisma.IntNullableFilter<"Deployment"> | number | null
+  numberTestsTotal?: Prisma.IntNullableFilter<"Deployment"> | number | null
+  numberTestErrors?: Prisma.IntNullableFilter<"Deployment"> | number | null
+  numberComponentsDeployed?: Prisma.IntNullableFilter<"Deployment"> | number | null
+  numberComponentsTotal?: Prisma.IntNullableFilter<"Deployment"> | number | null
+  numberComponentErrors?: Prisma.IntNullableFilter<"Deployment"> | number | null
+  checkOnly?: Prisma.BoolNullableFilter<"Deployment"> | boolean | null
   deployUrl?: Prisma.StringFilter<"Deployment"> | string
   organizationId?: Prisma.StringFilter<"Deployment"> | string
   componentSuccesses?: Prisma.DeployComponentSuccessListRelationFilter
@@ -327,17 +327,17 @@ export type DeploymentWhereInput = {
 export type DeploymentOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  createdBy?: Prisma.SortOrder
-  createdByName?: Prisma.SortOrder
-  startDate?: Prisma.SortOrder
-  endDate?: Prisma.SortOrder
-  numberTestsCompleted?: Prisma.SortOrder
-  numberTestsTotal?: Prisma.SortOrder
-  numberTestErrors?: Prisma.SortOrder
-  numberComponentsDeployed?: Prisma.SortOrder
-  numberComponentsTotal?: Prisma.SortOrder
-  numberComponentErrors?: Prisma.SortOrder
-  checkOnly?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdByName?: Prisma.SortOrderInput | Prisma.SortOrder
+  startDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  endDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  numberTestsCompleted?: Prisma.SortOrderInput | Prisma.SortOrder
+  numberTestsTotal?: Prisma.SortOrderInput | Prisma.SortOrder
+  numberTestErrors?: Prisma.SortOrderInput | Prisma.SortOrder
+  numberComponentsDeployed?: Prisma.SortOrderInput | Prisma.SortOrder
+  numberComponentsTotal?: Prisma.SortOrderInput | Prisma.SortOrder
+  numberComponentErrors?: Prisma.SortOrderInput | Prisma.SortOrder
+  checkOnly?: Prisma.SortOrderInput | Prisma.SortOrder
   deployUrl?: Prisma.SortOrder
   organizationId?: Prisma.SortOrder
   componentSuccesses?: Prisma.DeployComponentSuccessOrderByRelationAggregateInput
@@ -354,17 +354,17 @@ export type DeploymentWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.DeploymentWhereInput[]
   NOT?: Prisma.DeploymentWhereInput | Prisma.DeploymentWhereInput[]
   status?: Prisma.StringFilter<"Deployment"> | string
-  createdBy?: Prisma.StringFilter<"Deployment"> | string
-  createdByName?: Prisma.StringFilter<"Deployment"> | string
-  startDate?: Prisma.DateTimeFilter<"Deployment"> | Date | string
-  endDate?: Prisma.DateTimeFilter<"Deployment"> | Date | string
-  numberTestsCompleted?: Prisma.IntFilter<"Deployment"> | number
-  numberTestsTotal?: Prisma.IntFilter<"Deployment"> | number
-  numberTestErrors?: Prisma.IntFilter<"Deployment"> | number
-  numberComponentsDeployed?: Prisma.IntFilter<"Deployment"> | number
-  numberComponentsTotal?: Prisma.IntFilter<"Deployment"> | number
-  numberComponentErrors?: Prisma.IntFilter<"Deployment"> | number
-  checkOnly?: Prisma.BoolFilter<"Deployment"> | boolean
+  createdBy?: Prisma.StringNullableFilter<"Deployment"> | string | null
+  createdByName?: Prisma.StringNullableFilter<"Deployment"> | string | null
+  startDate?: Prisma.DateTimeNullableFilter<"Deployment"> | Date | string | null
+  endDate?: Prisma.DateTimeNullableFilter<"Deployment"> | Date | string | null
+  numberTestsCompleted?: Prisma.IntNullableFilter<"Deployment"> | number | null
+  numberTestsTotal?: Prisma.IntNullableFilter<"Deployment"> | number | null
+  numberTestErrors?: Prisma.IntNullableFilter<"Deployment"> | number | null
+  numberComponentsDeployed?: Prisma.IntNullableFilter<"Deployment"> | number | null
+  numberComponentsTotal?: Prisma.IntNullableFilter<"Deployment"> | number | null
+  numberComponentErrors?: Prisma.IntNullableFilter<"Deployment"> | number | null
+  checkOnly?: Prisma.BoolNullableFilter<"Deployment"> | boolean | null
   deployUrl?: Prisma.StringFilter<"Deployment"> | string
   organizationId?: Prisma.StringFilter<"Deployment"> | string
   componentSuccesses?: Prisma.DeployComponentSuccessListRelationFilter
@@ -378,17 +378,17 @@ export type DeploymentWhereUniqueInput = Prisma.AtLeast<{
 export type DeploymentOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   status?: Prisma.SortOrder
-  createdBy?: Prisma.SortOrder
-  createdByName?: Prisma.SortOrder
-  startDate?: Prisma.SortOrder
-  endDate?: Prisma.SortOrder
-  numberTestsCompleted?: Prisma.SortOrder
-  numberTestsTotal?: Prisma.SortOrder
-  numberTestErrors?: Prisma.SortOrder
-  numberComponentsDeployed?: Prisma.SortOrder
-  numberComponentsTotal?: Prisma.SortOrder
-  numberComponentErrors?: Prisma.SortOrder
-  checkOnly?: Prisma.SortOrder
+  createdBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  createdByName?: Prisma.SortOrderInput | Prisma.SortOrder
+  startDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  endDate?: Prisma.SortOrderInput | Prisma.SortOrder
+  numberTestsCompleted?: Prisma.SortOrderInput | Prisma.SortOrder
+  numberTestsTotal?: Prisma.SortOrderInput | Prisma.SortOrder
+  numberTestErrors?: Prisma.SortOrderInput | Prisma.SortOrder
+  numberComponentsDeployed?: Prisma.SortOrderInput | Prisma.SortOrder
+  numberComponentsTotal?: Prisma.SortOrderInput | Prisma.SortOrder
+  numberComponentErrors?: Prisma.SortOrderInput | Prisma.SortOrder
+  checkOnly?: Prisma.SortOrderInput | Prisma.SortOrder
   deployUrl?: Prisma.SortOrder
   organizationId?: Prisma.SortOrder
   _count?: Prisma.DeploymentCountOrderByAggregateInput
@@ -404,17 +404,17 @@ export type DeploymentScalarWhereWithAggregatesInput = {
   NOT?: Prisma.DeploymentScalarWhereWithAggregatesInput | Prisma.DeploymentScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Deployment"> | string
   status?: Prisma.StringWithAggregatesFilter<"Deployment"> | string
-  createdBy?: Prisma.StringWithAggregatesFilter<"Deployment"> | string
-  createdByName?: Prisma.StringWithAggregatesFilter<"Deployment"> | string
-  startDate?: Prisma.DateTimeWithAggregatesFilter<"Deployment"> | Date | string
-  endDate?: Prisma.DateTimeWithAggregatesFilter<"Deployment"> | Date | string
-  numberTestsCompleted?: Prisma.IntWithAggregatesFilter<"Deployment"> | number
-  numberTestsTotal?: Prisma.IntWithAggregatesFilter<"Deployment"> | number
-  numberTestErrors?: Prisma.IntWithAggregatesFilter<"Deployment"> | number
-  numberComponentsDeployed?: Prisma.IntWithAggregatesFilter<"Deployment"> | number
-  numberComponentsTotal?: Prisma.IntWithAggregatesFilter<"Deployment"> | number
-  numberComponentErrors?: Prisma.IntWithAggregatesFilter<"Deployment"> | number
-  checkOnly?: Prisma.BoolWithAggregatesFilter<"Deployment"> | boolean
+  createdBy?: Prisma.StringNullableWithAggregatesFilter<"Deployment"> | string | null
+  createdByName?: Prisma.StringNullableWithAggregatesFilter<"Deployment"> | string | null
+  startDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Deployment"> | Date | string | null
+  endDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Deployment"> | Date | string | null
+  numberTestsCompleted?: Prisma.IntNullableWithAggregatesFilter<"Deployment"> | number | null
+  numberTestsTotal?: Prisma.IntNullableWithAggregatesFilter<"Deployment"> | number | null
+  numberTestErrors?: Prisma.IntNullableWithAggregatesFilter<"Deployment"> | number | null
+  numberComponentsDeployed?: Prisma.IntNullableWithAggregatesFilter<"Deployment"> | number | null
+  numberComponentsTotal?: Prisma.IntNullableWithAggregatesFilter<"Deployment"> | number | null
+  numberComponentErrors?: Prisma.IntNullableWithAggregatesFilter<"Deployment"> | number | null
+  checkOnly?: Prisma.BoolNullableWithAggregatesFilter<"Deployment"> | boolean | null
   deployUrl?: Prisma.StringWithAggregatesFilter<"Deployment"> | string
   organizationId?: Prisma.StringWithAggregatesFilter<"Deployment"> | string
 }
@@ -422,17 +422,17 @@ export type DeploymentScalarWhereWithAggregatesInput = {
 export type DeploymentCreateInput = {
   id?: string
   status: string
-  createdBy: string
-  createdByName: string
-  startDate: Date | string
-  endDate: Date | string
-  numberTestsCompleted: number
-  numberTestsTotal: number
-  numberTestErrors: number
-  numberComponentsDeployed: number
-  numberComponentsTotal: number
-  numberComponentErrors: number
-  checkOnly: boolean
+  createdBy?: string | null
+  createdByName?: string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  numberTestsCompleted?: number | null
+  numberTestsTotal?: number | null
+  numberTestErrors?: number | null
+  numberComponentsDeployed?: number | null
+  numberComponentsTotal?: number | null
+  numberComponentErrors?: number | null
+  checkOnly?: boolean | null
   deployUrl: string
   componentSuccesses?: Prisma.DeployComponentSuccessCreateNestedManyWithoutDeploymentInput
   componentFailures?: Prisma.DeployComponentFailureCreateNestedManyWithoutDeploymentInput
@@ -445,17 +445,17 @@ export type DeploymentCreateInput = {
 export type DeploymentUncheckedCreateInput = {
   id?: string
   status: string
-  createdBy: string
-  createdByName: string
-  startDate: Date | string
-  endDate: Date | string
-  numberTestsCompleted: number
-  numberTestsTotal: number
-  numberTestErrors: number
-  numberComponentsDeployed: number
-  numberComponentsTotal: number
-  numberComponentErrors: number
-  checkOnly: boolean
+  createdBy?: string | null
+  createdByName?: string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  numberTestsCompleted?: number | null
+  numberTestsTotal?: number | null
+  numberTestErrors?: number | null
+  numberComponentsDeployed?: number | null
+  numberComponentsTotal?: number | null
+  numberComponentErrors?: number | null
+  checkOnly?: boolean | null
   deployUrl: string
   organizationId: string
   componentSuccesses?: Prisma.DeployComponentSuccessUncheckedCreateNestedManyWithoutDeploymentInput
@@ -468,17 +468,17 @@ export type DeploymentUncheckedCreateInput = {
 export type DeploymentUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
-  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
-  createdByName?: Prisma.StringFieldUpdateOperationsInput | string
-  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  numberTestsCompleted?: Prisma.IntFieldUpdateOperationsInput | number
-  numberTestsTotal?: Prisma.IntFieldUpdateOperationsInput | number
-  numberTestErrors?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentsDeployed?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentsTotal?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentErrors?: Prisma.IntFieldUpdateOperationsInput | number
-  checkOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdByName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  numberTestsCompleted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberTestsTotal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberTestErrors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentsDeployed?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentsTotal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentErrors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  checkOnly?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   deployUrl?: Prisma.StringFieldUpdateOperationsInput | string
   componentSuccesses?: Prisma.DeployComponentSuccessUpdateManyWithoutDeploymentNestedInput
   componentFailures?: Prisma.DeployComponentFailureUpdateManyWithoutDeploymentNestedInput
@@ -491,17 +491,17 @@ export type DeploymentUpdateInput = {
 export type DeploymentUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
-  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
-  createdByName?: Prisma.StringFieldUpdateOperationsInput | string
-  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  numberTestsCompleted?: Prisma.IntFieldUpdateOperationsInput | number
-  numberTestsTotal?: Prisma.IntFieldUpdateOperationsInput | number
-  numberTestErrors?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentsDeployed?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentsTotal?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentErrors?: Prisma.IntFieldUpdateOperationsInput | number
-  checkOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdByName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  numberTestsCompleted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberTestsTotal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberTestErrors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentsDeployed?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentsTotal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentErrors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  checkOnly?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   deployUrl?: Prisma.StringFieldUpdateOperationsInput | string
   organizationId?: Prisma.StringFieldUpdateOperationsInput | string
   componentSuccesses?: Prisma.DeployComponentSuccessUncheckedUpdateManyWithoutDeploymentNestedInput
@@ -514,17 +514,17 @@ export type DeploymentUncheckedUpdateInput = {
 export type DeploymentCreateManyInput = {
   id?: string
   status: string
-  createdBy: string
-  createdByName: string
-  startDate: Date | string
-  endDate: Date | string
-  numberTestsCompleted: number
-  numberTestsTotal: number
-  numberTestErrors: number
-  numberComponentsDeployed: number
-  numberComponentsTotal: number
-  numberComponentErrors: number
-  checkOnly: boolean
+  createdBy?: string | null
+  createdByName?: string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  numberTestsCompleted?: number | null
+  numberTestsTotal?: number | null
+  numberTestErrors?: number | null
+  numberComponentsDeployed?: number | null
+  numberComponentsTotal?: number | null
+  numberComponentErrors?: number | null
+  checkOnly?: boolean | null
   deployUrl: string
   organizationId: string
 }
@@ -532,34 +532,34 @@ export type DeploymentCreateManyInput = {
 export type DeploymentUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
-  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
-  createdByName?: Prisma.StringFieldUpdateOperationsInput | string
-  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  numberTestsCompleted?: Prisma.IntFieldUpdateOperationsInput | number
-  numberTestsTotal?: Prisma.IntFieldUpdateOperationsInput | number
-  numberTestErrors?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentsDeployed?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentsTotal?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentErrors?: Prisma.IntFieldUpdateOperationsInput | number
-  checkOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdByName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  numberTestsCompleted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberTestsTotal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberTestErrors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentsDeployed?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentsTotal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentErrors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  checkOnly?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   deployUrl?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type DeploymentUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
-  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
-  createdByName?: Prisma.StringFieldUpdateOperationsInput | string
-  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  numberTestsCompleted?: Prisma.IntFieldUpdateOperationsInput | number
-  numberTestsTotal?: Prisma.IntFieldUpdateOperationsInput | number
-  numberTestErrors?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentsDeployed?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentsTotal?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentErrors?: Prisma.IntFieldUpdateOperationsInput | number
-  checkOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdByName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  numberTestsCompleted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberTestsTotal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberTestErrors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentsDeployed?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentsTotal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentErrors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  checkOnly?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   deployUrl?: Prisma.StringFieldUpdateOperationsInput | string
   organizationId?: Prisma.StringFieldUpdateOperationsInput | string
 }
@@ -693,16 +693,24 @@ export type DeploymentUncheckedUpdateManyWithoutOrganizationNestedInput = {
   deleteMany?: Prisma.DeploymentScalarWhereInput | Prisma.DeploymentScalarWhereInput[]
 }
 
-export type IntFieldUpdateOperationsInput = {
-  set?: number
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
+}
+
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
+}
+
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
   increment?: number
   decrement?: number
   multiply?: number
   divide?: number
 }
 
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
+export type NullableBoolFieldUpdateOperationsInput = {
+  set?: boolean | null
 }
 
 export type DeploymentCreateNestedOneWithoutComponentSuccessesInput = {
@@ -778,17 +786,17 @@ export type DeploymentUpdateOneRequiredWithoutCodeCoveragesNestedInput = {
 export type DeploymentCreateWithoutOrganizationInput = {
   id?: string
   status: string
-  createdBy: string
-  createdByName: string
-  startDate: Date | string
-  endDate: Date | string
-  numberTestsCompleted: number
-  numberTestsTotal: number
-  numberTestErrors: number
-  numberComponentsDeployed: number
-  numberComponentsTotal: number
-  numberComponentErrors: number
-  checkOnly: boolean
+  createdBy?: string | null
+  createdByName?: string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  numberTestsCompleted?: number | null
+  numberTestsTotal?: number | null
+  numberTestErrors?: number | null
+  numberComponentsDeployed?: number | null
+  numberComponentsTotal?: number | null
+  numberComponentErrors?: number | null
+  checkOnly?: boolean | null
   deployUrl: string
   componentSuccesses?: Prisma.DeployComponentSuccessCreateNestedManyWithoutDeploymentInput
   componentFailures?: Prisma.DeployComponentFailureCreateNestedManyWithoutDeploymentInput
@@ -800,17 +808,17 @@ export type DeploymentCreateWithoutOrganizationInput = {
 export type DeploymentUncheckedCreateWithoutOrganizationInput = {
   id?: string
   status: string
-  createdBy: string
-  createdByName: string
-  startDate: Date | string
-  endDate: Date | string
-  numberTestsCompleted: number
-  numberTestsTotal: number
-  numberTestErrors: number
-  numberComponentsDeployed: number
-  numberComponentsTotal: number
-  numberComponentErrors: number
-  checkOnly: boolean
+  createdBy?: string | null
+  createdByName?: string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  numberTestsCompleted?: number | null
+  numberTestsTotal?: number | null
+  numberTestErrors?: number | null
+  numberComponentsDeployed?: number | null
+  numberComponentsTotal?: number | null
+  numberComponentErrors?: number | null
+  checkOnly?: boolean | null
   deployUrl: string
   componentSuccesses?: Prisma.DeployComponentSuccessUncheckedCreateNestedManyWithoutDeploymentInput
   componentFailures?: Prisma.DeployComponentFailureUncheckedCreateNestedManyWithoutDeploymentInput
@@ -851,17 +859,17 @@ export type DeploymentScalarWhereInput = {
   NOT?: Prisma.DeploymentScalarWhereInput | Prisma.DeploymentScalarWhereInput[]
   id?: Prisma.StringFilter<"Deployment"> | string
   status?: Prisma.StringFilter<"Deployment"> | string
-  createdBy?: Prisma.StringFilter<"Deployment"> | string
-  createdByName?: Prisma.StringFilter<"Deployment"> | string
-  startDate?: Prisma.DateTimeFilter<"Deployment"> | Date | string
-  endDate?: Prisma.DateTimeFilter<"Deployment"> | Date | string
-  numberTestsCompleted?: Prisma.IntFilter<"Deployment"> | number
-  numberTestsTotal?: Prisma.IntFilter<"Deployment"> | number
-  numberTestErrors?: Prisma.IntFilter<"Deployment"> | number
-  numberComponentsDeployed?: Prisma.IntFilter<"Deployment"> | number
-  numberComponentsTotal?: Prisma.IntFilter<"Deployment"> | number
-  numberComponentErrors?: Prisma.IntFilter<"Deployment"> | number
-  checkOnly?: Prisma.BoolFilter<"Deployment"> | boolean
+  createdBy?: Prisma.StringNullableFilter<"Deployment"> | string | null
+  createdByName?: Prisma.StringNullableFilter<"Deployment"> | string | null
+  startDate?: Prisma.DateTimeNullableFilter<"Deployment"> | Date | string | null
+  endDate?: Prisma.DateTimeNullableFilter<"Deployment"> | Date | string | null
+  numberTestsCompleted?: Prisma.IntNullableFilter<"Deployment"> | number | null
+  numberTestsTotal?: Prisma.IntNullableFilter<"Deployment"> | number | null
+  numberTestErrors?: Prisma.IntNullableFilter<"Deployment"> | number | null
+  numberComponentsDeployed?: Prisma.IntNullableFilter<"Deployment"> | number | null
+  numberComponentsTotal?: Prisma.IntNullableFilter<"Deployment"> | number | null
+  numberComponentErrors?: Prisma.IntNullableFilter<"Deployment"> | number | null
+  checkOnly?: Prisma.BoolNullableFilter<"Deployment"> | boolean | null
   deployUrl?: Prisma.StringFilter<"Deployment"> | string
   organizationId?: Prisma.StringFilter<"Deployment"> | string
 }
@@ -869,17 +877,17 @@ export type DeploymentScalarWhereInput = {
 export type DeploymentCreateWithoutComponentSuccessesInput = {
   id?: string
   status: string
-  createdBy: string
-  createdByName: string
-  startDate: Date | string
-  endDate: Date | string
-  numberTestsCompleted: number
-  numberTestsTotal: number
-  numberTestErrors: number
-  numberComponentsDeployed: number
-  numberComponentsTotal: number
-  numberComponentErrors: number
-  checkOnly: boolean
+  createdBy?: string | null
+  createdByName?: string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  numberTestsCompleted?: number | null
+  numberTestsTotal?: number | null
+  numberTestErrors?: number | null
+  numberComponentsDeployed?: number | null
+  numberComponentsTotal?: number | null
+  numberComponentErrors?: number | null
+  checkOnly?: boolean | null
   deployUrl: string
   componentFailures?: Prisma.DeployComponentFailureCreateNestedManyWithoutDeploymentInput
   testSuccesses?: Prisma.DeployTestSuccessCreateNestedManyWithoutDeploymentInput
@@ -891,17 +899,17 @@ export type DeploymentCreateWithoutComponentSuccessesInput = {
 export type DeploymentUncheckedCreateWithoutComponentSuccessesInput = {
   id?: string
   status: string
-  createdBy: string
-  createdByName: string
-  startDate: Date | string
-  endDate: Date | string
-  numberTestsCompleted: number
-  numberTestsTotal: number
-  numberTestErrors: number
-  numberComponentsDeployed: number
-  numberComponentsTotal: number
-  numberComponentErrors: number
-  checkOnly: boolean
+  createdBy?: string | null
+  createdByName?: string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  numberTestsCompleted?: number | null
+  numberTestsTotal?: number | null
+  numberTestErrors?: number | null
+  numberComponentsDeployed?: number | null
+  numberComponentsTotal?: number | null
+  numberComponentErrors?: number | null
+  checkOnly?: boolean | null
   deployUrl: string
   organizationId: string
   componentFailures?: Prisma.DeployComponentFailureUncheckedCreateNestedManyWithoutDeploymentInput
@@ -929,17 +937,17 @@ export type DeploymentUpdateToOneWithWhereWithoutComponentSuccessesInput = {
 export type DeploymentUpdateWithoutComponentSuccessesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
-  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
-  createdByName?: Prisma.StringFieldUpdateOperationsInput | string
-  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  numberTestsCompleted?: Prisma.IntFieldUpdateOperationsInput | number
-  numberTestsTotal?: Prisma.IntFieldUpdateOperationsInput | number
-  numberTestErrors?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentsDeployed?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentsTotal?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentErrors?: Prisma.IntFieldUpdateOperationsInput | number
-  checkOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdByName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  numberTestsCompleted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberTestsTotal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberTestErrors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentsDeployed?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentsTotal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentErrors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  checkOnly?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   deployUrl?: Prisma.StringFieldUpdateOperationsInput | string
   componentFailures?: Prisma.DeployComponentFailureUpdateManyWithoutDeploymentNestedInput
   testSuccesses?: Prisma.DeployTestSuccessUpdateManyWithoutDeploymentNestedInput
@@ -951,17 +959,17 @@ export type DeploymentUpdateWithoutComponentSuccessesInput = {
 export type DeploymentUncheckedUpdateWithoutComponentSuccessesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
-  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
-  createdByName?: Prisma.StringFieldUpdateOperationsInput | string
-  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  numberTestsCompleted?: Prisma.IntFieldUpdateOperationsInput | number
-  numberTestsTotal?: Prisma.IntFieldUpdateOperationsInput | number
-  numberTestErrors?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentsDeployed?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentsTotal?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentErrors?: Prisma.IntFieldUpdateOperationsInput | number
-  checkOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdByName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  numberTestsCompleted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberTestsTotal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberTestErrors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentsDeployed?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentsTotal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentErrors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  checkOnly?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   deployUrl?: Prisma.StringFieldUpdateOperationsInput | string
   organizationId?: Prisma.StringFieldUpdateOperationsInput | string
   componentFailures?: Prisma.DeployComponentFailureUncheckedUpdateManyWithoutDeploymentNestedInput
@@ -973,17 +981,17 @@ export type DeploymentUncheckedUpdateWithoutComponentSuccessesInput = {
 export type DeploymentCreateWithoutComponentFailuresInput = {
   id?: string
   status: string
-  createdBy: string
-  createdByName: string
-  startDate: Date | string
-  endDate: Date | string
-  numberTestsCompleted: number
-  numberTestsTotal: number
-  numberTestErrors: number
-  numberComponentsDeployed: number
-  numberComponentsTotal: number
-  numberComponentErrors: number
-  checkOnly: boolean
+  createdBy?: string | null
+  createdByName?: string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  numberTestsCompleted?: number | null
+  numberTestsTotal?: number | null
+  numberTestErrors?: number | null
+  numberComponentsDeployed?: number | null
+  numberComponentsTotal?: number | null
+  numberComponentErrors?: number | null
+  checkOnly?: boolean | null
   deployUrl: string
   componentSuccesses?: Prisma.DeployComponentSuccessCreateNestedManyWithoutDeploymentInput
   testSuccesses?: Prisma.DeployTestSuccessCreateNestedManyWithoutDeploymentInput
@@ -995,17 +1003,17 @@ export type DeploymentCreateWithoutComponentFailuresInput = {
 export type DeploymentUncheckedCreateWithoutComponentFailuresInput = {
   id?: string
   status: string
-  createdBy: string
-  createdByName: string
-  startDate: Date | string
-  endDate: Date | string
-  numberTestsCompleted: number
-  numberTestsTotal: number
-  numberTestErrors: number
-  numberComponentsDeployed: number
-  numberComponentsTotal: number
-  numberComponentErrors: number
-  checkOnly: boolean
+  createdBy?: string | null
+  createdByName?: string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  numberTestsCompleted?: number | null
+  numberTestsTotal?: number | null
+  numberTestErrors?: number | null
+  numberComponentsDeployed?: number | null
+  numberComponentsTotal?: number | null
+  numberComponentErrors?: number | null
+  checkOnly?: boolean | null
   deployUrl: string
   organizationId: string
   componentSuccesses?: Prisma.DeployComponentSuccessUncheckedCreateNestedManyWithoutDeploymentInput
@@ -1033,17 +1041,17 @@ export type DeploymentUpdateToOneWithWhereWithoutComponentFailuresInput = {
 export type DeploymentUpdateWithoutComponentFailuresInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
-  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
-  createdByName?: Prisma.StringFieldUpdateOperationsInput | string
-  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  numberTestsCompleted?: Prisma.IntFieldUpdateOperationsInput | number
-  numberTestsTotal?: Prisma.IntFieldUpdateOperationsInput | number
-  numberTestErrors?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentsDeployed?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentsTotal?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentErrors?: Prisma.IntFieldUpdateOperationsInput | number
-  checkOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdByName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  numberTestsCompleted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberTestsTotal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberTestErrors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentsDeployed?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentsTotal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentErrors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  checkOnly?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   deployUrl?: Prisma.StringFieldUpdateOperationsInput | string
   componentSuccesses?: Prisma.DeployComponentSuccessUpdateManyWithoutDeploymentNestedInput
   testSuccesses?: Prisma.DeployTestSuccessUpdateManyWithoutDeploymentNestedInput
@@ -1055,17 +1063,17 @@ export type DeploymentUpdateWithoutComponentFailuresInput = {
 export type DeploymentUncheckedUpdateWithoutComponentFailuresInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
-  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
-  createdByName?: Prisma.StringFieldUpdateOperationsInput | string
-  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  numberTestsCompleted?: Prisma.IntFieldUpdateOperationsInput | number
-  numberTestsTotal?: Prisma.IntFieldUpdateOperationsInput | number
-  numberTestErrors?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentsDeployed?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentsTotal?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentErrors?: Prisma.IntFieldUpdateOperationsInput | number
-  checkOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdByName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  numberTestsCompleted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberTestsTotal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberTestErrors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentsDeployed?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentsTotal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentErrors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  checkOnly?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   deployUrl?: Prisma.StringFieldUpdateOperationsInput | string
   organizationId?: Prisma.StringFieldUpdateOperationsInput | string
   componentSuccesses?: Prisma.DeployComponentSuccessUncheckedUpdateManyWithoutDeploymentNestedInput
@@ -1077,17 +1085,17 @@ export type DeploymentUncheckedUpdateWithoutComponentFailuresInput = {
 export type DeploymentCreateWithoutTestSuccessesInput = {
   id?: string
   status: string
-  createdBy: string
-  createdByName: string
-  startDate: Date | string
-  endDate: Date | string
-  numberTestsCompleted: number
-  numberTestsTotal: number
-  numberTestErrors: number
-  numberComponentsDeployed: number
-  numberComponentsTotal: number
-  numberComponentErrors: number
-  checkOnly: boolean
+  createdBy?: string | null
+  createdByName?: string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  numberTestsCompleted?: number | null
+  numberTestsTotal?: number | null
+  numberTestErrors?: number | null
+  numberComponentsDeployed?: number | null
+  numberComponentsTotal?: number | null
+  numberComponentErrors?: number | null
+  checkOnly?: boolean | null
   deployUrl: string
   componentSuccesses?: Prisma.DeployComponentSuccessCreateNestedManyWithoutDeploymentInput
   componentFailures?: Prisma.DeployComponentFailureCreateNestedManyWithoutDeploymentInput
@@ -1099,17 +1107,17 @@ export type DeploymentCreateWithoutTestSuccessesInput = {
 export type DeploymentUncheckedCreateWithoutTestSuccessesInput = {
   id?: string
   status: string
-  createdBy: string
-  createdByName: string
-  startDate: Date | string
-  endDate: Date | string
-  numberTestsCompleted: number
-  numberTestsTotal: number
-  numberTestErrors: number
-  numberComponentsDeployed: number
-  numberComponentsTotal: number
-  numberComponentErrors: number
-  checkOnly: boolean
+  createdBy?: string | null
+  createdByName?: string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  numberTestsCompleted?: number | null
+  numberTestsTotal?: number | null
+  numberTestErrors?: number | null
+  numberComponentsDeployed?: number | null
+  numberComponentsTotal?: number | null
+  numberComponentErrors?: number | null
+  checkOnly?: boolean | null
   deployUrl: string
   organizationId: string
   componentSuccesses?: Prisma.DeployComponentSuccessUncheckedCreateNestedManyWithoutDeploymentInput
@@ -1137,17 +1145,17 @@ export type DeploymentUpdateToOneWithWhereWithoutTestSuccessesInput = {
 export type DeploymentUpdateWithoutTestSuccessesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
-  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
-  createdByName?: Prisma.StringFieldUpdateOperationsInput | string
-  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  numberTestsCompleted?: Prisma.IntFieldUpdateOperationsInput | number
-  numberTestsTotal?: Prisma.IntFieldUpdateOperationsInput | number
-  numberTestErrors?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentsDeployed?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentsTotal?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentErrors?: Prisma.IntFieldUpdateOperationsInput | number
-  checkOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdByName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  numberTestsCompleted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberTestsTotal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberTestErrors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentsDeployed?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentsTotal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentErrors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  checkOnly?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   deployUrl?: Prisma.StringFieldUpdateOperationsInput | string
   componentSuccesses?: Prisma.DeployComponentSuccessUpdateManyWithoutDeploymentNestedInput
   componentFailures?: Prisma.DeployComponentFailureUpdateManyWithoutDeploymentNestedInput
@@ -1159,17 +1167,17 @@ export type DeploymentUpdateWithoutTestSuccessesInput = {
 export type DeploymentUncheckedUpdateWithoutTestSuccessesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
-  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
-  createdByName?: Prisma.StringFieldUpdateOperationsInput | string
-  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  numberTestsCompleted?: Prisma.IntFieldUpdateOperationsInput | number
-  numberTestsTotal?: Prisma.IntFieldUpdateOperationsInput | number
-  numberTestErrors?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentsDeployed?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentsTotal?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentErrors?: Prisma.IntFieldUpdateOperationsInput | number
-  checkOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdByName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  numberTestsCompleted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberTestsTotal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberTestErrors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentsDeployed?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentsTotal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentErrors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  checkOnly?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   deployUrl?: Prisma.StringFieldUpdateOperationsInput | string
   organizationId?: Prisma.StringFieldUpdateOperationsInput | string
   componentSuccesses?: Prisma.DeployComponentSuccessUncheckedUpdateManyWithoutDeploymentNestedInput
@@ -1181,17 +1189,17 @@ export type DeploymentUncheckedUpdateWithoutTestSuccessesInput = {
 export type DeploymentCreateWithoutTestFailuresInput = {
   id?: string
   status: string
-  createdBy: string
-  createdByName: string
-  startDate: Date | string
-  endDate: Date | string
-  numberTestsCompleted: number
-  numberTestsTotal: number
-  numberTestErrors: number
-  numberComponentsDeployed: number
-  numberComponentsTotal: number
-  numberComponentErrors: number
-  checkOnly: boolean
+  createdBy?: string | null
+  createdByName?: string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  numberTestsCompleted?: number | null
+  numberTestsTotal?: number | null
+  numberTestErrors?: number | null
+  numberComponentsDeployed?: number | null
+  numberComponentsTotal?: number | null
+  numberComponentErrors?: number | null
+  checkOnly?: boolean | null
   deployUrl: string
   componentSuccesses?: Prisma.DeployComponentSuccessCreateNestedManyWithoutDeploymentInput
   componentFailures?: Prisma.DeployComponentFailureCreateNestedManyWithoutDeploymentInput
@@ -1203,17 +1211,17 @@ export type DeploymentCreateWithoutTestFailuresInput = {
 export type DeploymentUncheckedCreateWithoutTestFailuresInput = {
   id?: string
   status: string
-  createdBy: string
-  createdByName: string
-  startDate: Date | string
-  endDate: Date | string
-  numberTestsCompleted: number
-  numberTestsTotal: number
-  numberTestErrors: number
-  numberComponentsDeployed: number
-  numberComponentsTotal: number
-  numberComponentErrors: number
-  checkOnly: boolean
+  createdBy?: string | null
+  createdByName?: string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  numberTestsCompleted?: number | null
+  numberTestsTotal?: number | null
+  numberTestErrors?: number | null
+  numberComponentsDeployed?: number | null
+  numberComponentsTotal?: number | null
+  numberComponentErrors?: number | null
+  checkOnly?: boolean | null
   deployUrl: string
   organizationId: string
   componentSuccesses?: Prisma.DeployComponentSuccessUncheckedCreateNestedManyWithoutDeploymentInput
@@ -1241,17 +1249,17 @@ export type DeploymentUpdateToOneWithWhereWithoutTestFailuresInput = {
 export type DeploymentUpdateWithoutTestFailuresInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
-  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
-  createdByName?: Prisma.StringFieldUpdateOperationsInput | string
-  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  numberTestsCompleted?: Prisma.IntFieldUpdateOperationsInput | number
-  numberTestsTotal?: Prisma.IntFieldUpdateOperationsInput | number
-  numberTestErrors?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentsDeployed?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentsTotal?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentErrors?: Prisma.IntFieldUpdateOperationsInput | number
-  checkOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdByName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  numberTestsCompleted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberTestsTotal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberTestErrors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentsDeployed?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentsTotal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentErrors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  checkOnly?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   deployUrl?: Prisma.StringFieldUpdateOperationsInput | string
   componentSuccesses?: Prisma.DeployComponentSuccessUpdateManyWithoutDeploymentNestedInput
   componentFailures?: Prisma.DeployComponentFailureUpdateManyWithoutDeploymentNestedInput
@@ -1263,17 +1271,17 @@ export type DeploymentUpdateWithoutTestFailuresInput = {
 export type DeploymentUncheckedUpdateWithoutTestFailuresInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
-  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
-  createdByName?: Prisma.StringFieldUpdateOperationsInput | string
-  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  numberTestsCompleted?: Prisma.IntFieldUpdateOperationsInput | number
-  numberTestsTotal?: Prisma.IntFieldUpdateOperationsInput | number
-  numberTestErrors?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentsDeployed?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentsTotal?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentErrors?: Prisma.IntFieldUpdateOperationsInput | number
-  checkOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdByName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  numberTestsCompleted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberTestsTotal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberTestErrors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentsDeployed?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentsTotal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentErrors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  checkOnly?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   deployUrl?: Prisma.StringFieldUpdateOperationsInput | string
   organizationId?: Prisma.StringFieldUpdateOperationsInput | string
   componentSuccesses?: Prisma.DeployComponentSuccessUncheckedUpdateManyWithoutDeploymentNestedInput
@@ -1285,17 +1293,17 @@ export type DeploymentUncheckedUpdateWithoutTestFailuresInput = {
 export type DeploymentCreateWithoutCodeCoveragesInput = {
   id?: string
   status: string
-  createdBy: string
-  createdByName: string
-  startDate: Date | string
-  endDate: Date | string
-  numberTestsCompleted: number
-  numberTestsTotal: number
-  numberTestErrors: number
-  numberComponentsDeployed: number
-  numberComponentsTotal: number
-  numberComponentErrors: number
-  checkOnly: boolean
+  createdBy?: string | null
+  createdByName?: string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  numberTestsCompleted?: number | null
+  numberTestsTotal?: number | null
+  numberTestErrors?: number | null
+  numberComponentsDeployed?: number | null
+  numberComponentsTotal?: number | null
+  numberComponentErrors?: number | null
+  checkOnly?: boolean | null
   deployUrl: string
   componentSuccesses?: Prisma.DeployComponentSuccessCreateNestedManyWithoutDeploymentInput
   componentFailures?: Prisma.DeployComponentFailureCreateNestedManyWithoutDeploymentInput
@@ -1307,17 +1315,17 @@ export type DeploymentCreateWithoutCodeCoveragesInput = {
 export type DeploymentUncheckedCreateWithoutCodeCoveragesInput = {
   id?: string
   status: string
-  createdBy: string
-  createdByName: string
-  startDate: Date | string
-  endDate: Date | string
-  numberTestsCompleted: number
-  numberTestsTotal: number
-  numberTestErrors: number
-  numberComponentsDeployed: number
-  numberComponentsTotal: number
-  numberComponentErrors: number
-  checkOnly: boolean
+  createdBy?: string | null
+  createdByName?: string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  numberTestsCompleted?: number | null
+  numberTestsTotal?: number | null
+  numberTestErrors?: number | null
+  numberComponentsDeployed?: number | null
+  numberComponentsTotal?: number | null
+  numberComponentErrors?: number | null
+  checkOnly?: boolean | null
   deployUrl: string
   organizationId: string
   componentSuccesses?: Prisma.DeployComponentSuccessUncheckedCreateNestedManyWithoutDeploymentInput
@@ -1345,17 +1353,17 @@ export type DeploymentUpdateToOneWithWhereWithoutCodeCoveragesInput = {
 export type DeploymentUpdateWithoutCodeCoveragesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
-  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
-  createdByName?: Prisma.StringFieldUpdateOperationsInput | string
-  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  numberTestsCompleted?: Prisma.IntFieldUpdateOperationsInput | number
-  numberTestsTotal?: Prisma.IntFieldUpdateOperationsInput | number
-  numberTestErrors?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentsDeployed?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentsTotal?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentErrors?: Prisma.IntFieldUpdateOperationsInput | number
-  checkOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdByName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  numberTestsCompleted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberTestsTotal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberTestErrors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentsDeployed?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentsTotal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentErrors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  checkOnly?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   deployUrl?: Prisma.StringFieldUpdateOperationsInput | string
   componentSuccesses?: Prisma.DeployComponentSuccessUpdateManyWithoutDeploymentNestedInput
   componentFailures?: Prisma.DeployComponentFailureUpdateManyWithoutDeploymentNestedInput
@@ -1367,17 +1375,17 @@ export type DeploymentUpdateWithoutCodeCoveragesInput = {
 export type DeploymentUncheckedUpdateWithoutCodeCoveragesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
-  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
-  createdByName?: Prisma.StringFieldUpdateOperationsInput | string
-  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  numberTestsCompleted?: Prisma.IntFieldUpdateOperationsInput | number
-  numberTestsTotal?: Prisma.IntFieldUpdateOperationsInput | number
-  numberTestErrors?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentsDeployed?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentsTotal?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentErrors?: Prisma.IntFieldUpdateOperationsInput | number
-  checkOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdByName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  numberTestsCompleted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberTestsTotal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberTestErrors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentsDeployed?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentsTotal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentErrors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  checkOnly?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   deployUrl?: Prisma.StringFieldUpdateOperationsInput | string
   organizationId?: Prisma.StringFieldUpdateOperationsInput | string
   componentSuccesses?: Prisma.DeployComponentSuccessUncheckedUpdateManyWithoutDeploymentNestedInput
@@ -1389,34 +1397,34 @@ export type DeploymentUncheckedUpdateWithoutCodeCoveragesInput = {
 export type DeploymentCreateManyOrganizationInput = {
   id?: string
   status: string
-  createdBy: string
-  createdByName: string
-  startDate: Date | string
-  endDate: Date | string
-  numberTestsCompleted: number
-  numberTestsTotal: number
-  numberTestErrors: number
-  numberComponentsDeployed: number
-  numberComponentsTotal: number
-  numberComponentErrors: number
-  checkOnly: boolean
+  createdBy?: string | null
+  createdByName?: string | null
+  startDate?: Date | string | null
+  endDate?: Date | string | null
+  numberTestsCompleted?: number | null
+  numberTestsTotal?: number | null
+  numberTestErrors?: number | null
+  numberComponentsDeployed?: number | null
+  numberComponentsTotal?: number | null
+  numberComponentErrors?: number | null
+  checkOnly?: boolean | null
   deployUrl: string
 }
 
 export type DeploymentUpdateWithoutOrganizationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
-  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
-  createdByName?: Prisma.StringFieldUpdateOperationsInput | string
-  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  numberTestsCompleted?: Prisma.IntFieldUpdateOperationsInput | number
-  numberTestsTotal?: Prisma.IntFieldUpdateOperationsInput | number
-  numberTestErrors?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentsDeployed?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentsTotal?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentErrors?: Prisma.IntFieldUpdateOperationsInput | number
-  checkOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdByName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  numberTestsCompleted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberTestsTotal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberTestErrors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentsDeployed?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentsTotal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentErrors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  checkOnly?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   deployUrl?: Prisma.StringFieldUpdateOperationsInput | string
   componentSuccesses?: Prisma.DeployComponentSuccessUpdateManyWithoutDeploymentNestedInput
   componentFailures?: Prisma.DeployComponentFailureUpdateManyWithoutDeploymentNestedInput
@@ -1428,17 +1436,17 @@ export type DeploymentUpdateWithoutOrganizationInput = {
 export type DeploymentUncheckedUpdateWithoutOrganizationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
-  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
-  createdByName?: Prisma.StringFieldUpdateOperationsInput | string
-  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  numberTestsCompleted?: Prisma.IntFieldUpdateOperationsInput | number
-  numberTestsTotal?: Prisma.IntFieldUpdateOperationsInput | number
-  numberTestErrors?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentsDeployed?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentsTotal?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentErrors?: Prisma.IntFieldUpdateOperationsInput | number
-  checkOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdByName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  numberTestsCompleted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberTestsTotal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberTestErrors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentsDeployed?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentsTotal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentErrors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  checkOnly?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   deployUrl?: Prisma.StringFieldUpdateOperationsInput | string
   componentSuccesses?: Prisma.DeployComponentSuccessUncheckedUpdateManyWithoutDeploymentNestedInput
   componentFailures?: Prisma.DeployComponentFailureUncheckedUpdateManyWithoutDeploymentNestedInput
@@ -1450,17 +1458,17 @@ export type DeploymentUncheckedUpdateWithoutOrganizationInput = {
 export type DeploymentUncheckedUpdateManyWithoutOrganizationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   status?: Prisma.StringFieldUpdateOperationsInput | string
-  createdBy?: Prisma.StringFieldUpdateOperationsInput | string
-  createdByName?: Prisma.StringFieldUpdateOperationsInput | string
-  startDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  endDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  numberTestsCompleted?: Prisma.IntFieldUpdateOperationsInput | number
-  numberTestsTotal?: Prisma.IntFieldUpdateOperationsInput | number
-  numberTestErrors?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentsDeployed?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentsTotal?: Prisma.IntFieldUpdateOperationsInput | number
-  numberComponentErrors?: Prisma.IntFieldUpdateOperationsInput | number
-  checkOnly?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdByName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  startDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  endDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  numberTestsCompleted?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberTestsTotal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberTestErrors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentsDeployed?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentsTotal?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  numberComponentErrors?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  checkOnly?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   deployUrl?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -1642,17 +1650,17 @@ export type $DeploymentPayload<ExtArgs extends runtime.Types.Extensions.Internal
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     status: string
-    createdBy: string
-    createdByName: string
-    startDate: Date
-    endDate: Date
-    numberTestsCompleted: number
-    numberTestsTotal: number
-    numberTestErrors: number
-    numberComponentsDeployed: number
-    numberComponentsTotal: number
-    numberComponentErrors: number
-    checkOnly: boolean
+    createdBy: string | null
+    createdByName: string | null
+    startDate: Date | null
+    endDate: Date | null
+    numberTestsCompleted: number | null
+    numberTestsTotal: number | null
+    numberTestErrors: number | null
+    numberComponentsDeployed: number | null
+    numberComponentsTotal: number | null
+    numberComponentErrors: number | null
+    checkOnly: boolean | null
     deployUrl: string
     organizationId: string
   }, ExtArgs["result"]["deployment"]>

@@ -65,21 +65,21 @@ model Deployment {
 
     status       String
 
-    createdBy   String
-    createdByName String
+    createdBy   String?
+    createdByName String?
 
-    startDate    DateTime
-    endDate DateTime
+    startDate    DateTime?
+    endDate DateTime?
     
-    numberTestsCompleted Int
-    numberTestsTotal Int
-    numberTestErrors Int
+    numberTestsCompleted Int?
+    numberTestsTotal Int?
+    numberTestErrors Int?
 
-    numberComponentsDeployed Int
-    numberComponentsTotal Int
-    numberComponentErrors Int
+    numberComponentsDeployed Int?
+    numberComponentsTotal Int?
+    numberComponentErrors Int?
 
-    checkOnly Boolean
+    checkOnly Boolean?
 
     deployUrl String
 

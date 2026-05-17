@@ -1,0 +1,12 @@
+-- AlterTable
+ALTER TABLE "Deployment" ALTER COLUMN "createdBy" DROP NOT NULL,
+ALTER COLUMN "createdByName" DROP NOT NULL,
+ALTER COLUMN "startDate" DROP NOT NULL,
+ALTER COLUMN "endDate" DROP NOT NULL,
+ALTER COLUMN "numberTestsCompleted" DROP NOT NULL,
+ALTER COLUMN "numberTestsTotal" DROP NOT NULL,
+ALTER COLUMN "numberTestErrors" DROP NOT NULL,
+ALTER COLUMN "numberComponentsDeployed" DROP NOT NULL,
+ALTER COLUMN "numberComponentsTotal" DROP NOT NULL,
+ALTER COLUMN "numberComponentErrors" DROP NOT NULL,
+ALTER COLUMN "checkOnly" DROP NOT NULL;

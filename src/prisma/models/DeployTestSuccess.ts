@@ -425,10 +425,6 @@ export type DeployTestSuccessUncheckedUpdateManyWithoutDeploymentNestedInput = {
   deleteMany?: Prisma.DeployTestSuccessScalarWhereInput | Prisma.DeployTestSuccessScalarWhereInput[]
 }
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
-}
-
 export type DeployTestSuccessCreateWithoutDeploymentInput = {
   id?: string
   className: string

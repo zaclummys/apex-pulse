@@ -26,12 +26,16 @@ export class GetOrganizationByIdService {
         return Math.round((successfulDeployments / totalDeployments) * 100);
     }
 
-    computeAverageDeploymentTime (deployments: { startDate: Date; endDate: Date }[]): number {
+    computeAverageDeploymentTime (deployments: { startDate?: Date | null | undefined; endDate?: Date | null | undefined }[]): number {
         if (deployments.length === 0) {
             return 0;
         }
 
         const totalMs = deployments.reduce((sum, deployment) => {
+            if (!deployment.startDate || !deployment.endDate) {
+                return sum;
+            }
+
             const start = Temporal.Instant.fromEpochMilliseconds(deployment.startDate.getTime());
             const end = Temporal.Instant.fromEpochMilliseconds(deployment.endDate.getTime());
             return sum + start.until(end).total('milliseconds');
@@ -40,12 +44,12 @@ export class GetOrganizationByIdService {
         return Math.round(totalMs / deployments.length);
     }
 
-    computeAverageDeploymentSize (deployments: { numberComponentsTotal: number }[]): number {
+    computeAverageDeploymentSize (deployments: { numberComponentsTotal?: number | null | undefined }[]): number {
         if (deployments.length === 0) {
             return 0;
         }
 
-        const total = deployments.reduce((sum, deployment) => sum + deployment.numberComponentsTotal, 0);
+        const total = deployments.reduce((sum, deployment) => sum + (deployment.numberComponentsTotal ?? 0), 0);
 
         return Math.round(total / deployments.length);
     }

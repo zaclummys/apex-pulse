@@ -85,6 +85,75 @@ export default class PrismaDeploymentRepository implements DeploymentRepository 
     }
 
     public async saveDeployment (deployResult: Deployment) {
+        const componentSuccesses = [];
+        const componentFailures = [];
+        const testSuccesses = [];
+        const testFailures = [];
+        const codeCoverages = [];
+
+        if (deployResult.componentSuccesses) {
+            for (const success of deployResult.componentSuccesses) {
+                componentSuccesses.push({
+                    fullName: success.fullName,
+                    componentType: success.componentType,
+                    changed: success.changed,
+                    created: success.created,
+                    deleted: success.deleted,
+                });
+            }
+        }
+
+        if (deployResult.componentFailures) {
+            for (const failure of deployResult.componentFailures) {
+                componentFailures.push({
+                    fullName: failure.fullName,
+                    componentType: failure.componentType,
+                    changed: failure.changed,
+                    created: failure.created,
+                    deleted: failure.deleted,
+                    lineNumber: failure.lineNumber,
+                    columnNumber: failure.columnNumber,
+                    problem: failure.problem,
+                    problemType: failure.problemType,
+                });
+            }
+        }
+
+        if (deployResult.testSuccesses) {
+            for (const success of deployResult.testSuccesses) {
+                testSuccesses.push({
+                    className: success.className,
+                    methodName: success.methodName,
+                    namespace: success.namespace,
+                    time: success.time,
+                });
+            }
+        }
+
+        if (deployResult.testFailures) {
+            for (const failure of deployResult.testFailures) {
+                testFailures.push({
+                    className: failure.className,
+                    methodName: failure.methodName,
+                    namespace: failure.namespace,
+                    message: failure.message,
+                    stackTrace: failure.stackTrace,
+                    time: failure.time,
+                    type: failure.type,
+                });
+            }
+        }
+
+        if (deployResult.codeCoverages) {
+            for (const coverage of deployResult.codeCoverages) {
+                codeCoverages.push({
+                    className: coverage.className,
+                    numLocations: coverage.numLocations,
+                    numLocationsNotCovered: coverage.numLocationsNotCovered,
+                });
+            }
+        }
+
         const savedDeployment= await prisma.deployment.create({
             data: {
                 organizationId: deployResult.organizationId,
@@ -109,64 +178,31 @@ export default class PrismaDeploymentRepository implements DeploymentRepository 
 
                 componentSuccesses: {
                     createMany: {
-                        data: deployResult.componentSuccesses.map(success => ({
-                            fullName: success.fullName,
-                            componentType: success.componentType,
-                            changed: success.changed,
-                            created: success.created,
-                            deleted: success.deleted,
-                        })),
+                        data: componentSuccesses,
                     },
                 },
 
                 componentFailures: {
                     createMany: {
-                        data: deployResult.componentFailures.map(failure => ({
-                            fullName: failure.fullName,
-                            componentType: failure.componentType,
-                            changed: failure.changed,
-                            created: failure.created,
-                            deleted: failure.deleted,
-                            lineNumber: failure.lineNumber,
-                            columnNumber: failure.columnNumber,
-                            problem: failure.problem,
-                            problemType: failure.problemType,
-                        })),
+                        data: componentFailures,
                     },
                 },
 
                 testSuccesses: {
                     createMany: {
-                        data: deployResult.testSuccesses.map(success => ({
-                            className: success.className,
-                            methodName: success.methodName,
-                            namespace: success.namespace,
-                            time: success.time,
-                        })),
+                        data: testSuccesses,
                     },
                 },
 
                 testFailures: {
                     createMany: {
-                        data: deployResult.testFailures.map(failure => ({
-                            className: failure.className,
-                            methodName: failure.methodName,
-                            namespace: failure.namespace,
-                            message: failure.message,
-                            stackTrace: failure.stackTrace,
-                            time: failure.time,
-                            type: failure.type,
-                        })),
+                        data: testFailures,
                     },
                 },
 
                 codeCoverages: {
                     createMany: {
-                        data: deployResult.codeCoverages.map(coverage => ({
-                            className: coverage.className,
-                            numLocations: coverage.numLocations,
-                            numLocationsNotCovered: coverage.numLocationsNotCovered,
-                        })),
+                        data: codeCoverages,
                     },
                 },
             },

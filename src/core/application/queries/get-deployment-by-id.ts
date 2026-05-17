@@ -9,7 +9,14 @@ export class GetDeploymentByIdService {
         this.deploymentRepository = deploymentRepository;
     }
 
-    computeDuration (startDate: Date, endDate: Date) {
+    computeDuration (
+        startDate: Date | null | undefined,
+        endDate: Date | null | undefined,
+    ): string | null {
+        if (!startDate || !endDate) {
+            return null;
+        }
+
         const start = Temporal.Instant.fromEpochMilliseconds(startDate.getTime());
         const end = Temporal.Instant.fromEpochMilliseconds(endDate.getTime());
         
@@ -18,6 +25,15 @@ export class GetDeploymentByIdService {
     }
 
     computeComponentMetrics (deployment: Deployment) {
+        if (!deployment.componentSuccesses || !deployment.componentFailures) {
+            return {
+                componentDeployRate: 0,
+                changedComponents: 0,
+                createdComponents: 0,
+                deletedComponents: 0,
+            };   
+        }
+
         const totalComponents = deployment.componentSuccesses.length + deployment.componentFailures.length;
 
         const calculateDeployRate = (numDeployed: number, total: number) => {
@@ -43,6 +59,14 @@ export class GetDeploymentByIdService {
     }
 
     computeTestMetrics (deployment: Deployment) {
+        if (!deployment.testSuccesses || !deployment.testFailures) {
+            return {
+                totalTestExecutionTime: 0,
+                averageTestExecutionTime: 0,
+                testPassRate: 0,
+            };
+        }
+
         const allTests = [
             ...deployment.testSuccesses,
             ...deployment.testFailures,
@@ -61,6 +85,15 @@ export class GetDeploymentByIdService {
     }
 
     computeCodeCoverageMetrics (deployment: Deployment) {
+        if (!deployment.codeCoverages) {
+            return {
+                codeCoveragePercent: 0,
+                codeCoverageBelowThresholdPercent: 0,
+                minCodeCoverage: null,
+                maxCodeCoverage: null,
+            };
+        }
+
         const calculateBelowThresholdPercentage = (
             num: number,
             total: number,
